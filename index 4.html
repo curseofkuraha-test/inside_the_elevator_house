@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elevator Escape</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+html{scroll-behavior:smooth;}
+
+body{
+  margin:0;
+  font-family:"LINE Seed Sans","LINESeedJP","Noto Sans JP",sans-serif;
+  color:white;
+  overflow-x:hidden;
+  background:#111;
+  min-height:100vh;
+}
+
+.background-layer{
+  position:fixed;
+  inset:0;
+  background-image:url("./image/background.png");
+  background-size:cover;
+  background-position:center;
+  z-index:-20;
+}
+
+.background-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.58);
+  z-index:-19;
+}
+
+.hidden{display:none!important;}
+
+.page{
+  width:100%;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.section{
+  width:100%;
+  max-width:1000px;
+  padding:70px 24px;
+  box-sizing:border-box;
+}
+
+.step-header{
+  width:100%;
+  text-align:center;
+  font-size:42px;
+  letter-spacing:6px;
+  font-weight:700;
+  padding-top:42px;
+  margin-bottom:10px;
+}
+
+.story{text-align:center;}
+
+.story h1{
+  font-size:52px;
+  letter-spacing:6px;
+  margin-bottom:44px;
+}
+
+.story p{
+  font-size:20px;
+  line-height:2.2;
+  color:#e2e2e2;
+}
+
+.step-nav{
+  position:fixed;
+  left:20px;
+  top:20px;
+  z-index:9200;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.step-nav-button{
+  width:82px;
+  height:44px;
+  border:none;
+  border-radius:5px;
+  background:rgba(255,255,255,.92);
+  color:#111;
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.floor-title{
+  width:100%;
+  max-width:720px;
+  margin:0 auto 18px;
+  text-align:center;
+  font-size:28px;
+  font-weight:700;
+  letter-spacing:2px;
+}
+
+.image-frame{
+  width:100%;
+  max-width:720px;
+  border-radius:8px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.18);
+  background:#181818;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto;
+}
+
+.image-frame img{
+  width:100%;
+  height:auto;
+  display:block;
+  object-fit:contain;
+}
+
+.image-placeholder{
+  width:100%;
+  min-height:320px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#999;
+  font-size:28px;
+  text-align:center;
+  padding:20px;
+  box-sizing:border-box;
+}
+
+.tablet-image.image-frame{
+  max-width:none;
+}
+
+.riddle{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.riddle-title{
+  font-size:34px;
+  margin-bottom:34px;
+}
+
+.elevator-wrap{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.panel{
+  width:360px;
+  background:#cecece;
+  border-radius:6px;
+  padding:28px;
+  box-sizing:border-box;
+  border:1px solid rgba(255,255,255,.8);
+  display:flex;
+  justify-content:center;
+}
+
+.buttons{
+  width:100%;
+  display:grid;
+  grid-template-columns:repeat(2,120px);
+  justify-content:center;
+  gap:22px;
+}
+
+.elevator-button{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  border:4px solid white;
+  background:#313333;
+  position:relative;
+  cursor:pointer;
+  transition:.15s;
+  padding:0;
+}
+
+.elevator-button span{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:78px;
+  font-weight:700;
+  color:#b7b7b7;
+}
+
+.active{
+  box-shadow:0 0 10px rgba(255,160,0,.45),0 0 24px rgba(255,160,0,.25);
+}
+
+.active span{
+  color:#ffb300;
+  text-shadow:0 0 8px rgba(255,180,0,.9),0 0 18px rgba(255,160,0,.55);
+}
+
+.locked{
+  opacity:.24;
+  cursor:default;
+}
+
+.floor-view{
+  width:100%;
+  max-width:720px;
+  margin-top:54px;
+}
+
+.answer-area{
+  margin-top:36px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+}
+
+.input-label{
+  width:340px;
+  text-align:left;
+  font-size:16px;
+  font-weight:700;
+  color:#e8e8e8;
+  margin-bottom:-10px;
+}
+
+.answer-area input{
+  width:340px;
+  height:56px;
+  border:none;
+  border-radius:5px;
+  background:#2a2a2a;
+  color:white;
+  padding:0 18px;
+  font-size:20px;
+}
+
+.answer-area button,
+.next-step-button{
+  border:none;
+  border-radius:5px;
+  background:white;
+  color:black;
+  cursor:pointer;
+}
+
+.answer-area button{
+  width:160px;
+  height:52px;
+  font-size:18px;
+}
+
+.answer-message,
+.tablet-message{
+  min-height:28px;
+  text-align:center;
+  font-size:20px;
+  font-weight:700;
+  color:#ffdf6e;
+}
+
+.answer-message{
+  margin-top:-6px;
+  opacity:0;
+  transition:.25s;
+}
+
+.answer-message.show{
+  opacity:1;
+}
+
+.tablet-message{
+  margin-top:18px;
+}
+
+.password-title{
+  margin-top:42px;
+  text-align:center;
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:1px;
+}
+
+.next-step-button{
+  width:260px;
+  height:64px;
+  font-size:22px;
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.72);
+  z-index:10000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+}
+
+.modal.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.modal-card{
+  width:min(90vw,520px);
+  background:#f4f4f4;
+  color:black;
+  border-radius:8px;
+  padding:44px;
+  box-sizing:border-box;
+  text-align:center;
+}
+
+.modal-title{
+  font-size:32px;
+  margin-bottom:24px;
+}
+
+.modal-floors{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:16px;
+  margin:36px 0;
+}
+
+.modal-floor{
+  width:72px;
+  height:72px;
+  border-radius:50%;
+  background:#313333;
+  border:3px solid white;
+  color:#ffb300;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:34px;
+}
+
+.modal-next{
+  width:170px;
+  height:54px;
+  border:none;
+  border-radius:5px;
+  background:black;
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+}
+
+.card-guide-button,
+.inventory-button{
+  position:fixed;
+  top:24px;
+  z-index:9000;
+  border:none;
+  border-radius:5px;
+  background:rgba(255,255,255,.92);
+  color:#111;
+  height:52px;
+  padding:0 22px;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.card-guide-button{right:24px;}
+.inventory-button{right:240px;}
+
+.guide-overlay,
+.inventory-overlay{
+  position:fixed;
+  inset:0;
+  z-index:9500;
+  background:rgba(0,0,0,.7);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+}
+
+.guide-overlay.show,
+.inventory-overlay.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.guide-close{
+  position:absolute;
+  top:28px;
+  right:28px;
+  width:54px;
+  height:54px;
+  border:none;
+  border-radius:50%;
+  background:#111;
+  color:white;
+  font-size:28px;
+  cursor:pointer;
+}
+
+.inventory-panel{
+  width:min(90vw,600px);
+  background:#f2f2f2;
+  border-radius:8px;
+  padding:48px;
+  color:black;
+}
+
+.inventory-title{
+  text-align:center;
+  font-size:34px;
+  margin-bottom:34px;
+}
+
+.inventory-item{
+  background:white;
+  border-radius:5px;
+  padding:24px;
+  margin-bottom:18px;
+  font-size:22px;
+}
+
+.tablet{
+  width:min(100%,980px);
+  background:linear-gradient(145deg,#3a3a3a,#161616);
+  border:10px solid #5b5b5b;
+  border-radius:36px;
+  padding:26px;
+  box-sizing:border-box;
+}
+
+.tablet-top{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding-bottom:14px;
+}
+
+.tablet-floor-input{
+  width:90px;
+  height:46px;
+  background:#1f1f1f;
+  border:1px solid rgba(255,255,255,.2);
+  color:white;
+  font-size:28px;
+  text-align:center;
+}
+
+.tablet-bottom{
+  display:flex;
+  gap:14px;
+  padding-top:18px;
+}
+
+.tablet-answer-input{
+  flex:1;
+  height:56px;
+  background:#1f1f1f;
+  border:1px solid rgba(255,255,255,.2);
+  color:white;
+  padding:0 18px;
+  font-size:20px;
+}
+
+.tablet-send{
+  width:130px;
+  height:56px;
+  border:none;
+  background:white;
+  color:black;
+  font-size:18px;
+  cursor:pointer;
+}
+
+.fourth-story-box{
+  width:min(90vw,760px);
+  margin:40px auto 0;
+  padding:42px 32px;
+  box-sizing:border-box;
+  border-radius:8px;
+  background:rgba(0,0,0,.55);
+  border:1px solid rgba(255,255,255,.18);
+  text-align:center;
+}
+
+.fourth-story-box p{
+  font-size:20px;
+  line-height:2.1;
+  color:#e8e8e8;
+}
+
+.diary{
+  width:min(90vw,700px);
+  margin:auto;
+  background:linear-gradient(180deg,#f5ecd8,#ead9b8);
+  color:#2a2a2a;
+  border-radius:6px;
+  padding:48px;
+  box-sizing:border-box;
+  font-family:"Yu Mincho",serif;
+}
+
+.diary-title{
+  font-size:34px;
+  margin-bottom:34px;
+  text-align:center;
+}
+
+.diary-body{
+  font-size:22px;
+  line-height:2.2;
+}
+
+.clear-title{
+  font-size:54px;
+  letter-spacing:8px;
+  margin-bottom:34px;
+}
+
+@media(max-width:600px){
+  .section{padding:48px 16px;}
+  .step-header{font-size:30px;}
+  .story h1{font-size:38px;}
+  .story p{font-size:17px;}
+  .panel{width:300px;padding:22px;}
+  .buttons{grid-template-columns:repeat(2,100px);gap:18px;}
+  .elevator-button{width:100px;height:100px;}
+  .elevator-button span{font-size:64px;}
+  .inventory-button{right:24px;top:88px;}
+  .tablet-bottom{flex-direction:column;}
+  .tablet-send{width:100%;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="background-layer"></div>
+<div class="background-overlay"></div>
+
+<div class="step-nav">
+  <button class="step-nav-button" id="nav-step1" onclick="showStepDirect('step1-page')">1st</button>
+  <button class="step-nav-button hidden" id="nav-step2" onclick="showStepDirect('step2-page')">2nd</button>
+  <button class="step-nav-button hidden" id="nav-step3" onclick="showStepDirect('step3-page')">3rd</button>
+  <button class="step-nav-button hidden" id="nav-step4" onclick="showStepDirect('step4-page')">4th</button>
+  <button class="step-nav-button hidden" id="nav-step5" onclick="showStepDirect('step5-page')">5th</button>
+  <button class="step-nav-button hidden" id="nav-last" onclick="showStepDirect('last-step-page')">LAST</button>
+</div>
+
+<button class="card-guide-button hidden" id="guide-button" onclick="openGuide()">透明カードの使い方</button>
+<button class="inventory-button hidden" id="inventory-button" onclick="openInventory()">手に入れたもの一覧</button>
+
+<div class="guide-overlay" id="guide-overlay">
+  <button class="guide-close" onclick="closeGuide()">×</button>
+  <div class="image-frame" id="guide-image"></div>
+</div>
+
+<div class="inventory-overlay" id="inventory-overlay">
+  <button class="guide-close" onclick="closeInventory()">×</button>
+  <div class="inventory-panel">
+    <div class="inventory-title">手に入れたもの</div>
+    <div class="inventory-item">金インゴット</div>
+    <div class="inventory-item">資産家の日記</div>
+  </div>
+</div>
+
+<div class="page" id="step1-page">
+  <div class="step-header">1st STEP</div>
+
+  <section class="section story">
+    <h1>ELEVATOR</h1>
+    <p>
+      ここは、とある資産家が残した奇妙な建物。<br>
+      この建物には、3台のエレベーターが存在している。
+    </p>
+  </section>
+
+  <section class="section riddle">
+    <div class="riddle-title">資産家の残した謎</div>
+    <div class="image-frame" id="image-step1-riddle"></div>
+  </section>
+
+  <section class="section elevator-wrap">
+    <div class="panel">
+      <div class="buttons" id="buttons-step1"></div>
+    </div>
+  </section>
+</div>
+
+<div class="page hidden" id="step2-page">
+  <div class="step-header">2nd STEP</div>
+
+  <section class="section story">
+    <p>
+      色々な階に行けるようになった。<br>
+      ＜２つ折り①＞を開き、各階層を調査しよう。
+    </p>
+  </section>
+
+  <section class="section elevator-wrap">
+    <div class="panel">
+      <div class="buttons" id="buttons-step2"></div>
+    </div>
+
+    <div class="floor-view">
+      <div class="floor-title hidden" id="floor-title-step2"></div>
+      <div class="image-frame" id="floor-image-step2"></div>
+    </div>
+
+    <div class="answer-area">
+      <div class="input-label">解答入力欄</div>
+      <input id="step2-answer" placeholder="この階の解答を入力">
+      <button onclick="submitStep2FloorAnswer()">送信</button>
+      <div class="answer-message" id="step2-message"></div>
+    </div>
+  </section>
+</div>
+
+<div class="page hidden" id="step3-page">
+  <div class="step-header">3rd STEP</div>
+
+  <section class="section story">
+    <p>
+      残りの階層のロックが解除された。<br>
+      ＜２つ折り②＞を開き、さらに調査を進めよう。
+    </p>
+  </section>
+
+  <section class="section elevator-wrap">
+    <div class="panel">
+      <div class="buttons" id="buttons-step3"></div>
+    </div>
+
+    <div class="floor-view">
+      <div class="floor-title hidden" id="floor-title-step3"></div>
+      <div class="image-frame" id="floor-image-step3"></div>
+    </div>
+
+    <div class="answer-area">
+      <div class="input-label">解答入力欄</div>
+      <input id="step3-answer" placeholder="この階の解答を入力">
+      <button onclick="submitStep3FloorAnswer()">送信</button>
+      <div class="answer-message" id="step3-message"></div>
+
+      <div class="password-title">２号エレベーター起動パスワード</div>
+      <input id="step3-password" placeholder="パスワードを入力">
+      <button onclick="submitStep3Password()">送信</button>
+    </div>
+  </section>
+</div>
+
+<div class="page hidden" id="step4-page">
+  <div class="step-header">4th STEP</div>
+
+  <section class="section story">
+    <p>
+      １階、A階から２号エレベーターへ移動した。<br>
+      エレベーターの中には階数ボタンがなく、代わりにタブレットがはまっている。
+    </p>
+    <p style="margin-top:30px;">
+      階の様子に映る謎から次の行き先を導き、<br>
+      タブレットに入力して移動用の問題を表示しよう。
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="floor-title" id="floor-title-step4"></div>
+    <div class="image-frame" id="floor-image-step4"></div>
+  </section>
+
+  <section class="section">
+    <div class="tablet">
+      <div class="tablet-top">
+        <input id="floor-input-4" class="tablet-floor-input" maxlength="2">
+        <span>階へ行くための手がかり</span>
+      </div>
+
+      <div class="image-frame tablet-image" id="tablet-image-4"></div>
+
+      <div class="tablet-message" id="tablet-message-4"></div>
+
+      <div class="tablet-bottom">
+        <input id="answer-input-4" class="tablet-answer-input" placeholder="解答を入力">
+        <button class="tablet-send" onclick="submitTablet4()">送信</button>
+      </div>
+    </div>
+
+    <div class="fourth-story-box hidden" id="fourth-story-box">
+      <p>E階につくと、目の前に３号エレベーターがあった。</p>
+      <p>「資産がある階にいくには、こちらのタブレットが必要となります」</p>
+      <p>その表示を見たあなたは、タブレットを持って３号エレベーターに乗り込んだ。</p>
+      <p>「こちらは資産があるフロア直通のエレベーターとなります」</p>
+
+      <button class="next-step-button" onclick="goStep5FromFourth()">
+        5th STEPへ
+      </button>
+    </div>
+  </section>
+</div>
+
+<div class="page hidden" id="step5-page">
+  <div class="step-header">5th STEP</div>
+
+  <section class="section story">
+    <p>
+      ３号機の階数情報は伏せられている。<br>
+      しかし、２号機で使用していたタブレットは、このエレベーターでも使用できるようだ。
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="tablet">
+      <div class="tablet-top">
+        <input id="floor-input-5" class="tablet-floor-input" maxlength="2">
+        <span>階へ行くための手がかり</span>
+      </div>
+
+      <div class="image-frame tablet-image" id="tablet-image-5"></div>
+
+      <div class="tablet-message" id="tablet-message-5"></div>
+
+      <div class="tablet-bottom">
+        <input id="answer-input-5" class="tablet-answer-input" placeholder="解答を入力">
+        <button class="tablet-send" onclick="submitStep5()">送信</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="page hidden" id="step5-story-page">
+  <div class="step-header">5th STEP</div>
+
+  <section class="section story">
+    <p>
+      エレベーターは目的の階につき、<br>
+      無事に目的の＜金インゴット＞を入手した。
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="diary">
+      <div class="diary-title">資産家の日記</div>
+      <div class="diary-body">
+        屋上(11F)から見る光景が好きだ。<br><br>
+        屋上へつながるトビラは、私しか開けられないようになっている。<br><br>
+        開ける前に身だしなみをチェックするのが習慣になっている。
+      </div>
+    </div>
+  </section>
+
+  <section class="section story">
+    <p>
+      １号エレベーターへ戻り、＜金インゴット＞を監視カメラへ見せると、<br>
+      エレベーターマンから電話がかかってきた。
+    </p>
+
+    <p style="margin-top:40px;">
+      「脱出させるというのはウソだ。<br>
+      お前をエレベーターの中から出すつもりはない」
+    </p>
+
+    <p style="margin-top:40px;">通話は切れた。</p>
+
+    <p style="margin-top:40px;">
+      あなたは、金インゴットで監視カメラを叩き割った。
+    </p>
+  </section>
+
+  <section class="section" style="text-align:center;">
+    <button class="next-step-button" onclick="goLastStep()">LAST STEPへ</button>
+  </section>
+</div>
+
+<div class="page hidden" id="last-step-page">
+  <div class="step-header">LAST STEP</div>
+
+  <section class="section story">
+    <p>
+      エレベーターマンの監視から逃れた。<br>
+      資産家の日記に残された情報をもとに、向かうべき階を探そう。
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="tablet">
+      <div class="tablet-top">
+        <input id="floor-input-last" class="tablet-floor-input" maxlength="2">
+        <span>階へ行くための手がかり</span>
+      </div>
+
+      <div class="image-frame tablet-image" id="tablet-image-last"></div>
+
+      <div class="tablet-bottom">
+        <input id="answer-input-last" class="tablet-answer-input" placeholder="解答を入力">
+        <button class="tablet-send" onclick="submitLastRiddle()">送信</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="page hidden" id="last-action-page">
+  <div class="step-header">LAST STEP</div>
+
+  <section class="section story">
+    <p>
+      １１階につき、エレベーターのトビラが開いた。<br>
+      しかし、そこにあるのは壁のみだった。
+    </p>
+    <p style="margin-top:34px;">
+      今まで手に入れた情報を整理し、とるべき行動を入力せよ。
+    </p>
+  </section>
+
+  <section class="section riddle">
+    <div class="image-frame" id="image-last-wall"></div>
+
+    <div class="answer-area">
+      <input id="last-action-answer" placeholder="とるべき行動を入力">
+      <button onclick="submitLastAction()">送信</button>
+    </div>
+  </section>
+</div>
+
+<div class="page hidden" id="clear-page">
+  <div class="step-header">CLEAR</div>
+
+  <section class="section story">
+    <div class="clear-title">GAME CLEAR</div>
+    <p>
+      主人公がミラーをノックすると、奥に空間があることがわかった。<br>
+      金インゴットで鏡を割ると、屋外へとつながる道が現れた。
+    </p>
+    <p style="margin-top:34px;">
+      スマホの電波がつながり、救助を呼ぶことができた。<br>
+      あなたは資産を手に入れ、この奇妙な建物から脱出した。
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="image-frame" id="image-clear"></div>
+  </section>
+</div>
+
+<div class="modal" id="unlock-modal">
+  <div class="modal-card">
+    <div class="modal-title">以下の階層が解放されました</div>
+    <div class="modal-floors" id="modal-floors"></div>
+    <button class="modal-next" id="modal-next">次へ</button>
+  </div>
+</div>
+
+<script>
+const SAVE_KEY = "elevator_escape_state";
+
+const gameState = {
+  currentPage:"step1-page",
+  unlockedNav:["nav-step1"],
+  selectedStep2Floor:null,
+  selectedStep3Floor:null,
+  currentStep4Floor:"A",
+  currentStep4Mode:"waiting",
+  currentStep4Target:null,
+  fourthStoryVisible:false,
+  inventoryUnlocked:false,
+  guideUnlocked:false
+};
+
+function saveState(){
+  sessionStorage.setItem(SAVE_KEY, JSON.stringify(gameState));
+}
+
+function loadState(){
+  const saved = sessionStorage.getItem(SAVE_KEY);
+  if(!saved) return;
+
+  try{
+    Object.assign(gameState, JSON.parse(saved));
+  }catch(e){
+    console.warn("保存データの読み込みに失敗しました", e);
+  }
+}
+
+function normalize(str){
+  return String(str)
+    .toLowerCase()
+    .replace(/[Ａ-Ｚａ-ｚ０-９]/g, s => String.fromCharCode(s.charCodeAt(0)-65248))
+    .replace(/[ぁ-ん]/g, s => String.fromCharCode(s.charCodeAt(0)+0x60))
+    .replace(/\s/g,"");
+}
+
+function setImage(id,path,label=""){
+  const el = document.getElementById(id);
+  if(!el) return;
+
+  el.innerHTML = `
+    <img
+      src="${path}"
+      alt="${label}"
+      loading="lazy"
+      onerror="this.parentElement.innerHTML='<div class=&quot;image-placeholder&quot;>${label || "画像が見つかりません"}</div>';"
+    >
+  `;
+}
+
+function setPlaceholder(id,text="画像"){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.innerHTML = `<div class="image-placeholder">${text}</div>`;
+}
+
+function setFloorTitle(id,text){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.innerText = text;
+  el.classList.remove("hidden");
+}
+
+function clearFloorTitle(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.innerText = "";
+  el.classList.add("hidden");
+}
+
+function setTabletMessage(id,text){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.innerText = text || "";
+}
+
+function showTemporaryMessage(id,text){
+  const el = document.getElementById(id);
+  if(!el) return;
+
+  el.innerText = text;
+  el.classList.add("show");
+
+  setTimeout(() => {
+    el.classList.remove("show");
+    el.innerText = "";
+  },1400);
+}
+
+function showPage(id, shouldSave = true){
+  document.querySelectorAll(".page").forEach(p => p.classList.add("hidden"));
+
+  const page = document.getElementById(id);
+  if(!page) return;
+
+  page.classList.remove("hidden");
+
+  if(id === "step4-page"){
+    renderStep4();
+  }
+
+  if(shouldSave){
+    gameState.currentPage = id;
+    saveState();
+  }
+
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function showStepDirect(id){
+  showPage(id);
+}
+
+function unlockNav(id){
+  const nav = document.getElementById(id);
+  if(nav) nav.classList.remove("hidden");
+
+  if(!gameState.unlockedNav.includes(id)){
+    gameState.unlockedNav.push(id);
+  }
+
+  saveState();
+}
+
+function openGuide(){
+  document.getElementById("guide-overlay").classList.add("show");
+}
+
+function closeGuide(){
+  document.getElementById("guide-overlay").classList.remove("show");
+}
+
+function openInventory(){
+  document.getElementById("inventory-overlay").classList.add("show");
+}
+
+function closeInventory(){
+  document.getElementById("inventory-overlay").classList.remove("show");
+}
+
+const elevatorOrder = [8,9,6,7,4,5,2,3,0,1];
+
+const imagePaths = {
+  guide:"./image/guide_transparent_card.png",
+  step1Riddle:"./image/step1_riddle.png",
+
+  floor0:"./image/floor_0.png",
+  floor1:"./image/floor_1.png",
+  floor2:"./image/floor_2.png",
+  floor3:"./image/floor_3.png",
+  floor4:"./image/floor_4.png",
+  floor5:"./image/floor_5.png",
+  floor6:"./image/floor_6.png",
+  floor7:"./image/floor_7.png",
+  floor8:"./image/floor_8.png",
+  floor9:"./image/floor_9.png",
+
+  step4FloorA:"./image/step4_floor_a.png",
+  step4FloorJ:"./image/step4_floor_j.png",
+  step4FloorH:"./image/step4_floor_h.png",
+  step4FloorE:"./image/step4_floor_e.png",
+  step4RiddleJ:"./image/step4_riddle_j.png",
+  step4RiddleH:"./image/step4_riddle_h.png",
+  step4RiddleE:"./image/step4_riddle_e.png",
+
+  step5RiddleKo:"./image/step5_riddle_ko.png",
+
+  lastRiddle11:"./image/last_riddle_11.png",
+  lastWall:"./image/last_wall.png",
+  clear:"./image/clear.png"
+};
+
+function createButtons(targetId,enabledFloors,callback){
+  const wrap = document.getElementById(targetId);
+  wrap.innerHTML = "";
+
+  elevatorOrder.forEach(i => {
+    const button = document.createElement("button");
+    button.className = "elevator-button";
+    button.innerHTML = `<span>${i}</span>`;
+
+    if(enabledFloors.includes(i)){
+      button.classList.add("active");
+      button.onclick = () => callback(i);
+    }else{
+      button.classList.add("locked");
+    }
+
+    wrap.appendChild(button);
+  });
+}
+
+function createStep1Buttons(){
+  const wrap = document.getElementById("buttons-step1");
+  wrap.innerHTML = "";
+
+  elevatorOrder.forEach(i => {
+    const button = document.createElement("button");
+    button.className = "elevator-button";
+    button.innerHTML = `<span>${i}</span>`;
+
+    button.onclick = () => {
+      button.classList.toggle("active");
+      checkStep1();
+    };
+
+    wrap.appendChild(button);
+  });
+}
+
+function checkStep1(){
+  const buttons = document.querySelectorAll("#buttons-step1 .elevator-button");
+  const activeNumbers = [];
+
+  buttons.forEach(btn => {
+    if(btn.classList.contains("active")){
+      activeNumbers.push(Number(btn.innerText));
+    }
+  });
+
+  activeNumbers.sort((a,b)=>a-b);
+
+  if(JSON.stringify(activeNumbers) === JSON.stringify([2,4,6,9])){
+    unlockNav("nav-step2");
+    openUnlockModal([4,5,6,8,9],"step2-page");
+  }
+}
+
+function openUnlockModal(floors,nextPage){
+  const modal = document.getElementById("unlock-modal");
+  const floorsWrap = document.getElementById("modal-floors");
+  floorsWrap.innerHTML = "";
+
+  floors.forEach(f => {
+    const div = document.createElement("div");
+    div.className = "modal-floor";
+    div.innerText = f;
+    floorsWrap.appendChild(div);
+  });
+
+  modal.classList.add("show");
+
+  document.getElementById("modal-next").onclick = () => {
+    modal.classList.remove("show");
+
+    if(nextPage !== "step1-page"){
+      document.getElementById("guide-button").classList.remove("hidden");
+      gameState.guideUnlocked = true;
+    }
+
+    showPage(nextPage);
+  };
+}
+
+let selectedStep2Floor = null;
+
+const step2FloorAnswers = {
+  4:["じょしょう","序章","ジョショウ"],
+  5:["マカロニ","まかろに"],
+  6:["ういんく","ウインク"],
+  8:["きのみ","キノミ","木の実"],
+  9:["こうてつ","コウテツ","鋼鉄"]
+};
+
+function selectStep2Floor(floor){
+  selectedStep2Floor = floor;
+  gameState.selectedStep2Floor = floor;
+  saveState();
+
+  document.getElementById("step2-answer").value = "";
+  setFloorTitle("floor-title-step2",`${floor}階の様子`);
+  setImage("floor-image-step2",imagePaths[`floor${floor}`],`${floor}階の様子画像`);
+}
+
+function submitStep2FloorAnswer(){
+  const value = normalize(document.getElementById("step2-answer").value);
+
+  const technologyAnswers = [
+    "テクノロジー",
+    "てくのろじー",
+    "technology"
+  ];
+
+  if(technologyAnswers.map(normalize).includes(value)){
+    unlockNav("nav-step3");
+    openUnlockModal([0,1,2,3,7],"step3-page");
+    return;
+  }
+
+  if(selectedStep2Floor === null) return;
+
+  const answers = step2FloorAnswers[selectedStep2Floor] || [];
+
+  if(answers.map(normalize).includes(value)){
+    showTemporaryMessage("step2-message","正解です！");
+  }
+}
+
+let selectedStep3Floor = null;
+
+const step3FloorAnswers = {
+  0:["とりひき","トリヒキ","取引","取り引き"],
+  1:["あらすじ","アラスジ","粗筋"],
+  2:["すとーん","ストーン"],
+  3:["さっかく","サッカク"],
+  7:["かっと","カット"]
+};
+
+function selectStep3Floor(floor){
+  selectedStep3Floor = floor;
+  gameState.selectedStep3Floor = floor;
+  saveState();
+
+  document.getElementById("step3-answer").value = "";
+  setFloorTitle("floor-title-step3",`${floor}階の様子`);
+  setImage("floor-image-step3",imagePaths[`floor${floor}`],`${floor}階の様子画像`);
+}
+
+function submitStep3FloorAnswer(){
+  if(selectedStep3Floor === null) return;
+
+  const value = normalize(document.getElementById("step3-answer").value);
+  const answers = step3FloorAnswers[selectedStep3Floor] || [];
+
+  if(answers.map(normalize).includes(value)){
+    showTemporaryMessage("step3-message","正解です！");
+  }
+}
+
+function submitStep3Password(){
+  const value = normalize(document.getElementById("step3-password").value);
+
+  if(["かいきん","カイキン","解禁"].map(normalize).includes(value)){
+    unlockNav("nav-step4");
+    showPage("step4-page");
+  }
+}
+
+let currentStep4Floor = "A";
+let currentStep4Mode = "waiting";
+let currentStep4Target = null;
+
+function getStep4FloorImage(floor){
+  if(floor === "A") return imagePaths.step4FloorA;
+  if(floor === "J") return imagePaths.step4FloorJ;
+  if(floor === "H") return imagePaths.step4FloorH;
+  if(floor === "E") return imagePaths.step4FloorE;
+  return imagePaths.step4FloorA;
+}
+
+function getStep4RiddleImage(target){
+  if(target === "J") return imagePaths.step4RiddleJ;
+  if(target === "H") return imagePaths.step4RiddleH;
+  if(target === "E") return imagePaths.step4RiddleE;
+  return "";
+}
+
+function syncStep4State(){
+  currentStep4Floor = gameState.currentStep4Floor || "A";
+  currentStep4Mode = gameState.currentStep4Mode || "waiting";
+  currentStep4Target = gameState.currentStep4Target || null;
+}
+
+function renderStep4(){
+  syncStep4State();
+
+  const storyBox = document.getElementById("fourth-story-box");
+
+  if(storyBox){
+    storyBox.classList.toggle("hidden", !gameState.fourthStoryVisible);
+  }
+
+  setFloorTitle("floor-title-step4",`${currentStep4Floor}階の様子`);
+
+  setImage(
+    "floor-image-step4",
+    getStep4FloorImage(currentStep4Floor),
+    `${currentStep4Floor}階の様子`
+  );
+
+  if(currentStep4Mode === "riddle" && currentStep4Target){
+    setImage(
+      "tablet-image-4",
+      getStep4RiddleImage(currentStep4Target),
+      `${currentStep4Target}階へ行くための問題`
+    );
+  }else{
+    setPlaceholder(
+      "tablet-image-4",
+      "行きたい階を入力せよ。"
+    );
+  }
+}
+
+function setStep4Riddle(target){
+  currentStep4Mode = "riddle";
+  currentStep4Target = target;
+
+  gameState.currentStep4Mode = "riddle";
+  gameState.currentStep4Target = target;
+
+  setTabletMessage("tablet-message-4","");
+  saveState();
+
+  setImage(
+    "tablet-image-4",
+    getStep4RiddleImage(target),
+    `${target}階へ行くための問題`
+  );
+}
+
+function moveStep4ToFloor(floor){
+  currentStep4Floor = floor;
+  currentStep4Mode = "waiting";
+  currentStep4Target = null;
+
+  gameState.currentStep4Floor = floor;
+  gameState.currentStep4Mode = "waiting";
+  gameState.currentStep4Target = null;
+
+  setTabletMessage("tablet-message-4","");
+  saveState();
+
+  setFloorTitle("floor-title-step4",`${floor}階の様子`);
+
+  setImage(
+    "floor-image-step4",
+    getStep4FloorImage(floor),
+    `${floor}階の様子`
+  );
+
+  setPlaceholder(
+    "tablet-image-4",
+    "行きたい階を入力せよ。"
+  );
+
+  clearTablet4();
+}
+
+function finishFourthStep(){
+  moveStep4ToFloor("E");
+
+  gameState.fourthStoryVisible = true;
+  saveState();
+
+  const storyBox = document.getElementById("fourth-story-box");
+  if(storyBox){
+    storyBox.classList.remove("hidden");
+  }
+
+  unlockNav("nav-step5");
+}
+
+function handleStep4InvalidFloor(floorInput){
+  const inaccessibleFloors = ["b","c","d","f","g","i"];
+  const progressionFloors = ["a","j","h","e"];
+
+  if(inaccessibleFloors.includes(floorInput)){
+    setTabletMessage("tablet-message-4","その階に移動することはできません。");
+    return true;
+  }
+
+  if(progressionFloors.includes(floorInput)){
+    setTabletMessage("tablet-message-4","その階にはまだ移動することはできません。");
+    return true;
+  }
+
+  if(floorInput){
+    setTabletMessage("tablet-message-4","その階は存在しません。");
+    return true;
+  }
+
+  return false;
+}
+
+function submitTablet4(){
+  const floorInput = normalize(document.getElementById("floor-input-4").value);
+  const answerInput = normalize(document.getElementById("answer-input-4").value);
+
+  if(currentStep4Floor === "A"){
+    if(currentStep4Mode === "waiting"){
+      if(floorInput === "j"){
+        setStep4Riddle("J");
+      }else{
+        handleStep4InvalidFloor(floorInput);
+      }
+      return;
+    }
+
+    if(currentStep4Mode === "riddle" && currentStep4Target === "J"){
+      if(["よくばり","ヨクバリ","欲張り"].map(normalize).includes(answerInput)){
+        moveStep4ToFloor("J");
+      }
+    }
+
+    return;
+  }
+
+  if(currentStep4Floor === "J"){
+    if(currentStep4Mode === "waiting"){
+      if(floorInput === "h"){
+        setStep4Riddle("H");
+      }else{
+        handleStep4InvalidFloor(floorInput);
+      }
+      return;
+    }
+
+    if(currentStep4Mode === "riddle" && currentStep4Target === "H"){
+      if(["よる","ヨル","夜"].map(normalize).includes(answerInput)){
+        moveStep4ToFloor("H");
+      }
+    }
+
+    return;
+  }
+
+  if(currentStep4Floor === "H"){
+    if(currentStep4Mode === "waiting"){
+      if(floorInput === "e"){
+        setStep4Riddle("E");
+      }else{
+        handleStep4InvalidFloor(floorInput);
+      }
+      return;
+    }
+
+    if(currentStep4Mode === "riddle" && currentStep4Target === "E"){
+      if(["めいはく","メイハク","明白"].map(normalize).includes(answerInput)){
+        finishFourthStep();
+      }
+    }
+  }
+}
+
+function clearTablet4(){
+  document.getElementById("floor-input-4").value = "";
+  document.getElementById("answer-input-4").value = "";
+}
+
+function goStep5FromFourth(){
+  unlockNav("nav-step5");
+  showPage("step5-page");
+}
+
+function handleStep5InvalidFloor(floorInput){
+  const inaccessibleFloors = ["ア","イ","ウ","エ","オ","カ","キ","ク","ケ"];
+
+  if(inaccessibleFloors.includes(floorInput)){
+    setTabletMessage("tablet-message-5","その階に移動することはできません。");
+    return true;
+  }
+
+  if(floorInput){
+    setTabletMessage("tablet-message-5","その階は存在しません。");
+    return true;
+  }
+
+  return false;
+}
+
+function submitStep5(){
+  const floor = normalize(document.getElementById("floor-input-5").value);
+  const answer = normalize(document.getElementById("answer-input-5").value);
+
+  if(floor === normalize("こ")){
+    setTabletMessage("tablet-message-5","");
+    setImage("tablet-image-5",imagePaths.step5RiddleKo,"「こ」の階");
+
+    if(["かくめい","カクメイ","革命"].map(normalize).includes(answer)){
+      gameState.inventoryUnlocked = true;
+      saveState();
+
+      showPage("step5-story-page");
+      document.getElementById("inventory-button").classList.remove("hidden");
+    }
+
+    return;
+  }
+
+  handleStep5InvalidFloor(floor);
+}
+
+function goLastStep(){
+  unlockNav("nav-last");
+  showPage("last-step-page");
+}
+
+function submitLastRiddle(){
+  const floor = normalize(document.getElementById("floor-input-last").value);
+  const answer = normalize(document.getElementById("answer-input-last").value);
+
+  if(floor === "11"){
+    setImage("tablet-image-last",imagePaths.lastRiddle11,"11階へ行く問題");
+
+    if(["ミラー","みらー"].map(normalize).includes(answer)){
+      showPage("last-action-page");
+    }
+  }
+}
+
+function submitLastAction(){
+  const value = normalize(document.getElementById("last-action-answer").value);
+
+  const correctAnswers = [
+    "かがみをインゴットでわる",
+    "鏡をインゴットで割る",
+    "かがみインゴットわる",
+    "鏡インゴット割る",
+    "インゴットでかがみをわる",
+    "インゴットで鏡を割る"
+  ].map(normalize);
+
+  if(correctAnswers.includes(value)){
+    showPage("clear-page");
+  }
+}
+
+function initializeImages(){
+  setImage("guide-image",imagePaths.guide,"透明カードの使い方画像");
+  setImage("image-step1-riddle",imagePaths.step1Riddle,"1st STEP 問題画像");
+  clearFloorTitle("floor-title-step2");
+  clearFloorTitle("floor-title-step3");
+  setPlaceholder("floor-image-step2","階層を選択してください");
+  setPlaceholder("floor-image-step3","階層を選択してください");
+  renderStep4();
+  setPlaceholder("tablet-image-5","行き先を入力してください");
+  setPlaceholder("tablet-image-last","行き先を入力してください");
+  setImage("image-last-wall",imagePaths.lastWall,"11階");
+  setImage("image-clear",imagePaths.clear,"GAME CLEAR");
+}
+
+function restoreGame(){
+  loadState();
+
+  gameState.unlockedNav.forEach(id => {
+    const nav = document.getElementById(id);
+    if(nav) nav.classList.remove("hidden");
+  });
+
+  if(gameState.guideUnlocked){
+    document.getElementById("guide-button").classList.remove("hidden");
+  }
+
+  if(gameState.inventoryUnlocked){
+    document.getElementById("inventory-button").classList.remove("hidden");
+  }
+
+  if(gameState.selectedStep2Floor !== null){
+    selectedStep2Floor = gameState.selectedStep2Floor;
+    setFloorTitle("floor-title-step2",`${selectedStep2Floor}階の様子`);
+    setImage(
+      "floor-image-step2",
+      imagePaths[`floor${selectedStep2Floor}`],
+      `${selectedStep2Floor}階の様子画像`
+    );
+  }
+
+  if(gameState.selectedStep3Floor !== null){
+    selectedStep3Floor = gameState.selectedStep3Floor;
+    setFloorTitle("floor-title-step3",`${selectedStep3Floor}階の様子`);
+    setImage(
+      "floor-image-step3",
+      imagePaths[`floor${selectedStep3Floor}`],
+      `${selectedStep3Floor}階の様子画像`
+    );
+  }
+
+  syncStep4State();
+
+  showPage(gameState.currentPage || "step1-page", false);
+}
+
+function bindEnterKeys(){
+  [
+    "step2-answer",
+    "step3-answer",
+    "step3-password",
+    "answer-input-4",
+    "floor-input-4",
+    "answer-input-5",
+    "floor-input-5",
+    "answer-input-last",
+    "floor-input-last",
+    "last-action-answer"
+  ].forEach(id => {
+    const el = document.getElementById(id);
+    if(!el) return;
+
+    el.addEventListener("keydown", e => {
+      if(e.key === "Enter"){
+        if(id === "step2-answer") submitStep2FloorAnswer();
+        if(id === "step3-answer") submitStep3FloorAnswer();
+        if(id === "step3-password") submitStep3Password();
+
+        if(id === "answer-input-4" || id === "floor-input-4"){
+          submitTablet4();
+        }
+
+        if(id === "answer-input-5" || id === "floor-input-5"){
+          submitStep5();
+        }
+
+        if(id === "answer-input-last" || id === "floor-input-last"){
+          submitLastRiddle();
+        }
+
+        if(id === "last-action-answer"){
+          submitLastAction();
+        }
+      }
+    });
+  });
+}
+
+function initGame(){
+  createStep1Buttons();
+  createButtons("buttons-step2",[4,5,6,8,9],selectStep2Floor);
+  createButtons("buttons-step3",[0,1,2,3,4,5,6,7,8,9],selectStep3Floor);
+
+  initializeImages();
+  bindEnterKeys();
+  restoreGame();
+}
+
+initGame();
+</script>
+
+</body>
+</html>
