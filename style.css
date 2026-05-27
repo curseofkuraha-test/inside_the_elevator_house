@@ -276,31 +276,24 @@ a:hover{
 
 @media(max-width:700px){
 
+  html,
   body{
     width:100%;
+    max-width:100%;
     overflow-x:hidden;
   }
 
-  h1{
-    padding:42px 16px 24px;
-    font-size:32px;
-    letter-spacing:4px;
-  }
-
   #accordion-container{
-    width:100%;
-    max-width:100%;
-    margin:0 auto 60px;
-    padding-left:12px;
-    padding-right:12px;
-    box-sizing:border-box;
-  }
-
-  #accordion-container > *{
-    width:100%;
-    max-width:100%;
+    width:calc(100vw - 24px);
+    max-width:calc(100vw - 24px);
     margin-left:auto;
     margin-right:auto;
+    padding-left:0;
+    padding-right:0;
+  }
+
+  #accordion-container,
+  #accordion-container *{
     box-sizing:border-box;
   }
 
@@ -309,20 +302,16 @@ a:hover{
   details{
     width:100%;
     max-width:100%;
-    margin-left:auto;
-    margin-right:auto;
-    border-radius:4px;
-    box-sizing:border-box;
+    margin-left:0;
+    margin-right:0;
   }
 
   .accordion-header,
   .hint-title,
   summary{
     width:100%;
-    min-height:54px;
-    padding:16px 18px;
-    font-size:16px;
-    box-sizing:border-box;
+    padding-left:16px;
+    padding-right:48px;
   }
 
   .accordion-content,
@@ -330,23 +319,7 @@ a:hover{
   details > div,
   details > p{
     width:100%;
-    padding:20px 18px;
-    font-size:16px;
-    line-height:1.9;
-    box-sizing:border-box;
-  }
-
-  .accordion-content img,
-  .hint-content img,
-  details img{
-    width:100%;
-    max-width:100%;
-    box-sizing:border-box;
-  }
-
-  .back-button,
-  .home-button{
-    width:100%;
-    max-width:320px;
+    padding-left:16px;
+    padding-right:16px;
   }
 }
