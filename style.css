@@ -45,7 +45,9 @@ h1{
 #accordion-container{
   width:min(92vw,820px);
   max-width:820px;
-  margin:0 auto 80px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-bottom:80px;
   padding:0;
   box-sizing:border-box;
 }
@@ -54,6 +56,26 @@ h1{
   text-align:center;
   color:#d7d7d7;
   font-size:18px;
+}
+
+/* ========================================
+   main.jsで生成されるul/liリセット
+======================================== */
+
+.accordion-list{
+  width:100%;
+  margin:0;
+  padding:0;
+  list-style:none;
+  box-sizing:border-box;
+}
+
+.accordion-list li{
+  width:100%;
+  margin:0;
+  padding:0;
+  list-style:none;
+  box-sizing:border-box;
 }
 
 /* ========================================
@@ -93,9 +115,10 @@ details:hover{
 .accordion-header,
 .hint-title,
 summary{
+  position:relative;
   width:100%;
   min-height:58px;
-  padding:18px 22px;
+  padding:18px 48px 18px 30px;
   box-sizing:border-box;
   background:
     linear-gradient(
@@ -111,7 +134,6 @@ summary{
   text-align:left;
   list-style:none;
   transition:.18s;
-  position:relative;
 }
 
 .accordion-header:hover,
@@ -125,14 +147,39 @@ summary:hover{
     );
 }
 
+/* 標準の点を消す */
+
 summary::-webkit-details-marker{
   display:none;
 }
 
+summary::marker{
+  content:"";
+}
+
+/* 左の独自点 */
+
+.accordion-header::before,
+.hint-title::before,
+summary::before{
+  content:"";
+  position:absolute;
+  left:14px;
+  top:50%;
+  transform:translateY(-50%);
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:white;
+  opacity:.88;
+}
+
+/* + / - */
+
 summary::after{
   content:"+";
   position:absolute;
-  right:20px;
+  right:18px;
   top:50%;
   transform:translateY(-50%);
   font-size:24px;
@@ -148,7 +195,7 @@ details[open] summary::after{
 .hint-title::after{
   content:"+";
   position:absolute;
-  right:20px;
+  right:18px;
   top:50%;
   transform:translateY(-50%);
   font-size:24px;
@@ -274,63 +321,62 @@ a:hover{
    MOBILE
 ======================================== */
 
-/* スマホ時：アコーディオン本体を軸に中央揃え */
 @media(max-width:700px){
 
-  #accordion-container{
-    width:min(92vw,820px);
-    max-width:820px;
-    margin-left:auto;
-    margin-right:auto;
-    padding-left:0;
-    padding-right:0;
+  html,
+  body{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
   }
 
-  .accordion-item,
-  .hint-item,
-  details{
-    width:100%;
+  h1{
+    padding:42px 16px 24px;
+    font-size:32px;
+    letter-spacing:4px;
+  }
+
+  #accordion-container{
+    width:calc(100vw - 28px);
+    max-width:calc(100vw - 28px);
     margin-left:auto;
     margin-right:auto;
-    position:relative;
+    padding:0;
+    box-sizing:border-box;
+  }
+
+  .accordion-list,
+  .accordion-list li,
+  .accordion-list details{
+    width:100%;
+    max-width:100%;
+    margin-left:0;
+    margin-right:0;
+    padding-left:0;
+    padding-right:0;
+    box-sizing:border-box;
   }
 
   .accordion-header,
   .hint-title,
   summary{
-    position:relative;
     width:100%;
-    padding-left:18px;
-    padding-right:48px;
+    min-height:54px;
+    padding:16px 46px 16px 30px;
+    font-size:16px;
+    box-sizing:border-box;
   }
 
-  /* 左の点はメニュー幅の外ではなく、内側に配置 */
   .accordion-header::before,
   .hint-title::before,
   summary::before{
-    content:"";
-    position:absolute;
-    left:8px;
-    top:50%;
-    transform:translateY(-50%);
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    background:#ffffff;
-    opacity:.85;
-  }
-
-  /* 点のぶんだけテキストを少し右に逃がす */
-  .accordion-header,
-  .hint-title,
-  summary{
-    padding-left:26px;
+    left:12px;
   }
 
   .accordion-header::after,
   .hint-title::after,
   summary::after{
-    right:16px;
+    right:14px;
   }
 
   .accordion-content,
@@ -338,7 +384,23 @@ a:hover{
   details > div,
   details > p{
     width:100%;
-    padding-left:16px;
-    padding-right:16px;
+    padding:20px 16px;
+    font-size:16px;
+    line-height:1.9;
+    box-sizing:border-box;
+  }
+
+  .accordion-content img,
+  .hint-content img,
+  details img{
+    width:100%;
+    max-width:100%;
+    box-sizing:border-box;
+  }
+
+  .back-button,
+  .home-button{
+    width:100%;
+    max-width:320px;
   }
 }
