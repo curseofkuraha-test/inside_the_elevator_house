@@ -58,9 +58,7 @@ h1{
   font-size:18px;
 }
 
-/* ========================================
-   main.jsで生成されるul/liリセット
-======================================== */
+/* main.jsで生成されるul/liリセット */
 
 .accordion-list{
   width:100%;
@@ -78,9 +76,28 @@ h1{
   box-sizing:border-box;
 }
 
-/* ========================================
-   ACCORDION
-======================================== */
+/* 階層ごとの余白 */
+
+.accordion-list > li{
+  margin-bottom:16px;
+}
+
+.accordion-list .accordion-list{
+  padding-top:10px;
+  padding-left:14px;
+}
+
+.accordion-list .accordion-list details{
+  width:calc(100% - 6px);
+  margin-left:auto;
+  margin-right:0;
+}
+
+.accordion-list .accordion-list .accordion-list{
+  padding-left:16px;
+}
+
+/* ACCORDION */
 
 .accordion-item,
 .hint-item,
@@ -108,9 +125,7 @@ details:hover{
     0 0 16px rgba(0,162,154,.12);
 }
 
-/* ========================================
-   HEADER
-======================================== */
+/* HEADER */
 
 .accordion-header,
 .hint-title,
@@ -147,8 +162,6 @@ summary:hover{
     );
 }
 
-/* 標準の点を消す */
-
 summary::-webkit-details-marker{
   display:none;
 }
@@ -156,8 +169,6 @@ summary::-webkit-details-marker{
 summary::marker{
   content:"";
 }
-
-/* 左の独自点 */
 
 .accordion-header::before,
 .hint-title::before,
@@ -173,8 +184,6 @@ summary::before{
   background:white;
   opacity:.88;
 }
-
-/* + / - */
 
 summary::after{
   content:"+";
@@ -208,16 +217,14 @@ details[open] summary::after{
   content:"−";
 }
 
-/* ========================================
-   CONTENT
-======================================== */
+/* CONTENT */
 
 .accordion-content,
 .hint-content,
 details > div,
 details > p{
   width:100%;
-  padding:24px;
+  padding:26px 24px;
   box-sizing:border-box;
   color:#ececec;
   font-size:17px;
@@ -240,9 +247,7 @@ details > p{
   margin-bottom:0;
 }
 
-/* ========================================
-   IMAGE
-======================================== */
+/* IMAGE */
 
 .accordion-content img,
 .hint-content img,
@@ -261,9 +266,7 @@ details img{
   box-sizing:border-box;
 }
 
-/* ========================================
-   LINK
-======================================== */
+/* LINK */
 
 a{
   color:#6ce7df;
@@ -278,9 +281,7 @@ a:hover{
   text-decoration:underline;
 }
 
-/* ========================================
-   BUTTON
-======================================== */
+/* BUTTON */
 
 .back-button,
 .home-button{
@@ -317,9 +318,7 @@ a:hover{
     );
 }
 
-/* ========================================
-   MOBILE
-======================================== */
+/* MOBILE */
 
 @media(max-width:700px){
 
@@ -357,6 +356,23 @@ a:hover{
     box-sizing:border-box;
   }
 
+  .accordion-list > li{
+    margin-bottom:14px;
+  }
+
+  .accordion-list .accordion-list{
+    padding-top:8px;
+    padding-left:10px;
+  }
+
+  .accordion-list .accordion-list details{
+    width:calc(100% - 4px);
+  }
+
+  .accordion-list .accordion-list .accordion-list{
+    padding-left:12px;
+  }
+
   .accordion-header,
   .hint-title,
   summary{
@@ -384,7 +400,7 @@ a:hover{
   details > div,
   details > p{
     width:100%;
-    padding:20px 16px;
+    padding:22px 16px;
     font-size:16px;
     line-height:1.9;
     box-sizing:border-box;
