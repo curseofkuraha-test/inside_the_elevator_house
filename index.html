@@ -12,19 +12,17 @@ html{scroll-behavior:smooth;}
 
 body{
   margin:0;
+  min-height:100vh;
   font-family:"LINE Seed Sans","LINESeedJP","Noto Sans JP",sans-serif;
+  background:#111;
   color:white;
   overflow-x:hidden;
-  background:#111;
-  min-height:100vh;
 }
 
 .background-layer{
   position:fixed;
   inset:0;
-  background-image:url("./image/background.png");
-  background-size:cover;
-  background-position:center;
+  background:url("./image/background.png") center/cover no-repeat;
   z-index:-20;
 }
 
@@ -40,62 +38,343 @@ body{
 .page{
   width:100%;
   min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-
-.section{
-  width:100%;
-  max-width:1000px;
-  padding:70px 24px;
+  padding:44px 20px 100px;
   box-sizing:border-box;
+  position:relative;
+  z-index:1;
 }
 
 .step-header{
-  width:100%;
   display:flex;
-  align-items:center;
   justify-content:center;
-  padding-top:42px;
-  margin-bottom:10px;
+  align-items:center;
+  margin-bottom:38px;
 }
 
 .step-header img{
-  width:min(72vw,420px);
+  width:min(80vw,420px);
   height:auto;
   display:block;
   object-fit:contain;
 }
 
-.story{text-align:center;}
+.story{
+  max-width:960px;
+  margin:0 auto 58px;
+  text-align:center;
+  font-size:20px;
+  line-height:2.15;
+  color:#e8e8e8;
+}
 
 .story h1{
   font-size:52px;
   letter-spacing:6px;
-  margin-bottom:44px;
+  margin:0 0 36px;
 }
 
-.story p{
+.section{
+  width:100%;
+  max-width:1000px;
+  margin:0 auto;
+  padding:36px 0;
+  box-sizing:border-box;
+}
+
+.image-frame{
+  width:100%;
+  max-width:900px;
+  margin:0 auto;
+  border-radius:8px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.16);
+  background:#181818;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.image-frame img{
+  width:100%;
+  height:auto;
+  display:block;
+  object-fit:contain;
+}
+
+.image-placeholder{
+  width:100%;
+  min-height:320px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#aaa;
+  text-align:center;
+  font-size:28px;
+  padding:24px;
+  box-sizing:border-box;
+}
+
+.floor-title{
+  max-width:900px;
+  margin:0 auto 18px;
+  text-align:center;
+  font-size:30px;
+  font-weight:700;
+  letter-spacing:2px;
+}
+
+.panel{
+  width:360px;
+  margin:48px auto 0;
+  padding:28px;
+  box-sizing:border-box;
+  background:#cecece;
+  border-radius:6px;
+  border:1px solid rgba(255,255,255,.8);
+}
+
+.buttons{
+  display:grid;
+  grid-template-columns:repeat(2,120px);
+  justify-content:center;
+  gap:22px;
+}
+
+.elevator-button{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  border:4px solid white;
+  background:#313333;
+  position:relative;
+  cursor:pointer;
+  transition:.15s;
+  padding:0;
+}
+
+.elevator-button:active{
+  transform:scale(.96);
+}
+
+.elevator-button span{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:78px;
+  font-weight:700;
+  color:#b7b7b7;
+}
+
+.elevator-button.active{
+  box-shadow:0 0 10px rgba(255,160,0,.45),0 0 24px rgba(255,160,0,.25);
+}
+
+.elevator-button.active span{
+  color:#ffb300;
+  text-shadow:0 0 8px rgba(255,180,0,.9),0 0 18px rgba(255,160,0,.55);
+}
+
+.elevator-button.locked{
+  opacity:.24;
+  cursor:default;
+  pointer-events:none;
+}
+
+.floor-view{
+  max-width:900px;
+  margin:54px auto 0;
+}
+
+.answer-area{
+  margin-top:36px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+}
+
+.input-label{
+  width:min(88vw,360px);
+  text-align:left;
+  font-size:16px;
+  font-weight:700;
+  color:#e8e8e8;
+  margin-bottom:-10px;
+}
+
+.answer-area input{
+  width:min(88vw,360px);
+  height:56px;
+  border:none;
+  border-radius:5px;
+  background:#252525;
+  color:white;
+  padding:0 18px;
+  box-sizing:border-box;
   font-size:20px;
-  line-height:2.2;
-  color:#e2e2e2;
 }
 
-/* =========================
-MENU
-========================= */
+.answer-area button,
+.next-step-button{
+  border:none;
+  border-radius:5px;
+  background:white;
+  color:#111;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.answer-area button{
+  width:160px;
+  height:52px;
+  font-size:18px;
+}
+
+.password-title{
+  margin-top:38px;
+  text-align:center;
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:1px;
+}
+
+.answer-message,
+.tablet-message{
+  min-height:28px;
+  text-align:center;
+  font-size:20px;
+  font-weight:700;
+  color:#ffdf6e;
+}
+
+.answer-message{
+  opacity:0;
+  transition:.25s;
+}
+
+.answer-message.show{
+  opacity:1;
+}
+
+.next-step-button{
+  width:260px;
+  height:64px;
+  font-size:22px;
+}
+
+.tablet{
+  width:min(96vw,980px);
+  margin:40px auto;
+  padding:26px;
+  box-sizing:border-box;
+  border:10px solid #555;
+  border-radius:36px;
+  background:linear-gradient(145deg,#3c3c3c,#1a1a1a);
+}
+
+.tablet-top{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding-bottom:16px;
+}
+
+.tablet-floor-input{
+  width:100px;
+  height:50px;
+  border:1px solid #666;
+  background:#111;
+  color:white;
+  text-align:center;
+  font-size:28px;
+}
+
+.tablet-bottom{
+  display:flex;
+  gap:14px;
+  padding-top:18px;
+}
+
+.tablet-answer-input{
+  flex:1;
+  height:56px;
+  border:1px solid #666;
+  background:#111;
+  color:white;
+  padding:0 18px;
+  font-size:20px;
+  box-sizing:border-box;
+}
+
+.tablet-send{
+  width:140px;
+  border:none;
+  border-radius:5px;
+  background:white;
+  color:#111;
+  font-size:18px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.fourth-story-box{
+  width:min(90vw,760px);
+  margin:40px auto 0;
+  padding:42px 32px;
+  box-sizing:border-box;
+  border-radius:8px;
+  background:rgba(0,0,0,.55);
+  border:1px solid rgba(255,255,255,.18);
+  text-align:center;
+}
+
+.fourth-story-box p{
+  font-size:20px;
+  line-height:2.1;
+  color:#e8e8e8;
+}
+
+.diary{
+  width:min(90vw,700px);
+  margin:0 auto;
+  padding:48px;
+  box-sizing:border-box;
+  border-radius:6px;
+  background:linear-gradient(180deg,#f5ecd8,#ead9b8);
+  color:#2a2a2a;
+  font-family:"Yu Mincho",serif;
+}
+
+.diary-title{
+  text-align:center;
+  font-size:34px;
+  margin-bottom:34px;
+}
+
+.diary-body{
+  font-size:22px;
+  line-height:2.2;
+}
+
+.clear-title{
+  font-size:54px;
+  letter-spacing:8px;
+  margin-bottom:34px;
+}
+
+/* MENU */
 
 .menu-toggle{
   position:fixed;
   top:18px;
   right:18px;
   z-index:12000;
-  width:54px;
-  height:54px;
+  width:56px;
+  height:56px;
   border:none;
   border-radius:50%;
-  background:rgba(255,255,255,.94);
+  background:rgba(255,255,255,.95);
   color:#111;
   font-size:28px;
   font-weight:700;
@@ -107,7 +386,7 @@ MENU
   position:fixed;
   inset:0;
   z-index:11900;
-  background:rgba(0,0,0,.58);
+  background:rgba(0,0,0,.62);
   opacity:0;
   pointer-events:none;
   transition:.25s;
@@ -125,13 +404,13 @@ MENU
   z-index:11950;
   width:min(86vw,360px);
   height:100vh;
+  padding:86px 24px 28px;
+  box-sizing:border-box;
+  overflow-y:auto;
   background:#f4f4f4;
   color:#111;
   transform:translateX(100%);
   transition:.25s;
-  padding:86px 24px 28px;
-  box-sizing:border-box;
-  overflow-y:auto;
   box-shadow:-8px 0 24px rgba(0,0,0,.38);
 }
 
@@ -167,228 +446,17 @@ MENU
 }
 
 .menu-button.secondary{
-  background:#e4e4e4;
-  color:#111;
-}
-
-.menu-button.hidden{
-  display:none!important;
-}
-
-.floor-title{
-  width:100%;
-  max-width:720px;
-  margin:0 auto 18px;
-  text-align:center;
-  font-size:28px;
-  font-weight:700;
-  letter-spacing:2px;
-}
-
-.image-frame{
-  width:100%;
-  max-width:720px;
-  border-radius:8px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.18);
-  background:#181818;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:0 auto;
-}
-
-.image-frame img{
-  width:100%;
-  height:auto;
-  display:block;
-  object-fit:contain;
-}
-
-.image-placeholder{
-  width:100%;
-  min-height:320px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#999;
-  font-size:28px;
-  text-align:center;
-  padding:20px;
-  box-sizing:border-box;
-}
-
-.tablet-image.image-frame{
-  max-width:none;
-}
-
-.riddle{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-
-.riddle-title{
-  font-size:34px;
-  margin-bottom:34px;
-}
-
-.elevator-wrap{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-
-.panel{
-  width:360px;
-  background:#cecece;
-  border-radius:6px;
-  padding:28px;
-  box-sizing:border-box;
-  border:1px solid rgba(255,255,255,.8);
-  display:flex;
-  justify-content:center;
-}
-
-.buttons{
-  width:100%;
-  display:grid;
-  grid-template-columns:repeat(2,120px);
-  justify-content:center;
-  gap:22px;
-}
-
-.elevator-button{
-  width:120px;
-  height:120px;
-  border-radius:50%;
-  border:4px solid white;
-  background:#313333;
-  position:relative;
-  cursor:pointer;
-  transition:.15s;
-  padding:0;
-}
-
-.elevator-button:active{
-  transform:scale(.96);
-}
-
-.elevator-button span{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  font-size:78px;
-  font-weight:700;
-  color:#b7b7b7;
-}
-
-.active{
-  box-shadow:0 0 10px rgba(255,160,0,.45),0 0 24px rgba(255,160,0,.25);
-}
-
-.active span{
-  color:#ffb300;
-  text-shadow:0 0 8px rgba(255,180,0,.9),0 0 18px rgba(255,160,0,.55);
-}
-
-.locked{
-  opacity:.24;
-  cursor:default;
-}
-
-.floor-view{
-  width:100%;
-  max-width:720px;
-  margin-top:54px;
-}
-
-.answer-area{
-  margin-top:36px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:18px;
-}
-
-.input-label{
-  width:340px;
-  text-align:left;
-  font-size:16px;
-  font-weight:700;
-  color:#e8e8e8;
-  margin-bottom:-10px;
-}
-
-.answer-area input{
-  width:340px;
-  height:56px;
-  border:none;
-  border-radius:5px;
-  background:#2a2a2a;
+  background:#00a29a;
   color:white;
-  padding:0 18px;
-  font-size:20px;
 }
 
-.answer-area button,
-.next-step-button{
-  border:none;
-  border-radius:5px;
-  background:white;
-  color:black;
-  cursor:pointer;
-}
-
-.answer-area button{
-  width:160px;
-  height:52px;
-  font-size:18px;
-}
-
-.answer-message,
-.tablet-message{
-  min-height:28px;
-  text-align:center;
-  font-size:20px;
-  font-weight:700;
-  color:#ffdf6e;
-}
-
-.answer-message{
-  margin-top:-6px;
-  opacity:0;
-  transition:.25s;
-}
-
-.answer-message.show{
-  opacity:1;
-}
-
-.tablet-message{
-  margin-top:18px;
-}
-
-.password-title{
-  margin-top:42px;
-  text-align:center;
-  font-size:22px;
-  font-weight:700;
-  letter-spacing:1px;
-}
-
-.next-step-button{
-  width:260px;
-  height:64px;
-  font-size:22px;
-}
+/* MODALS */
 
 .modal{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.72);
   z-index:10000;
+  background:rgba(0,0,0,.72);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -405,7 +473,7 @@ MENU
 .modal-card{
   width:min(90vw,520px);
   background:#f4f4f4;
-  color:black;
+  color:#111;
   border-radius:8px;
   padding:44px;
   box-sizing:border-box;
@@ -413,8 +481,10 @@ MENU
 }
 
 .modal-title{
-  font-size:32px;
-  margin-bottom:24px;
+  font-size:30px;
+  line-height:1.55;
+  margin-bottom:28px;
+  font-weight:700;
 }
 
 .modal-floors{
@@ -422,7 +492,7 @@ MENU
   justify-content:center;
   flex-wrap:wrap;
   gap:16px;
-  margin:36px 0;
+  margin:34px 0;
 }
 
 .modal-floor{
@@ -436,6 +506,7 @@ MENU
   align-items:center;
   justify-content:center;
   font-size:34px;
+  font-weight:700;
 }
 
 .modal-next{
@@ -443,19 +514,21 @@ MENU
   height:54px;
   border:none;
   border-radius:5px;
-  background:black;
+  background:#111;
   color:white;
   font-size:18px;
   cursor:pointer;
 }
 
+/* OVERLAYS */
+
 .guide-overlay,
-.inventory-overlay,
-.tablet-guide-overlay{
+.tablet-guide-overlay,
+.inventory-overlay{
   position:fixed;
   inset:0;
   z-index:9500;
-  background:rgba(0,0,0,.7);
+  background:rgba(0,0,0,.82);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -465,24 +538,45 @@ MENU
 }
 
 .guide-overlay.show,
-.inventory-overlay.show,
-.tablet-guide-overlay.show{
+.tablet-guide-overlay.show,
+.inventory-overlay.show{
   opacity:1;
   pointer-events:auto;
 }
 
+.guide-overlay .image-frame,
+.tablet-guide-overlay .image-frame{
+  width:min(92vw,1080px);
+  max-height:86vh;
+}
+
+.guide-overlay .image-frame img,
+.tablet-guide-overlay .image-frame img{
+  max-height:86vh;
+  width:auto;
+  max-width:100%;
+}
+
 .guide-close{
   position:absolute;
-  top:28px;
-  right:28px;
-  width:54px;
-  height:54px;
+  top:18px;
+  right:18px;
+  z-index:9600;
+  width:56px;
+  height:56px;
   border:none;
   border-radius:50%;
-  background:#111;
+  background:rgba(0,0,0,.88);
   color:white;
-  font-size:28px;
+  font-size:34px;
+  font-weight:700;
   cursor:pointer;
+  line-height:1;
+  box-shadow:0 4px 16px rgba(0,0,0,.45);
+}
+
+.guide-close:hover{
+  background:#00a29a;
 }
 
 .inventory-panel{
@@ -490,13 +584,15 @@ MENU
   background:#f2f2f2;
   border-radius:8px;
   padding:48px;
-  color:black;
+  box-sizing:border-box;
+  color:#111;
 }
 
 .inventory-title{
   text-align:center;
   font-size:34px;
   margin-bottom:34px;
+  font-weight:700;
 }
 
 .inventory-item{
@@ -507,166 +603,23 @@ MENU
   font-size:22px;
 }
 
-.tablet{
-  width:min(100%,980px);
-  background:linear-gradient(145deg,#3a3a3a,#161616);
-  border:10px solid #5b5b5b;
-  border-radius:36px;
-  padding:26px;
-  box-sizing:border-box;
-}
-
-.tablet-top{
-  display:flex;
-  align-items:center;
-  gap:16px;
-  padding-bottom:14px;
-}
-
-.tablet-floor-input{
-  width:90px;
-  height:46px;
-  background:#1f1f1f;
-  border:1px solid rgba(255,255,255,.2);
-  color:white;
-  font-size:28px;
-  text-align:center;
-}
-
-.tablet-bottom{
-  display:flex;
-  gap:14px;
-  padding-top:18px;
-}
-
-.tablet-answer-input{
-  flex:1;
-  height:56px;
-  background:#1f1f1f;
-  border:1px solid rgba(255,255,255,.2);
-  color:white;
-  padding:0 18px;
-  font-size:20px;
-}
-
-.tablet-send{
-  width:130px;
-  height:56px;
-  border:none;
-  background:white;
-  color:black;
-  font-size:18px;
-  cursor:pointer;
-}
-
-.fourth-story-box{
-  width:min(90vw,760px);
-  margin:40px auto 0;
-  padding:42px 32px;
-  box-sizing:border-box;
-  border-radius:8px;
-  background:rgba(0,0,0,.55);
-  border:1px solid rgba(255,255,255,.18);
-  text-align:center;
-}
-
-.fourth-story-box p{
-  font-size:20px;
-  line-height:2.1;
-  color:#e8e8e8;
-}
-
-.diary{
-  width:min(90vw,700px);
-  margin:auto;
-  background:linear-gradient(180deg,#f5ecd8,#ead9b8);
-  color:#2a2a2a;
-  border-radius:6px;
-  padding:48px;
-  box-sizing:border-box;
-  font-family:"Yu Mincho",serif;
-}
-
-.diary-title{
-  font-size:34px;
-  margin-bottom:34px;
-  text-align:center;
-}
-
-.diary-body{
-  font-size:22px;
-  line-height:2.2;
-}
-
-.clear-title{
-  font-size:54px;
-  letter-spacing:8px;
-  margin-bottom:34px;
-}
-
 @media(max-width:700px){
-  .section{padding:48px 16px;}
-  .step-header{padding-top:42px;}
+  .page{padding:36px 14px 90px;}
   .step-header img{width:min(82vw,320px);}
+  .story{font-size:17px;line-height:2;}
   .story h1{font-size:38px;}
-  .story p{font-size:17px;}
-
-  .panel{
-    width:300px;
-    padding:22px;
-  }
-
-  .buttons{
-    grid-template-columns:repeat(2,100px);
-    gap:18px;
-  }
-
-  .elevator-button{
-    width:100px;
-    height:100px;
-  }
-
-  .elevator-button span{
-    font-size:64px;
-  }
-
-  .floor-title{
-    font-size:22px;
-  }
-
-  .answer-area input,
-  .input-label{
-    width:min(86vw,340px);
-  }
-
-  .tablet{
-    border-width:7px;
-    border-radius:24px;
-    padding:18px;
-  }
-
-  .tablet-top{
-    align-items:flex-start;
-    flex-direction:column;
-  }
-
-  .tablet-bottom{
-    flex-direction:column;
-  }
-
-  .tablet-send{
-    width:100%;
-  }
-
-  .tablet-answer-input{
-    width:100%;
-    box-sizing:border-box;
-  }
-
-  .guide-close{
-    top:16px;
-    right:16px;
-  }
+  .panel{width:300px;padding:22px;}
+  .buttons{grid-template-columns:repeat(2,100px);gap:18px;}
+  .elevator-button{width:100px;height:100px;}
+  .elevator-button span{font-size:64px;}
+  .floor-title{font-size:22px;}
+  .tablet{border-width:7px;border-radius:24px;padding:18px;}
+  .tablet-top{align-items:flex-start;flex-direction:column;}
+  .tablet-bottom{flex-direction:column;}
+  .tablet-send{width:100%;height:56px;}
+  .tablet-answer-input{width:100%;}
+  .modal-title{font-size:22px;}
+  .guide-close{top:14px;right:14px;width:50px;height:50px;}
 }
 </style>
 </head>
@@ -722,115 +675,94 @@ MENU
   </div>
 </div>
 
+<!-- STEP1 -->
 <div class="page" id="step1-page">
-  <div class="step-header">
-    <img src="./image/title_step1.png" alt="1st STEP">
-  </div>
+  <div class="step-header"><img src="./image/title_step1.png" alt="1st STEP"></div>
 
-  <section class="section story">
+  <section class="story">
     <h1>ELEVATOR</h1>
-    <p>
-      ここは、とある資産家が残した奇妙な建物。<br>
-      この建物には、3台のエレベーターが存在している。
-    </p>
+    ここは、とある資産家が残した奇妙な建物。<br>
+    この建物には、3台のエレベーターが存在している。
   </section>
 
-  <section class="section riddle">
-    <div class="riddle-title">資産家の残した謎</div>
+  <section class="section">
     <div class="image-frame" id="image-step1-riddle"></div>
   </section>
 
-  <section class="section elevator-wrap">
-    <div class="panel">
-      <div class="buttons" id="buttons-step1"></div>
-    </div>
-  </section>
+  <div class="panel">
+    <div class="buttons" id="buttons-step1"></div>
+  </div>
 </div>
 
+<!-- STEP2 -->
 <div class="page hidden" id="step2-page">
-  <div class="step-header">
-    <img src="./image/title_step2.png" alt="2nd STEP">
+  <div class="step-header"><img src="./image/title_step2.png" alt="2nd STEP"></div>
+
+  <section class="story">
+    色々な階に行けるようになった。<br>
+    ＜２つ折り①＞を開き、各階層を調査しよう。
+  </section>
+
+  <div class="panel">
+    <div class="buttons" id="buttons-step2"></div>
   </div>
 
-  <section class="section story">
-    <p>
-      色々な階に行けるようになった。<br>
-      ＜２つ折り①＞を開き、各階層を調査しよう。
-    </p>
+  <section class="floor-view">
+    <div class="floor-title hidden" id="floor-title-step2"></div>
+    <div class="image-frame" id="floor-image-step2"></div>
   </section>
 
-  <section class="section elevator-wrap">
-    <div class="panel">
-      <div class="buttons" id="buttons-step2"></div>
-    </div>
+  <div class="answer-area">
+    <div class="input-label">解答入力欄</div>
+    <input id="step2-answer" placeholder="この階の解答を入力">
+    <button onclick="submitStep2FloorAnswer()">送信</button>
+    <div class="answer-message" id="step2-message"></div>
 
-    <div class="floor-view">
-      <div class="floor-title hidden" id="floor-title-step2"></div>
-      <div class="image-frame" id="floor-image-step2"></div>
-    </div>
-
-    <div class="answer-area">
-      <div class="input-label">解答入力欄</div>
-      <input id="step2-answer" placeholder="この階の解答を入力">
-      <button onclick="submitStep2FloorAnswer()">送信</button>
-      <div class="answer-message" id="step2-message"></div>
-
-      <div class="password-title">６文字の答えが出たら送信</div>
-      <input id="step2-password" placeholder="６文字の答えを入力">
-      <button onclick="submitStep2Password()">送信</button>
-    </div>
-  </section>
+    <div class="password-title">６文字の答えが出たら送信</div>
+    <input id="step2-password" placeholder="６文字の答えを入力">
+    <button onclick="submitStep2Password()">送信</button>
+  </div>
 </div>
 
+<!-- STEP3 -->
 <div class="page hidden" id="step3-page">
-  <div class="step-header">
-    <img src="./image/title_step3.png" alt="3rd STEP">
+  <div class="step-header"><img src="./image/title_step3.png" alt="3rd STEP"></div>
+
+  <section class="story">
+    残りの階層のロックが解除された。<br>
+    ＜２つ折り②＞を開き、さらに調査を進めよう。
+  </section>
+
+  <div class="panel">
+    <div class="buttons" id="buttons-step3"></div>
   </div>
 
-  <section class="section story">
-    <p>
-      残りの階層のロックが解除された。<br>
-      ＜２つ折り②＞を開き、さらに調査を進めよう。
-    </p>
+  <section class="floor-view">
+    <div class="floor-title hidden" id="floor-title-step3"></div>
+    <div class="image-frame" id="floor-image-step3"></div>
   </section>
 
-  <section class="section elevator-wrap">
-    <div class="panel">
-      <div class="buttons" id="buttons-step3"></div>
-    </div>
+  <div class="answer-area">
+    <div class="input-label">解答入力欄</div>
+    <input id="step3-answer" placeholder="この階の解答を入力">
+    <button onclick="submitStep3FloorAnswer()">送信</button>
+    <div class="answer-message" id="step3-message"></div>
 
-    <div class="floor-view">
-      <div class="floor-title hidden" id="floor-title-step3"></div>
-      <div class="image-frame" id="floor-image-step3"></div>
-    </div>
-
-    <div class="answer-area">
-      <div class="input-label">解答入力欄</div>
-      <input id="step3-answer" placeholder="この階の解答を入力">
-      <button onclick="submitStep3FloorAnswer()">送信</button>
-      <div class="answer-message" id="step3-message"></div>
-
-      <div class="password-title">２号エレベーター起動パスワード</div>
-      <input id="step3-password" placeholder="パスワードを入力">
-      <button onclick="submitStep3Password()">送信</button>
-    </div>
-  </section>
+    <div class="password-title">２号エレベーター起動パスワード</div>
+    <input id="step3-password" placeholder="パスワードを入力">
+    <button onclick="submitStep3Password()">送信</button>
+  </div>
 </div>
 
+<!-- STEP4 -->
 <div class="page hidden" id="step4-page">
-  <div class="step-header">
-    <img src="./image/title_step4.png" alt="4th STEP">
-  </div>
+  <div class="step-header"><img src="./image/title_step4.png" alt="4th STEP"></div>
 
-  <section class="section story">
-    <p>
-      １階、A階から２号エレベーターへ移動した。<br>
-      エレベーターの中には階数ボタンがなく、代わりにタブレットがはまっている。
-    </p>
-    <p style="margin-top:30px;">
-      階の様子に映る謎から次の行き先を導き、<br>
-      タブレットに入力して移動用の問題を表示しよう。
-    </p>
+  <section class="story">
+    １階、A階から２号エレベーターへ移動した。<br>
+    エレベーターの中には階数ボタンがなく、代わりにタブレットがはまっている。<br><br>
+    階の様子に映る謎から次の行き先を導き、<br>
+    タブレットに入力して移動用の問題を表示しよう。
   </section>
 
   <section class="section">
@@ -845,7 +777,7 @@ MENU
         <span>階へ行くための手がかり</span>
       </div>
 
-      <div class="image-frame tablet-image" id="tablet-image-4"></div>
+      <div class="image-frame" id="tablet-image-4"></div>
       <div class="tablet-message" id="tablet-message-4"></div>
 
       <div class="tablet-bottom">
@@ -864,16 +796,13 @@ MENU
   </section>
 </div>
 
+<!-- STEP5 -->
 <div class="page hidden" id="step5-page">
-  <div class="step-header">
-    <img src="./image/title_step5.png" alt="5th STEP">
-  </div>
+  <div class="step-header"><img src="./image/title_step5.png" alt="5th STEP"></div>
 
-  <section class="section story">
-    <p>
-      ３号機の階数情報は伏せられている。<br>
-      しかし、２号機で使用していたタブレットは、このエレベーターでも使用できるようだ。
-    </p>
+  <section class="story">
+    ３号機の階数情報は伏せられている。<br>
+    しかし、２号機で使用していたタブレットは、このエレベーターでも使用できるようだ。
   </section>
 
   <section class="section">
@@ -883,7 +812,7 @@ MENU
         <span>階へ行くための手がかり</span>
       </div>
 
-      <div class="image-frame tablet-image" id="tablet-image-5"></div>
+      <div class="image-frame" id="tablet-image-5"></div>
       <div class="tablet-message" id="tablet-message-5"></div>
 
       <div class="tablet-bottom">
@@ -894,16 +823,13 @@ MENU
   </section>
 </div>
 
+<!-- STEP5 STORY -->
 <div class="page hidden" id="step5-story-page">
-  <div class="step-header">
-    <img src="./image/title_step5.png" alt="5th STEP">
-  </div>
+  <div class="step-header"><img src="./image/title_step5.png" alt="5th STEP"></div>
 
-  <section class="section story">
-    <p>
-      エレベーターは目的の階につき、<br>
-      無事に目的の＜金インゴット＞を入手した。
-    </p>
+  <section class="story">
+    エレベーターは目的の階につき、<br>
+    無事に目的の＜金インゴット＞を入手した。
   </section>
 
   <section class="section">
@@ -917,22 +843,13 @@ MENU
     </div>
   </section>
 
-  <section class="section story">
-    <p>
-      １号エレベーターへ戻り、＜金インゴット＞を監視カメラへ見せると、<br>
-      エレベーターマンから電話がかかってきた。
-    </p>
-
-    <p style="margin-top:40px;">
-      「脱出させるというのはウソだ。<br>
-      お前をエレベーターの中から出すつもりはない」
-    </p>
-
-    <p style="margin-top:40px;">通話は切れた。</p>
-
-    <p style="margin-top:40px;">
-      あなたは、金インゴットで監視カメラを叩き割った。
-    </p>
+  <section class="story">
+    １号エレベーターへ戻り、＜金インゴット＞を監視カメラへ見せると、<br>
+    エレベーターマンから電話がかかってきた。<br><br>
+    「脱出させるというのはウソだ。<br>
+    お前をエレベーターの中から出すつもりはない」<br><br>
+    通話は切れた。<br><br>
+    あなたは、金インゴットで監視カメラを叩き割った。
   </section>
 
   <section class="section" style="text-align:center;">
@@ -940,16 +857,13 @@ MENU
   </section>
 </div>
 
+<!-- LAST STEP -->
 <div class="page hidden" id="last-step-page">
-  <div class="step-header">
-    <img src="./image/title_last.png" alt="LAST STEP">
-  </div>
+  <div class="step-header"><img src="./image/title_last.png" alt="LAST STEP"></div>
 
-  <section class="section story">
-    <p>
-      エレベーターマンの監視から逃れた。<br>
-      資産家の日記に残された情報をもとに、向かうべき階を探そう。
-    </p>
+  <section class="story">
+    エレベーターマンの監視から逃れた。<br>
+    資産家の日記に残された情報をもとに、向かうべき階を探そう。
   </section>
 
   <section class="section">
@@ -959,7 +873,7 @@ MENU
         <span>階へ行くための手がかり</span>
       </div>
 
-      <div class="image-frame tablet-image" id="tablet-image-last"></div>
+      <div class="image-frame" id="tablet-image-last"></div>
       <div class="tablet-message" id="tablet-message-last"></div>
 
       <div class="tablet-bottom">
@@ -970,22 +884,17 @@ MENU
   </section>
 </div>
 
+<!-- LAST ACTION -->
 <div class="page hidden" id="last-action-page">
-  <div class="step-header">
-    <img src="./image/title_last.png" alt="LAST STEP">
-  </div>
+  <div class="step-header"><img src="./image/title_last.png" alt="LAST STEP"></div>
 
-  <section class="section story">
-    <p>
-      １１階につき、エレベーターのトビラが開いた。<br>
-      しかし、そこにあるのは壁のみだった。
-    </p>
-    <p style="margin-top:34px;">
-      今まで手に入れた情報を整理し、とるべき行動を入力せよ。
-    </p>
+  <section class="story">
+    １１階につき、エレベーターのトビラが開いた。<br>
+    しかし、そこにあるのは壁のみだった。<br><br>
+    今まで手に入れた情報を整理し、とるべき行動を入力せよ。
   </section>
 
-  <section class="section riddle">
+  <section class="section">
     <div class="image-frame" id="image-last-wall"></div>
 
     <div class="answer-area">
@@ -995,21 +904,16 @@ MENU
   </section>
 </div>
 
+<!-- CLEAR -->
 <div class="page hidden" id="clear-page">
-  <div class="step-header">
-    <img src="./image/title_clear.png" alt="CLEAR">
-  </div>
+  <div class="step-header"><img src="./image/title_clear.png" alt="CLEAR"></div>
 
-  <section class="section story">
+  <section class="story">
     <div class="clear-title">GAME CLEAR</div>
-    <p>
-      主人公がミラーをノックすると、奥に空間があることがわかった。<br>
-      金インゴットで鏡を割ると、屋外へとつながる道が現れた。
-    </p>
-    <p style="margin-top:34px;">
-      スマホの電波がつながり、救助を呼ぶことができた。<br>
-      あなたは資産を手に入れ、この奇妙な建物から脱出した。
-    </p>
+    主人公がミラーをノックすると、奥に空間があることがわかった。<br>
+    金インゴットで鏡を割ると、屋外へとつながる道が現れた。<br><br>
+    スマホの電波がつながり、救助を呼ぶことができた。<br>
+    あなたは資産を手に入れ、この奇妙な建物から脱出した。
   </section>
 
   <section class="section">
@@ -1017,11 +921,19 @@ MENU
   </section>
 </div>
 
+<!-- MODALS -->
 <div class="modal" id="unlock-modal">
   <div class="modal-card">
     <div class="modal-title">以下の階層が解放されました</div>
     <div class="modal-floors" id="modal-floors"></div>
     <button class="modal-next" id="modal-next">次へ</button>
+  </div>
+</div>
+
+<div class="modal" id="message-modal">
+  <div class="modal-card">
+    <div class="modal-title" id="message-modal-text"></div>
+    <button class="modal-next" onclick="closeMessageModal()">次へ</button>
   </div>
 </div>
 
@@ -1038,7 +950,8 @@ const gameState = {
   currentStep4Target:null,
   fourthStoryVisible:false,
   inventoryUnlocked:false,
-  guideUnlocked:false
+  guideUnlocked:false,
+  tabletGuideUnlocked:false
 };
 
 let audioContext = null;
@@ -1146,10 +1059,8 @@ function showTemporaryMessage(id,text){
 }
 
 function toggleMenu(){
-  const panel = document.getElementById("menu-panel");
-  const overlay = document.getElementById("menu-overlay");
-  panel.classList.toggle("show");
-  overlay.classList.toggle("show");
+  document.getElementById("menu-panel").classList.toggle("show");
+  document.getElementById("menu-overlay").classList.toggle("show");
 }
 
 function closeMenu(){
@@ -1169,8 +1080,6 @@ function showPage(id, shouldSave = true){
 
   page.classList.remove("hidden");
   closeMenu();
-
-  document.getElementById("tablet-guide-button").classList.toggle("hidden", id !== "step4-page");
 
   if(id === "step4-page"){
     renderStep4();
@@ -1226,6 +1135,26 @@ function closeInventory(){
   document.getElementById("inventory-overlay").classList.remove("show");
 }
 
+function openMessageModal(text, callback){
+  const modal = document.getElementById("message-modal");
+  const textEl = document.getElementById("message-modal-text");
+
+  textEl.innerText = text;
+  modal.classList.add("show");
+  modal.dataset.callback = callback || "";
+}
+
+function closeMessageModal(){
+  const modal = document.getElementById("message-modal");
+  const callback = modal.dataset.callback;
+
+  modal.classList.remove("show");
+  modal.dataset.callback = "";
+
+  if(callback === "showStep2") showPage("step2-page");
+  if(callback === "showStep4") showPage("step4-page");
+}
+
 const elevatorOrder = [8,9,6,7,4,5,2,3,0,1];
 
 const imagePaths = {
@@ -1253,7 +1182,6 @@ const imagePaths = {
   step4RiddleE:"./image/step4_riddle_e.png",
 
   step5RiddleKo:"./image/step5_riddle_ko.png",
-
   lastRiddle11:"./image/last_riddle_11.png",
   lastWall:"./image/last_wall.png",
   clear:"./image/clear.png"
@@ -1322,6 +1250,7 @@ function checkStep1(){
 function openUnlockModal(floors,nextPage){
   const modal = document.getElementById("unlock-modal");
   const floorsWrap = document.getElementById("modal-floors");
+
   floorsWrap.innerHTML = "";
 
   floors.forEach(f => {
@@ -1336,9 +1265,17 @@ function openUnlockModal(floors,nextPage){
   document.getElementById("modal-next").onclick = () => {
     modal.classList.remove("show");
 
-    if(nextPage !== "step1-page"){
+    if(nextPage === "step2-page"){
       document.getElementById("guide-button").classList.remove("hidden");
       gameState.guideUnlocked = true;
+      saveState();
+
+      openMessageModal(
+        "「透明カードの使い方」がメニューに追加されました。",
+        "showStep2"
+      );
+
+      return;
     }
 
     showPage(nextPage);
@@ -1427,7 +1364,15 @@ function submitStep3Password(){
 
   if(["かいきん","カイキン","解禁"].map(normalize).includes(value)){
     unlockNav("nav-step4");
-    showPage("step4-page");
+
+    document.getElementById("tablet-guide-button").classList.remove("hidden");
+    gameState.tabletGuideUnlocked = true;
+    saveState();
+
+    openMessageModal(
+      "「タブレット端末の使い方」がメニューに追加されました。",
+      "showStep4"
+    );
   }
 }
 
@@ -1460,7 +1405,6 @@ function renderStep4(){
   syncStep4State();
 
   const storyBox = document.getElementById("fourth-story-box");
-
   if(storyBox){
     storyBox.classList.toggle("hidden", !gameState.fourthStoryVisible);
   }
@@ -1514,13 +1458,7 @@ function moveStep4ToFloor(floor){
   saveState();
 
   setFloorTitle("floor-title-step4",`${floor}階の様子`);
-
-  setImage(
-    "floor-image-step4",
-    getStep4FloorImage(floor),
-    `${floor}階の様子`
-  );
-
+  setImage("floor-image-step4",getStep4FloorImage(floor),`${floor}階の様子`);
   setPlaceholder("tablet-image-4","行きたい階を入力せよ。");
 
   clearTablet4();
@@ -1568,11 +1506,8 @@ function submitTablet4(){
 
   if(currentStep4Floor === "A"){
     if(currentStep4Mode === "waiting"){
-      if(floorInput === "j"){
-        setStep4Riddle("J");
-      }else{
-        handleStep4InvalidFloor(floorInput);
-      }
+      if(floorInput === "j") setStep4Riddle("J");
+      else handleStep4InvalidFloor(floorInput);
       return;
     }
 
@@ -1581,17 +1516,13 @@ function submitTablet4(){
         moveStep4ToFloor("J");
       }
     }
-
     return;
   }
 
   if(currentStep4Floor === "J"){
     if(currentStep4Mode === "waiting"){
-      if(floorInput === "h"){
-        setStep4Riddle("H");
-      }else{
-        handleStep4InvalidFloor(floorInput);
-      }
+      if(floorInput === "h") setStep4Riddle("H");
+      else handleStep4InvalidFloor(floorInput);
       return;
     }
 
@@ -1600,17 +1531,13 @@ function submitTablet4(){
         moveStep4ToFloor("H");
       }
     }
-
     return;
   }
 
   if(currentStep4Floor === "H"){
     if(currentStep4Mode === "waiting"){
-      if(floorInput === "e"){
-        setStep4Riddle("E");
-      }else{
-        handleStep4InvalidFloor(floorInput);
-      }
+      if(floorInput === "e") setStep4Riddle("E");
+      else handleStep4InvalidFloor(floorInput);
       return;
     }
 
@@ -1715,13 +1642,18 @@ function initializeImages(){
   setImage("guide-image",imagePaths.guide,"透明カードの使い方画像");
   setImage("tablet-guide-image",imagePaths.tabletGuide,"タブレット端末の使い方画像");
   setImage("image-step1-riddle",imagePaths.step1Riddle,"1st STEP 問題画像");
+
   clearFloorTitle("floor-title-step2");
   clearFloorTitle("floor-title-step3");
+
   setPlaceholder("floor-image-step2","階層を選択してください");
   setPlaceholder("floor-image-step3","階層を選択してください");
+
   renderStep4();
+
   setPlaceholder("tablet-image-5","行き先を入力してください");
   setPlaceholder("tablet-image-last","行き先を入力してください");
+
   setImage("image-last-wall",imagePaths.lastWall,"11階");
   setImage("image-clear",imagePaths.clear,"GAME CLEAR");
 }
@@ -1736,6 +1668,10 @@ function restoreGame(){
 
   if(gameState.guideUnlocked){
     document.getElementById("guide-button").classList.remove("hidden");
+  }
+
+  if(gameState.tabletGuideUnlocked){
+    document.getElementById("tablet-guide-button").classList.remove("hidden");
   }
 
   if(gameState.inventoryUnlocked){
