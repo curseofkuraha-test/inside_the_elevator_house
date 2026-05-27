@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:"LINE Seed Sans","LINESeedJP","Noto Sans JP",sans-serif;
+  color:white;
+  background:#111;
+  overflow-x:hidden;
+  position:relative;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url("./image/background.png") center/cover no-repeat;
+  z-index:-20;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.62);
+  z-index:-19;
+}
+
+h1{
+  margin:0;
+  padding:52px 20px 28px;
+  text-align:center;
+  font-size:42px;
+  letter-spacing:6px;
+  font-weight:700;
+}
+
+#accordion-container{
+  width:min(92vw,820px);
+  margin:0 auto 80px;
+  padding:0 16px;
+  box-sizing:border-box;
+}
+
+#accordion-container > p{
+  text-align:center;
+  color:#ddd;
+  font-size:18px;
+}
+
+/* アコーディオン全体 */
+
+.accordion-item,
+.hint-item,
+details{
+  width:100%;
+  margin:0 0 16px;
+  border-radius:10px;
+  overflow:hidden;
+  background:rgba(20,20,20,.82);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 8px 24px rgba(0,0,0,.28);
+}
+
+/* ボタン型で生成された場合 */
+
+.accordion-header,
+.hint-title,
+summary{
+  width:100%;
+  min-height:58px;
+  padding:18px 22px;
+  box-sizing:border-box;
+  background:rgba(255,255,255,.92);
+  color:#111;
+  font-size:18px;
+  font-weight:700;
+  cursor:pointer;
+  border:none;
+  text-align:left;
+  list-style:none;
+}
+
+summary::-webkit-details-marker{
+  display:none;
+}
+
+summary::after{
+  content:"+";
+  float:right;
+  font-size:24px;
+  line-height:1;
+}
+
+details[open] summary::after{
+  content:"−";
+}
+
+.accordion-header::after,
+.hint-title::after{
+  content:"+";
+  float:right;
+  font-size:24px;
+  line-height:1;
+}
+
+.accordion-item.open .accordion-header::after,
+.hint-item.open .hint-title::after{
+  content:"−";
+}
+
+/* 中身 */
+
+.accordion-content,
+.hint-content,
+details > div,
+details > p{
+  padding:24px;
+  box-sizing:border-box;
+  color:#e8e8e8;
+  font-size:17px;
+  line-height:2;
+  background:rgba(0,0,0,.45);
+}
+
+.accordion-content p,
+.hint-content p{
+  margin:0 0 1em;
+}
+
+.accordion-content p:last-child,
+.hint-content p:last-child{
+  margin-bottom:0;
+}
+
+/* CSV内に画像がある場合 */
+
+.accordion-content img,
+.hint-content img,
+details img{
+  display:block;
+  width:100%;
+  max-width:720px;
+  height:auto;
+  margin:18px auto;
+  border-radius:8px;
+  object-fit:contain;
+}
+
+/* CSV内にリンクがある場合 */
+
+a{
+  color:#ffdf6e;
+  text-decoration:none;
+  font-weight:700;
+}
+
+a:hover{
+  text-decoration:underline;
+}
+
+/* 戻るボタンなどをJS側で生成した場合用 */
+
+.back-button,
+.home-button{
+  display:block;
+  width:min(86vw,280px);
+  height:54px;
+  margin:36px auto 0;
+  border:none;
+  border-radius:6px;
+  background:white;
+  color:#111;
+  font-size:17px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* スマホ調整 */
+
+@media(max-width:700px){
+  h1{
+    padding:42px 16px 24px;
+    font-size:32px;
+    letter-spacing:4px;
+  }
+
+  #accordion-container{
+    width:100%;
+    padding:0 14px 60px;
+  }
+
+  .accordion-header,
+  .hint-title,
+  summary{
+    min-height:54px;
+    padding:16px 18px;
+    font-size:16px;
+  }
+
+  .accordion-content,
+  .hint-content,
+  details > div,
+  details > p{
+    padding:20px 18px;
+    font-size:16px;
+    line-height:1.9;
+  }
+
+  .accordion-content img,
+  .hint-content img,
+  details img{
+    width:100%;
+    max-width:100%;
+  }
+}
