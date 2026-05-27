@@ -431,18 +431,21 @@ body{
 
 .novel-stage{
   width:min(94vw,1000px);
-  min-height:74vh;
+  min-height:calc(100vh - 88px);
   margin:0 auto;
   display:flex;
   flex-direction:column;
-  justify-content:flex-end;
+  justify-content:center;
+  align-items:center;
 }
 
 .novel-window{
-  background:rgba(0,0,0,.72);
+  width:100%;
+  max-width:900px;
+  background:rgba(0,0,0,.74);
   border:1px solid rgba(255,255,255,.18);
   border-radius:10px;
-  padding:24px;
+  padding:26px;
   box-sizing:border-box;
   cursor:pointer;
   box-shadow:0 14px 34px rgba(0,0,0,.35);
@@ -451,20 +454,36 @@ body{
 .novel-speaker{
   display:inline-block;
   min-width:120px;
-  margin-bottom:12px;
+  margin-bottom:14px;
   padding:8px 18px;
-  background:#00a29a;
   color:white;
   border-radius:4px;
   font-weight:700;
   text-align:center;
 }
 
+.novel-speaker.role-narration{
+  background:#666;
+}
+
+.novel-speaker.role-elevatorman{
+  background:#00a29a;
+}
+
+.novel-speaker.role-protagonist{
+  background:#5c6bc0;
+}
+
+.novel-speaker.role-sound{
+  background:#8a6d3b;
+}
+
 .novel-text{
   font-size:22px;
   line-height:2;
-  min-height:120px;
+  min-height:180px;
   color:#fff;
+  white-space:pre-line;
 }
 
 .novel-actions{
@@ -598,7 +617,7 @@ body{
 .modal{
   position:fixed;
   inset:0;
-  z-index:10000;
+  z-index:13000;
   background:rgba(0,0,0,.72);
   display:flex;
   align-items:center;
@@ -621,6 +640,7 @@ body{
   padding:44px;
   box-sizing:border-box;
   text-align:center;
+  position:relative;
 }
 
 .modal-title{
@@ -671,7 +691,7 @@ body{
 .log-overlay{
   position:fixed;
   inset:0;
-  z-index:9500;
+  z-index:13000;
   background:rgba(0,0,0,.82);
   display:flex;
   align-items:center;
@@ -693,6 +713,7 @@ body{
 .tablet-guide-overlay .image-frame{
   width:min(92vw,1080px);
   max-height:86vh;
+  position:relative;
 }
 
 .guide-overlay .image-frame img,
@@ -706,7 +727,7 @@ body{
   position:absolute;
   top:18px;
   right:18px;
-  z-index:9600;
+  z-index:13100;
   width:56px;
   height:56px;
   border:none;
@@ -731,6 +752,7 @@ body{
   padding:48px;
   box-sizing:border-box;
   color:#111;
+  position:relative;
 }
 
 .inventory-title{
@@ -768,7 +790,9 @@ body{
   .tablet-answer-input{width:100%;}
   .modal-title{font-size:22px;}
   .guide-close{top:14px;right:14px;width:50px;height:50px;}
-  .novel-text{font-size:18px;min-height:150px;}
+  .novel-stage{min-height:calc(100vh - 72px);}
+  .novel-window{padding:20px;}
+  .novel-text{font-size:18px;min-height:220px;}
 }
 </style>
 </head>
@@ -808,26 +832,26 @@ body{
 
 <div class="guide-overlay" id="guide-overlay" onclick="closeGuideByOutside(event)">
   <button class="guide-close" onclick="closeGuide()">×</button>
-  <div class="image-frame" id="guide-image"></div>
+  <div class="image-frame" id="guide-image" onclick="event.stopPropagation()"></div>
 </div>
 
 <div class="tablet-guide-overlay" id="tablet-guide-overlay" onclick="closeTabletGuideByOutside(event)">
   <button class="guide-close" onclick="closeTabletGuide()">×</button>
-  <div class="image-frame" id="tablet-guide-image"></div>
+  <div class="image-frame" id="tablet-guide-image" onclick="event.stopPropagation()"></div>
 </div>
 
-<div class="inventory-overlay" id="inventory-overlay">
+<div class="inventory-overlay" id="inventory-overlay" onclick="closeInventoryByOutside(event)">
   <button class="guide-close" onclick="closeInventory()">×</button>
-  <div class="inventory-panel">
+  <div class="inventory-panel" onclick="event.stopPropagation()">
     <div class="inventory-title">手に入れたもの</div>
     <div class="inventory-item">金インゴット</div>
     <div class="inventory-item">資産家の日記</div>
   </div>
 </div>
 
-<div class="log-overlay" id="log-overlay">
+<div class="log-overlay" id="log-overlay" onclick="closeLogByOutside(event)">
   <button class="guide-close" onclick="closeLog()">×</button>
-  <div class="log-box" id="log-box"></div>
+  <div class="log-box" id="log-box" onclick="event.stopPropagation()"></div>
 </div>
 
 <!-- BEFORE -->
@@ -1162,10 +1186,27 @@ let audioContext = null;
 let novelIndex = 0;
 
 const novelLines = [
-  {speaker:"あなた", text:"ここが、あの資産家が残したという奇妙な建物……。"},
-  {speaker:"案内音声", text:"ようこそ。ELEVATOR HOUSEへ。"},
-  {speaker:"案内音声", text:"この建物には、3台のエレベーターが存在しています。"},
-  {speaker:"あなた", text:"まずは、この建物について調べてみよう。"}
+  {role:"sound", speaker:"効果音", text:"Prrrr...."},
+  {role:"sound", speaker:"効果音", text:"カチャ"},
+  {role:"elevatorman", speaker:"？？？", text:"hello～\n気分はどうだい？"},
+  {role:"elevatorman", speaker:"？？？", text:"レストランで眠ってしまい、起きたらエレベーターの中にいて驚いたろう。"},
+  {role:"elevatorman", speaker:"？？？", text:"キミは謎を解き明かすのが「大好き」だというウワサを耳にしてね。\nなに、少しキミに手伝って欲しいことがあって、勝手にこのエレベーターへ「招待」させてもらったのさ。"},
+  {role:"elevatorman", speaker:"？？？", text:"今、キミが閉じ込められている場所は「エレベーターハウス」と呼ばれる、とある資産家が趣味で建てた奇妙な建物だ。生活スペースはほとんどなく、各フロアには「謎めいた絵」が飾ってある。そして、入れない場所もたくさんあるんだ。"},
+  {role:"elevatorman", speaker:"？？？", text:"さらにこの建物には「資産家の遺産」が隠されていて、\n遺言によると「建物にある３台のエレベーターの謎を全て解き明かせば、遺産の隠し場所へ辿り着くことができる」らしい。"},
+  {role:"elevatorman", speaker:"？？？", text:"「財宝探し」だぜ？ワクワクするだろ？"},
+  {role:"elevatorman", speaker:"？？？", text:"現在、エレベーターは１台も動いていない上に、そこにある謎もオレにはさっぱりわからん。だからキミにオレの代わりをしてもらおうかと思ってね。"},
+  {role:"elevatorman", speaker:"？？？", text:"今オレは、エレベーターの専用コントロールルームにいる。そして、キミがいる１号エレベーターは、オレの手によって出口があるフロアには停まらないようになっている。"},
+  {role:"elevatorman", speaker:"？？？", text:"自力でこの建物から脱出することは不可能ってワケ！\nでも、もしキミが「財宝」を見つけることができれば、解放してやるよ！"},
+  {role:"elevatorman", speaker:"？？？", text:"そう、キミのことはその１号エレベーター内の監視カメラでずっと見ているから、妙なマネをしたらすぐにわかるぞ。"},
+  {role:"elevatorman", speaker:"？？？", text:"オレのことはそうだな・・・"},
+  {role:"elevatorman", speaker:"エレベーターマン", text:"「エレベーターマン」とでも呼んでくれ。"},
+  {role:"elevatorman", speaker:"エレベーターマン", text:"まずは、エレベーターを動かして謎のあるフロアに移動できるようにしよう。遺言と一緒に残されていた暗号を、エレベーターの中に置いておいた。探して、解き明かしてくれ。"},
+  {role:"elevatorman", speaker:"エレベーターマン", text:"遺言と一緒にあった謎を、キミの居るエレベーターに置いておいた。\nその謎を解けば、エレベータを動かして謎のあるフロアに移動できるようになるはずだ。"},
+  {role:"elevatorman", speaker:"エレベーターマン", text:"「財宝」を見つけるまでの間、よろしくな？\nあ・い・ぼ・う！"},
+  {role:"elevatorman", speaker:"エレベーターマン", text:"じゃあ、さっそく「財宝探し」に取りかかってくれ。"},
+  {role:"protagonist", speaker:"主人公", text:"妙なことに巻き込まれてしまった。墓泥棒の片棒を担がないと、脱出させてくれないだって！？\n\nスマートフォンも圏外だ。"},
+  {role:"protagonist", speaker:"主人公", text:"ここはひとまず「エレベーターマン」に逆らわず、さっさと「財宝」を見つけるのが、最善だろうな。"},
+  {role:"narration", speaker:"地の文", text:"１度深呼吸をしてから、キミはエレベーターの中をくまなく探し、ドアの隙間に挟まっていた１枚の暗号を見つけた。"}
 ];
 
 function playElevatorButtonSound(){
@@ -1371,6 +1412,12 @@ function closeInventory(){
   document.getElementById("inventory-overlay").classList.remove("show");
 }
 
+function closeInventoryByOutside(event){
+  if(event.target.id === "inventory-overlay"){
+    closeInventory();
+  }
+}
+
 function startNovel(){
   novelIndex = 0;
   unlockNav("nav-step1");
@@ -1388,8 +1435,14 @@ function renderNovelLine(){
     return;
   }
 
-  document.getElementById("novel-speaker").innerText = line.speaker;
-  document.getElementById("novel-text").innerText = line.text;
+  const speaker = document.getElementById("novel-speaker");
+  const text = document.getElementById("novel-text");
+
+  speaker.className = "novel-speaker";
+  speaker.classList.add(`role-${line.role || "narration"}`);
+
+  speaker.innerText = line.speaker;
+  text.innerText = line.text;
 }
 
 function nextNovelLine(){
@@ -1404,7 +1457,7 @@ function openLog(){
   logBox.innerHTML = lines.map(line => `
     <div class="log-entry">
       <div class="log-speaker">${line.speaker}</div>
-      <div>${line.text}</div>
+      <div>${line.text.replace(/\n/g,"<br>")}</div>
     </div>
   `).join("");
 
@@ -1413,6 +1466,12 @@ function openLog(){
 
 function closeLog(){
   document.getElementById("log-overlay").classList.remove("show");
+}
+
+function closeLogByOutside(event){
+  if(event.target.id === "log-overlay"){
+    closeLog();
+  }
 }
 
 function openMessageModal(text, callback){
