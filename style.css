@@ -274,7 +274,7 @@ a:hover{
    MOBILE
 ======================================== */
 
-/* スマホ時のアコーディオン中央揃え補正 */
+/* スマホ時：アコーディオン本体を軸に中央揃え */
 @media(max-width:700px){
 
   #accordion-container{
@@ -292,6 +292,7 @@ a:hover{
     width:100%;
     margin-left:auto;
     margin-right:auto;
+    position:relative;
   }
 
   .accordion-header,
@@ -299,23 +300,31 @@ a:hover{
   summary{
     position:relative;
     width:100%;
-    padding-left:34px;
+    padding-left:18px;
     padding-right:48px;
   }
 
+  /* 左の点はメニュー幅の外ではなく、内側に配置 */
   .accordion-header::before,
   .hint-title::before,
   summary::before{
     content:"";
     position:absolute;
-    left:16px;
+    left:8px;
     top:50%;
     transform:translateY(-50%);
-    width:7px;
-    height:7px;
+    width:6px;
+    height:6px;
     border-radius:50%;
     background:#ffffff;
-    opacity:.9;
+    opacity:.85;
+  }
+
+  /* 点のぶんだけテキストを少し右に逃がす */
+  .accordion-header,
+  .hint-title,
+  summary{
+    padding-left:26px;
   }
 
   .accordion-header::after,
