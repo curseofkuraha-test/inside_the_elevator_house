@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elevator Escape</title>
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+<meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+<title>ELEVATOR HOUSE</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
@@ -58,13 +60,38 @@ body{
   object-fit:contain;
 }
 
-.story{
+.story,
+.before-box{
   max-width:960px;
   margin:0 auto 58px;
   text-align:center;
   font-size:20px;
   line-height:2.15;
   color:#e8e8e8;
+}
+
+.before-box{
+  background:rgba(0,0,0,.48);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:8px;
+  padding:44px 28px;
+  box-sizing:border-box;
+}
+
+.before-box h2{
+  font-size:34px;
+  margin:0 0 28px;
+  color:#fff;
+}
+
+.before-box h3{
+  font-size:26px;
+  margin:44px 0 18px;
+  color:#ffdf6e;
+}
+
+.before-box p{
+  margin:0;
 }
 
 .story h1{
@@ -258,7 +285,7 @@ body{
 }
 
 .next-step-button{
-  width:260px;
+  width:min(86vw,280px);
   height:64px;
   font-size:22px;
 }
@@ -266,25 +293,55 @@ body{
 .tablet{
   width:min(96vw,980px);
   margin:40px auto;
-  padding:26px;
+  padding:22px;
   box-sizing:border-box;
-  border:10px solid #555;
-  border-radius:36px;
-  background:linear-gradient(145deg,#3c3c3c,#1a1a1a);
+  border:10px solid #30343a;
+  border-radius:34px;
+  background:linear-gradient(145deg,#262a30,#101216);
+  box-shadow:
+    inset 0 0 0 3px rgba(255,255,255,.05),
+    inset 0 0 24px rgba(0,0,0,.75),
+    0 18px 44px rgba(0,0,0,.45);
+  position:relative;
+}
+
+.tablet::before{
+  content:"";
+  position:absolute;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+  width:58px;
+  height:5px;
+  border-radius:999px;
+  background:rgba(255,255,255,.18);
+}
+
+.tablet::after{
+  content:"";
+  position:absolute;
+  bottom:9px;
+  left:50%;
+  transform:translateX(-50%);
+  width:44px;
+  height:4px;
+  border-radius:999px;
+  background:rgba(255,255,255,.16);
 }
 
 .tablet-top{
   display:flex;
   align-items:center;
   gap:16px;
-  padding-bottom:16px;
+  padding:20px 10px 16px;
 }
 
 .tablet-floor-input{
   width:100px;
   height:50px;
-  border:1px solid #666;
-  background:#111;
+  border:1px solid rgba(255,255,255,.24);
+  border-radius:6px;
+  background:#070808;
   color:white;
   text-align:center;
   font-size:28px;
@@ -293,14 +350,15 @@ body{
 .tablet-bottom{
   display:flex;
   gap:14px;
-  padding-top:18px;
+  padding:18px 10px 12px;
 }
 
 .tablet-answer-input{
   flex:1;
   height:56px;
-  border:1px solid #666;
-  background:#111;
+  border:1px solid rgba(255,255,255,.24);
+  border-radius:6px;
+  background:#070808;
   color:white;
   padding:0 18px;
   font-size:20px;
@@ -310,12 +368,18 @@ body{
 .tablet-send{
   width:140px;
   border:none;
-  border-radius:5px;
+  border-radius:6px;
   background:white;
   color:#111;
   font-size:18px;
   font-weight:700;
   cursor:pointer;
+}
+
+.tablet .image-frame{
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.12);
+  background:#090b0d;
 }
 
 .fourth-story-box{
@@ -361,6 +425,85 @@ body{
   font-size:54px;
   letter-spacing:8px;
   margin-bottom:34px;
+}
+
+/* novel */
+
+.novel-stage{
+  width:min(94vw,1000px);
+  min-height:74vh;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+}
+
+.novel-window{
+  background:rgba(0,0,0,.72);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:10px;
+  padding:24px;
+  box-sizing:border-box;
+  cursor:pointer;
+  box-shadow:0 14px 34px rgba(0,0,0,.35);
+}
+
+.novel-speaker{
+  display:inline-block;
+  min-width:120px;
+  margin-bottom:12px;
+  padding:8px 18px;
+  background:#00a29a;
+  color:white;
+  border-radius:4px;
+  font-weight:700;
+  text-align:center;
+}
+
+.novel-text{
+  font-size:22px;
+  line-height:2;
+  min-height:120px;
+  color:#fff;
+}
+
+.novel-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:12px;
+  margin-top:18px;
+}
+
+.novel-small-button{
+  border:none;
+  border-radius:4px;
+  background:rgba(255,255,255,.92);
+  color:#111;
+  padding:10px 18px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.log-box{
+  width:min(94vw,900px);
+  max-height:70vh;
+  overflow-y:auto;
+  background:#f4f4f4;
+  color:#111;
+  border-radius:8px;
+  padding:28px;
+  box-sizing:border-box;
+}
+
+.log-entry{
+  border-bottom:1px solid #ddd;
+  padding:12px 0;
+  line-height:1.8;
+}
+
+.log-speaker{
+  font-weight:700;
+  color:#007f79;
 }
 
 /* MENU */
@@ -524,7 +667,8 @@ body{
 
 .guide-overlay,
 .tablet-guide-overlay,
-.inventory-overlay{
+.inventory-overlay,
+.log-overlay{
   position:fixed;
   inset:0;
   z-index:9500;
@@ -539,7 +683,8 @@ body{
 
 .guide-overlay.show,
 .tablet-guide-overlay.show,
-.inventory-overlay.show{
+.inventory-overlay.show,
+.log-overlay.show{
   opacity:1;
   pointer-events:auto;
 }
@@ -606,8 +751,11 @@ body{
 @media(max-width:700px){
   .page{padding:36px 14px 90px;}
   .step-header img{width:min(82vw,320px);}
-  .story{font-size:17px;line-height:2;}
+  .story,.before-box{font-size:17px;line-height:2;}
   .story h1{font-size:38px;}
+  .before-box{padding:32px 20px;}
+  .before-box h2{font-size:25px;}
+  .before-box h3{font-size:22px;}
   .panel{width:300px;padding:22px;}
   .buttons{grid-template-columns:repeat(2,100px);gap:18px;}
   .elevator-button{width:100px;height:100px;}
@@ -620,6 +768,7 @@ body{
   .tablet-answer-input{width:100%;}
   .modal-title{font-size:22px;}
   .guide-close{top:14px;right:14px;width:50px;height:50px;}
+  .novel-text{font-size:18px;min-height:150px;}
 }
 </style>
 </head>
@@ -635,7 +784,8 @@ body{
 <nav class="menu-panel" id="menu-panel">
   <div class="menu-section">
     <div class="menu-section-title">STEP</div>
-    <button class="menu-button" id="nav-step1" onclick="showStepDirect('step1-page')">1st STEP</button>
+    <button class="menu-button" id="nav-before" onclick="showStepDirect('before-page')">始める前に</button>
+    <button class="menu-button hidden" id="nav-step1" onclick="showStepDirect('step1-page')">1st STEP</button>
     <button class="menu-button hidden" id="nav-step2" onclick="showStepDirect('step2-page')">2nd STEP</button>
     <button class="menu-button hidden" id="nav-step3" onclick="showStepDirect('step3-page')">3rd STEP</button>
     <button class="menu-button hidden" id="nav-step4" onclick="showStepDirect('step4-page')">4th STEP</button>
@@ -656,12 +806,12 @@ body{
   </div>
 </nav>
 
-<div class="guide-overlay" id="guide-overlay">
+<div class="guide-overlay" id="guide-overlay" onclick="closeGuideByOutside(event)">
   <button class="guide-close" onclick="closeGuide()">×</button>
   <div class="image-frame" id="guide-image"></div>
 </div>
 
-<div class="tablet-guide-overlay" id="tablet-guide-overlay">
+<div class="tablet-guide-overlay" id="tablet-guide-overlay" onclick="closeTabletGuideByOutside(event)">
   <button class="guide-close" onclick="closeTabletGuide()">×</button>
   <div class="image-frame" id="tablet-guide-image"></div>
 </div>
@@ -675,8 +825,62 @@ body{
   </div>
 </div>
 
+<div class="log-overlay" id="log-overlay">
+  <button class="guide-close" onclick="closeLog()">×</button>
+  <div class="log-box" id="log-box"></div>
+</div>
+
+<!-- BEFORE -->
+<div class="page" id="before-page">
+  <section class="before-box">
+    <h2>「ELEVATOR HOUSE」を始める前に</h2>
+
+    <p>
+      以下の内容物（計５点）があるか<br>確認してください。<br><br>
+      １:進め方が書かれた用紙<br>
+      ２:2nd.STEPと書かれた２つ折りの紙<br>
+      ３:透明な袋に入っている2nd.STEPと書かれたもの<br>
+      ４:3rd.STEPと書かれた２つ折りの紙<br>
+      ５:透明な袋に入っている3rd.STEPと書かれたもの<br><br>
+      ※2nd及び3rdSTEPと書かれているものは指示があるまで開けたり取り出したりしないでください。<br><br>
+      どれか一つでも不足している場合は<br>
+      お手数ですが、下記窓口まで<br>
+      ご連絡をお願いいたします。<br><br>
+      株式会社エフェックス<br>
+      hanbai_nazo@efex.co.jp
+    </p>
+
+    <h3>注意事項</h3>
+    <p>
+      ・十分にコンテンツを楽しんでいただくため、ソースコードの閲覧はお控えください。<br>
+      ・音声はONにしてお楽しみください。<br>
+      ・答えがわかったら、解答欄に入力してください。<br>
+      ・ゲーム進行中、メニュー画面に様々な機能が追加されます。随時確認しながら進めるようにしましょう。<br>
+      ・ヒントは、右上のメニューより「ヒント」ボタンを選択することで、閲覧が可能です。
+    </p>
+
+    <div style="text-align:center;margin-top:44px;">
+      <button class="next-step-button" onclick="startNovel()">次へ</button>
+    </div>
+  </section>
+</div>
+
+<!-- NOVEL -->
+<div class="page hidden" id="novel-page">
+  <div class="novel-stage">
+    <div class="novel-window" onclick="nextNovelLine()">
+      <div class="novel-speaker" id="novel-speaker"></div>
+      <div class="novel-text" id="novel-text"></div>
+      <div class="novel-actions" onclick="event.stopPropagation()">
+        <button class="novel-small-button" onclick="openLog()">ログ</button>
+        <button class="novel-small-button" onclick="nextNovelLine()">次へ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- STEP1 -->
-<div class="page" id="step1-page">
+<div class="page hidden" id="step1-page">
   <div class="step-header"><img src="./image/title_step1.png" alt="1st STEP"></div>
 
   <section class="story">
@@ -718,8 +922,8 @@ body{
     <button onclick="submitStep2FloorAnswer()">送信</button>
     <div class="answer-message" id="step2-message"></div>
 
-    <div class="password-title">６文字の答えが出たら送信</div>
-    <input id="step2-password" placeholder="６文字の答えを入力">
+    <div class="password-title">５つの階の謎の答えから導いたキーワード</div>
+    <input id="step2-password" placeholder="答えを入力">
     <button onclick="submitStep2Password()">送信</button>
   </div>
 </div>
@@ -921,7 +1125,6 @@ body{
   </section>
 </div>
 
-<!-- MODALS -->
 <div class="modal" id="unlock-modal">
   <div class="modal-card">
     <div class="modal-title">以下の階層が解放されました</div>
@@ -941,8 +1144,8 @@ body{
 const SAVE_KEY = "elevator_escape_state";
 
 const gameState = {
-  currentPage:"step1-page",
-  unlockedNav:["nav-step1"],
+  currentPage:"before-page",
+  unlockedNav:["nav-before"],
   selectedStep2Floor:null,
   selectedStep3Floor:null,
   currentStep4Floor:"A",
@@ -951,10 +1154,19 @@ const gameState = {
   fourthStoryVisible:false,
   inventoryUnlocked:false,
   guideUnlocked:false,
-  tabletGuideUnlocked:false
+  tabletGuideUnlocked:false,
+  novelFinished:false
 };
 
 let audioContext = null;
+let novelIndex = 0;
+
+const novelLines = [
+  {speaker:"あなた", text:"ここが、あの資産家が残したという奇妙な建物……。"},
+  {speaker:"案内音声", text:"ようこそ。ELEVATOR HOUSEへ。"},
+  {speaker:"案内音声", text:"この建物には、3台のエレベーターが存在しています。"},
+  {speaker:"あなた", text:"まずは、この建物について調べてみよう。"}
+];
 
 function playElevatorButtonSound(){
   try{
@@ -1058,6 +1270,18 @@ function showTemporaryMessage(id,text){
   },1400);
 }
 
+function forceScrollTop(){
+  window.scrollTo(0,0);
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+
+  requestAnimationFrame(() => {
+    window.scrollTo(0,0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  });
+}
+
 function toggleMenu(){
   document.getElementById("menu-panel").classList.toggle("show");
   document.getElementById("menu-overlay").classList.toggle("show");
@@ -1090,7 +1314,7 @@ function showPage(id, shouldSave = true){
     saveState();
   }
 
-  window.scrollTo({top:0,behavior:"smooth"});
+  forceScrollTop();
 }
 
 function showStepDirect(id){
@@ -1117,6 +1341,12 @@ function closeGuide(){
   document.getElementById("guide-overlay").classList.remove("show");
 }
 
+function closeGuideByOutside(event){
+  if(event.target.id === "guide-overlay"){
+    closeGuide();
+  }
+}
+
 function openTabletGuide(){
   closeMenu();
   document.getElementById("tablet-guide-overlay").classList.add("show");
@@ -1126,6 +1356,12 @@ function closeTabletGuide(){
   document.getElementById("tablet-guide-overlay").classList.remove("show");
 }
 
+function closeTabletGuideByOutside(event){
+  if(event.target.id === "tablet-guide-overlay"){
+    closeTabletGuide();
+  }
+}
+
 function openInventory(){
   closeMenu();
   document.getElementById("inventory-overlay").classList.add("show");
@@ -1133,6 +1369,50 @@ function openInventory(){
 
 function closeInventory(){
   document.getElementById("inventory-overlay").classList.remove("show");
+}
+
+function startNovel(){
+  novelIndex = 0;
+  unlockNav("nav-step1");
+  showPage("novel-page");
+  renderNovelLine();
+}
+
+function renderNovelLine(){
+  const line = novelLines[novelIndex];
+
+  if(!line){
+    gameState.novelFinished = true;
+    saveState();
+    showPage("step1-page");
+    return;
+  }
+
+  document.getElementById("novel-speaker").innerText = line.speaker;
+  document.getElementById("novel-text").innerText = line.text;
+}
+
+function nextNovelLine(){
+  novelIndex += 1;
+  renderNovelLine();
+}
+
+function openLog(){
+  const logBox = document.getElementById("log-box");
+  const lines = novelLines.slice(0, Math.min(novelIndex + 1, novelLines.length));
+
+  logBox.innerHTML = lines.map(line => `
+    <div class="log-entry">
+      <div class="log-speaker">${line.speaker}</div>
+      <div>${line.text}</div>
+    </div>
+  `).join("");
+
+  document.getElementById("log-overlay").classList.add("show");
+}
+
+function closeLog(){
+  document.getElementById("log-overlay").classList.remove("show");
 }
 
 function openMessageModal(text, callback){
@@ -1700,7 +1980,7 @@ function restoreGame(){
 
   syncStep4State();
 
-  showPage(gameState.currentPage || "step1-page", false);
+  showPage(gameState.currentPage || "before-page", false);
 }
 
 function bindEnterKeys(){
