@@ -367,9 +367,9 @@ body{
 
 .tablet-top{
   display:grid;
-  grid-template-columns:100px 1fr auto;
+  grid-template-columns:100px auto 1fr 50px;
   align-items:center;
-  gap:16px;
+  gap:12px;
   padding:20px 10px 16px;
 }
 
@@ -385,8 +385,9 @@ body{
 }
 
 .tablet-label{
-  text-align:center;
+  text-align:left;
   font-weight:700;
+  white-space:nowrap;
 }
 
 .tablet-floor-badge{
@@ -762,6 +763,14 @@ body{
   cursor:pointer;
 }
 
+.camera-only-modal .modal-card{
+  padding:34px;
+}
+
+.camera-only-modal .modal-next{
+  width:min(82vw,260px);
+}
+
 /* OVERLAYS */
 
 .guide-overlay,
@@ -888,8 +897,8 @@ body{
   .step1-riddle-frame{max-width:92vw;}
   .tablet{border-width:7px;border-radius:24px;padding:18px;}
   .tablet-top{
-    grid-template-columns:74px 1fr 44px;
-    gap:10px;
+    grid-template-columns:74px auto 1fr 44px;
+    gap:8px;
     padding:20px 6px 16px;
   }
   .tablet-floor-input{
@@ -1152,6 +1161,7 @@ body{
       <div class="tablet-top">
         <input id="floor-input-4" class="tablet-floor-input" maxlength="2">
         <div class="tablet-label">階へ行くための手がかり</div>
+        <div></div>
         <div class="tablet-floor-badge empty" id="tablet-floor-badge-4"></div>
       </div>
 
@@ -1186,6 +1196,7 @@ body{
       <div class="tablet-top">
         <input id="floor-input-5" class="tablet-floor-input" maxlength="2">
         <div class="tablet-label">階へ行くための手がかり</div>
+        <div></div>
         <div class="tablet-floor-badge empty" id="tablet-floor-badge-5"></div>
       </div>
 
@@ -1211,11 +1222,21 @@ body{
     <div class="story">どうにかして、生き延びる方法を考えよ！</div>
   </section>
 
+  <div class="panel compact-panel">
+    <div class="buttons" id="buttons-last"></div>
+  </div>
+
+  <section class="floor-view">
+    <div class="floor-title hidden" id="floor-title-last"></div>
+    <div class="image-frame" id="floor-image-last"></div>
+  </section>
+
   <section class="section">
     <div class="tablet">
       <div class="tablet-top">
         <input id="floor-input-last" class="tablet-floor-input" maxlength="2">
         <div class="tablet-label">階へ行くための手がかり</div>
+        <div></div>
         <div class="tablet-floor-badge empty" id="tablet-floor-badge-last"></div>
       </div>
 
@@ -1289,9 +1310,8 @@ body{
   </div>
 </div>
 
-<div class="modal" id="camera-modal">
+<div class="modal camera-only-modal" id="camera-modal">
   <div class="modal-card">
-    <div class="modal-title">監視カメラを壊しますか？</div>
     <button class="modal-next" onclick="breakCamera()">監視カメラを壊す</button>
   </div>
 </div>
@@ -1304,6 +1324,7 @@ const gameState = {
   unlockedNav:["nav-before"],
   selectedStep2Floor:null,
   selectedStep3Floor:null,
+  selectedLastFloor:null,
   currentStep4Floor:"A",
   currentStep4Mode:"waiting",
   currentStep4Target:null,
@@ -1791,6 +1812,8 @@ const imagePaths = {
   floor8:"./image/floor_8.png",
   floor9:"./image/floor_9.png",
 
+  doorClosed:"./image/doorclose.png",
+
   step4FloorA:"./image/step4_floor_a.png",
   step4FloorJ:"./image/step4_floor_j.png",
   step4FloorH:"./image/step4_floor_h.png",
@@ -1969,6 +1992,13 @@ function submitStep3Password(){
       openMessageModal("メニュー内に「タブレット端末の使い方」ボタンが追加されました。","showStep4");
     });
   }
+}
+
+function selectLastElevatorFloor(floor){
+  gameState.selectedLastFloor = floor;
+  saveState();
+  setFloorTitle("floor-title-last",`${floor}階の様子`);
+  setImage("floor-image-last",imagePaths.doorClosed,`${floor}階 扉が閉まっている様子`);
 }
 
 let currentStep4Floor = "A";
@@ -2185,7 +2215,7 @@ function submitStep5(){
   if(floor === normalize("こ")){
     showStep5KoRiddle();
 
-    if(["かくめい","カクメイ","革命"].map(normalize).includes(answer)){
+    if(["かいどく","カイドク","解読"].map(normalize).includes(answer)){
       unlockNav("nav-last");
       gameState.ingotUnlocked = true;
       gameState.diaryUnlocked = true;
@@ -2309,9 +2339,11 @@ function initializeImages(){
 
   clearFloorTitle("floor-title-step2");
   clearFloorTitle("floor-title-step3");
+  clearFloorTitle("floor-title-last");
 
   setPlaceholder("floor-image-step2","階層を選択してください");
   setPlaceholder("floor-image-step3","階層を選択してください");
+  setPlaceholder("floor-image-last","階層を選択してください");
 
   renderStep4();
 
@@ -2352,6 +2384,11 @@ function restoreGame(){
     selectedStep3Floor = gameState.selectedStep3Floor;
     setFloorTitle("floor-title-step3",`${selectedStep3Floor}階の様子`);
     setImage("floor-image-step3",imagePaths[`floor${selectedStep3Floor}`],`${selectedStep3Floor}階の様子画像`);
+  }
+
+  if(gameState.selectedLastFloor !== null){
+    setFloorTitle("floor-title-last",`${gameState.selectedLastFloor}階の様子`);
+    setImage("floor-image-last",imagePaths.doorClosed,`${gameState.selectedLastFloor}階 扉が閉まっている様子`);
   }
 
   syncStep4State();
@@ -2408,6 +2445,7 @@ function initGame(){
   createStep1Buttons();
   createButtons("buttons-step2",[4,5,6,8,9],selectStep2Floor);
   createButtons("buttons-step3",[0,1,2,3,4,5,6,7,8,9],selectStep3Floor);
+  createButtons("buttons-last",[0,1,2,3,4,5,6,7,8,9],selectLastElevatorFloor);
   initializeImages();
   bindEnterKeys();
   bindTabletTyping();
