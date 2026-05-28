@@ -1186,10 +1186,7 @@ body{
     <h1 class="step-title-large">資産がある階を突き止めろ！</h1>
   </section>
 
-  <section class="story">
-    ３号機の階数情報は伏せられている。<br>
-    しかし、２号機で使用していたタブレットは、このエレベーターでも使用できるようだ。
-  </section>
+  <section class="story hidden" id="step5-story-text"></section>
 
   <section class="section">
     <div class="tablet">
@@ -1336,7 +1333,6 @@ const gameState = {
   globalLog:[]
 };
 
-let audioContext = null;
 let novelIndex = 0;
 let activeStory = [];
 let activeStoryComplete = null;
@@ -1344,8 +1340,8 @@ let moveModalCallback = null;
 
 const stories = {
   opening:[
-    {role:"sound", speaker:"", text:"Prrrr...."},
-    {role:"sound", speaker:"", text:"カチャ"},
+    {role:"sound", speaker:"", text:"Prrrr....", sound:"./sound/phone.mp3"},
+    {role:"sound", speaker:"", text:"カチャ", sound:"./sound/click.mp3"},
     {role:"elevatorman", speaker:"？？？", text:"HELLO～\n気分はどうだい？"},
     {role:"elevatorman", speaker:"？？？", text:"レストランで眠って、起きたらエレベーターの中にいて驚いたろう！"},
     {role:"elevatorman", speaker:"？？？", text:"キミは謎を解き明かすのが「大好き」だというウワサを耳にしてね。\nなに、少しキミに手伝って欲しいことがあって、勝手にこのエレベーターへ「招待」させてもらったのさ。"},
@@ -1406,31 +1402,33 @@ const stories = {
     {role:"protagonist", speaker:"キミ", text:"書斎には資産家が残した日記と金色のインゴットが置かれていた。\nどうやら、「資産」とはこの「金のインゴット」のことだろう。"},
     {role:"protagonist", speaker:"キミ", text:"それにしてもこんな妙な謎を残す、資産家ってどんな人物だろう。\n書斎にあった日記も読んでみよう。"},
     {role:"diary", speaker:"資産家の日記", html:"<img src='./image/item_diary.png' alt='資産家の日記' style='display:block;width:min(80vw,520px);margin:0 auto;border-radius:6px;'>"},
-    {role:"protagonist", speaker:"キミ", text:"金のインゴットと一緒に日記を持って１号エレベーターに戻ると、エレベーターマンから連絡がかかってきた。"},
+    {role:"elevatorman", speaker:"キミ", text:"金のインゴットと一緒に日記を持って１号エレベーターに戻ると、エレベーターマンから連絡がかかってきた。"},
+    {role:"sound", speaker:"", text:"Prrrr....", sound:"./sound/phone.mp3"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"何か見つけたのか！\n\nどれどれ・・・おお！それは金じゃないか？\n結構大きいな！結構な金額になりそうだ。"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"・・・・・・"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"無事に「財宝」を見つけられた、ということでキミの出番はここまでだ。"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"前に「財宝」を見つけたら、この「エレベーターハウス」から出してやる、と言ったが、あれは嘘だ。"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"金のインゴットのことを知っているやつを生かしておくことはできない。\nしばらくすると、エレベーター内に催眠ガスが充満するボタンを押した。"},
-    {role:"elevatorman", speaker:"エレベーターマン", text:"キミが「おねんね」した後に金のインゴットだけ頂戴して、キミは永遠にエレベーターの中、ってことさ。"},
+
+    {role:"elevatorman", speaker:"エレベーターマン", text:"キミが「おねんね」した後に金のインゴットだけ頂戴して、キミは永遠にエレベーターの中、ってことさ。",sound:"./sound/button.mp3"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"相棒、ここまで協力してくれてありがとう。\nバイバイ！"},
-    {role:"sound", speaker:"", text:"がちゃん！　ツー、ツー、ツー"},
+    {role:"sound", speaker:"", text:"がちゃん！　ツー、ツー、ツー", sound:"./sound/hangup.mp3"},
     {role:"protagonist", speaker:"キミ", text:"・・・・ちくしょう！「解放してやる」なんで信じるんじゃなかった！"},
     {role:"protagonist", speaker:"キミ", text:"落ち着け、まだエレベーター内に催眠ガスは充満していないようだ。"},
     {role:"protagonist", speaker:"キミ", text:"状況を整理して、活路を見出すんだ！"},
     {role:"protagonist", speaker:"キミ", text:"まずは、監視カメラをどうにかしよう・・・"}
   ],
   cameraBreak:[
-    {role:"protagonist", speaker:"キミ", text:"キミは手元のインゴットを使い、監視カメラを壊した。"}
+    {role:"sound", speaker:"", text:"キミは手元のインゴットを使い、監視カメラを壊した。", sound:"./sound/break_kanshi.mp3"},
   ],
   mirrorCheck:[
     {role:"protagonist", speaker:"キミ", text:"鏡をノックしてみよう・・・"},
-    {role:"sound", speaker:"", text:"コン、コン、、、"},
+    {role:"sound", speaker:"", text:"コン、コン、、、", sound:"./sound/knock.mp3"},
     {role:"protagonist", speaker:"キミ", text:"音が響く・・・どうやら、鏡の裏は空洞になっているようだ。"}
   ],
   ending:[
     {role:"protagonist", speaker:"キミ", text:"金のインゴットを振りかぶって、思いっきり鏡に叩きつけた！"},
-    {role:"sound", speaker:"", text:"ガッシャーン！！"},
+    {role:"sound", speaker:"", text:"ガッシャーン！！", sound:"./sound/break.mp3"},
     {role:"protagonist", speaker:"キミ", text:"鏡は粉々に砕け、その後ろにある扉があらわになった。"},
     {role:"protagonist", speaker:"キミ", text:"恐る恐るドアノブに手をかけたが、鍵はかかっていないようだ。\n\n思い切ってそのまま扉を開くと、そこは屋上だった。"},
     {role:"protagonist", speaker:"キミ", text:"エレベーターから外に出た。\n・・・・・・ずっと閉鎖的は空間にいたので、新鮮か空気が美味しい。"},
@@ -1526,6 +1524,21 @@ function setTabletMessage(id,text){
   const el = document.getElementById(id);
   if(!el) return;
   el.innerText = text || "";
+}
+
+function showTemporaryTabletMessage(id,text,duration=2000){
+  const el = document.getElementById(id);
+  if(!el) return;
+
+  el.innerText = text;
+
+  clearTimeout(el.dataset.timerId);
+
+  const timerId = setTimeout(() => {
+    el.innerText = "";
+  }, duration);
+
+  el.dataset.timerId = timerId;
 }
 
 function setTabletFloorBadge(id,path,label=""){
@@ -1690,7 +1703,29 @@ function runStory(lines,onComplete){
   renderNovelLine();
 }
 
+let currentStoryAudio = null;
+
+function stopStorySound(){
+  if(currentStoryAudio){
+    currentStoryAudio.pause();
+    currentStoryAudio.currentTime = 0;
+    currentStoryAudio = null;
+  }
+}
+
+function playStorySound(src){
+  if(!src) return;
+
+  stopStorySound();
+
+  currentStoryAudio = new Audio(src);
+  currentStoryAudio.volume = 0.85;
+  currentStoryAudio.play().catch(()=>{});
+}
+
 function renderNovelLine(){
+  stopStorySound();
+
   const line = activeStory[novelIndex];
   if(!line){
     const callback = activeStoryComplete;
@@ -1701,11 +1736,16 @@ function renderNovelLine(){
 
   addToGlobalLog(line);
 
+  if(line.sound){
+    playStorySound(line.sound);
+  }
+
   const speaker = document.getElementById("novel-speaker");
   const text = document.getElementById("novel-text");
 
   speaker.className = "novel-speaker";
-  if(!line.speaker || line.role === "sound"){
+
+  if(!line.speaker || line.role === "sound" || line.role === "storyline"){
     speaker.classList.add("no-speaker");
   }else{
     speaker.classList.add(`role-${line.role || "narration"}`);
@@ -1774,27 +1814,6 @@ function breakCamera(){
   });
 }
 
-function playElevatorButtonSound(){
-  try{
-    if(!audioContext){
-      audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    const now = audioContext.currentTime;
-    const oscillator = audioContext.createOscillator();
-    const gain = audioContext.createGain();
-    oscillator.type = "triangle";
-    oscillator.frequency.setValueAtTime(95, now);
-    oscillator.frequency.exponentialRampToValueAtTime(55, now + .08);
-    gain.gain.setValueAtTime(.0001, now);
-    gain.gain.exponentialRampToValueAtTime(.28, now + .01);
-    gain.gain.exponentialRampToValueAtTime(.0001, now + .11);
-    oscillator.connect(gain);
-    gain.connect(audioContext.destination);
-    oscillator.start(now);
-    oscillator.stop(now + .12);
-  }catch(e){}
-}
-
 const elevatorOrder = [8,9,6,7,4,5,2,3,0,1];
 
 const imagePaths = {
@@ -1824,7 +1843,7 @@ const imagePaths = {
 
   step5RiddleKo:"./image/step5_riddle_ko.png",
   lastRiddle11:"./image/last_riddle_11.png",
-  lastWall:"./image/last_wall.png",
+  lastWall:"./image/floor_11.png",
   clear:"./image/clear.png",
 
   itemIngot:"./image/item_ingot.png",
@@ -1847,7 +1866,6 @@ function createButtons(targetId,enabledFloors,callback){
     if(enabledFloors.includes(i)){
       button.classList.add("active");
       button.onclick = () => {
-        playElevatorButtonSound();
         callback(i);
       };
     }else{
@@ -1865,7 +1883,6 @@ function createStep1Buttons(){
     button.className = "elevator-button";
     button.innerHTML = `<span>${i}</span>`;
     button.onclick = () => {
-      playElevatorButtonSound();
       button.classList.toggle("active");
       checkStep1();
     };
@@ -2093,17 +2110,17 @@ function handleStep4InvalidFloor(floorInput){
   const progressionFloors = ["a","j","h","e"];
 
   if(inaccessibleFloors.includes(floorInput)){
-    setTabletMessage("tablet-message-4","その階に移動することはできません。");
+    showTemporaryTabletMessage("tablet-message-4","その階に移動することはできません。");
     return true;
   }
 
   if(progressionFloors.includes(floorInput)){
-    setTabletMessage("tablet-message-4","その階にはまだ移動することはできません。");
+    showTemporaryTabletMessage("tablet-message-4","その階にはまだ移動することはできません。");
     return true;
   }
 
   if(floorInput){
-    setTabletMessage("tablet-message-4","その階は存在しません。");
+    showTemporaryTabletMessage("tablet-message-4","その階は存在しません。");
     return true;
   }
 
@@ -2190,12 +2207,12 @@ function handleStep5InvalidFloor(floorInput){
   const inaccessibleFloors = ["ア","イ","ウ","エ","オ","カ","キ","ク","ケ"];
 
   if(inaccessibleFloors.includes(floorInput)){
-    setTabletMessage("tablet-message-5","その階に移動することはできません。");
+    showTemporaryTabletMessage("tablet-message-5","その階に移動することはできません。");
     return true;
   }
 
   if(floorInput){
-    setTabletMessage("tablet-message-5","その階は存在しません。");
+    showTemporaryTabletMessage("tablet-message-5","その階は存在しません。");
     return true;
   }
 
@@ -2224,7 +2241,7 @@ function submitStep5(){
       document.getElementById("item-ingot-button").classList.remove("hidden");
       document.getElementById("item-diary-button").classList.remove("hidden");
 
-      openMoveModal("こ", () => {
+      openMoveModal("コ", () => {
         runStory(stories.afterStep5, () => openCameraModal());
       });
     }
@@ -2261,7 +2278,7 @@ function submitLastRiddle(){
   const answer = normalize(document.getElementById("answer-input-last").value);
 
   if(["0","1","2","3","4","5","6","7","8","9"].includes(floor)){
-    setTabletMessage("tablet-message-last","その階に行く必要がありません。");
+    showTemporaryTabletMessage("tablet-message-last","その階に行く必要がありません。");
     return;
   }
 
