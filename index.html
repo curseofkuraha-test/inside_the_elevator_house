@@ -90,15 +90,7 @@ body{
   color:#ffdf6e;
 }
 
-.before-box p{
-  margin:0;
-}
-
-.story h1{
-  font-size:52px;
-  letter-spacing:6px;
-  margin:0 0 36px;
-}
+.before-box p{margin:0;}
 
 .section{
   width:100%;
@@ -150,6 +142,16 @@ body{
   letter-spacing:2px;
 }
 
+.step1-riddle-title{
+  text-align:center;
+  font-size:52px;
+  letter-spacing:6px;
+  margin:0 0 36px;
+  color:#fff;
+}
+
+.step1-riddle-frame{max-width:720px;}
+
 .panel{
   width:360px;
   margin:48px auto 0;
@@ -179,9 +181,7 @@ body{
   padding:0;
 }
 
-.elevator-button:active{
-  transform:scale(.96);
-}
+.elevator-button:active{transform:scale(.96);}
 
 .elevator-button span{
   position:absolute;
@@ -280,9 +280,7 @@ body{
   transition:.25s;
 }
 
-.answer-message.show{
-  opacity:1;
-}
+.answer-message.show{opacity:1;}
 
 .next-step-button{
   width:min(86vw,280px);
@@ -382,23 +380,6 @@ body{
   background:#090b0d;
 }
 
-.fourth-story-box{
-  width:min(90vw,760px);
-  margin:40px auto 0;
-  padding:42px 32px;
-  box-sizing:border-box;
-  border-radius:8px;
-  background:rgba(0,0,0,.55);
-  border:1px solid rgba(255,255,255,.18);
-  text-align:center;
-}
-
-.fourth-story-box p{
-  font-size:20px;
-  line-height:2.1;
-  color:#e8e8e8;
-}
-
 .diary{
   width:min(90vw,700px);
   margin:0 auto;
@@ -425,6 +406,31 @@ body{
   font-size:54px;
   letter-spacing:8px;
   margin-bottom:34px;
+}
+
+.clear-actions{
+  display:flex;
+  justify-content:center;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-top:34px;
+}
+
+.clear-actions a,
+.clear-actions button{
+  width:min(82vw,260px);
+  min-height:54px;
+  border:none;
+  border-radius:6px;
+  background:#00a29a;
+  color:white;
+  font-size:17px;
+  font-weight:700;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
 }
 
 /* novel */
@@ -462,21 +468,10 @@ body{
   text-align:center;
 }
 
-.novel-speaker.role-narration{
-  background:#666;
-}
-
-.novel-speaker.role-elevatorman{
-  background:#00a29a;
-}
-
-.novel-speaker.role-protagonist{
-  background:#5c6bc0;
-}
-
-.novel-speaker.role-sound{
-  background:#8a6d3b;
-}
+.novel-speaker.role-narration{background:#666;}
+.novel-speaker.role-elevatorman{background:#00a29a;}
+.novel-speaker.role-protagonist{background:#5c6bc0;}
+.novel-speaker.role-sound{background:#8a6d3b;}
 
 .novel-text{
   font-size:22px;
@@ -484,6 +479,14 @@ body{
   min-height:180px;
   color:#fff;
   white-space:pre-line;
+}
+
+.novel-text .big-line{
+  display:block;
+  font-size:1.26em;
+  font-weight:700;
+  color:#ffdf6e;
+  margin-top:8px;
 }
 
 .novel-actions{
@@ -687,7 +690,7 @@ body{
 
 .guide-overlay,
 .tablet-guide-overlay,
-.inventory-overlay,
+.item-overlay,
 .log-overlay{
   position:fixed;
   inset:0;
@@ -703,7 +706,7 @@ body{
 
 .guide-overlay.show,
 .tablet-guide-overlay.show,
-.inventory-overlay.show,
+.item-overlay.show,
 .log-overlay.show{
   opacity:1;
   pointer-events:auto;
@@ -745,36 +748,41 @@ body{
   background:#00a29a;
 }
 
-.inventory-panel{
-  width:min(90vw,600px);
+.item-panel{
+  width:min(92vw,640px);
   background:#f2f2f2;
   border-radius:8px;
-  padding:48px;
+  padding:42px;
   box-sizing:border-box;
   color:#111;
   position:relative;
-}
-
-.inventory-title{
   text-align:center;
-  font-size:34px;
-  margin-bottom:34px;
-  font-weight:700;
 }
 
-.inventory-item{
-  background:white;
-  border-radius:5px;
-  padding:24px;
-  margin-bottom:18px;
-  font-size:22px;
+.item-panel img{
+  display:block;
+  width:100%;
+  max-width:420px;
+  height:auto;
+  margin:0 auto 22px;
+  border-radius:6px;
+}
+
+.item-panel h2{
+  margin:0 0 18px;
+  font-size:30px;
+}
+
+.item-panel p{
+  font-size:18px;
+  line-height:1.9;
+  margin:0;
 }
 
 @media(max-width:700px){
   .page{padding:36px 14px 90px;}
   .step-header img{width:min(82vw,320px);}
   .story,.before-box{font-size:17px;line-height:2;}
-  .story h1{font-size:38px;}
   .before-box{padding:32px 20px;}
   .before-box h2{font-size:25px;}
   .before-box h3{font-size:22px;}
@@ -783,6 +791,8 @@ body{
   .elevator-button{width:100px;height:100px;}
   .elevator-button span{font-size:64px;}
   .floor-title{font-size:22px;}
+  .step1-riddle-title{font-size:34px;letter-spacing:3px;}
+  .step1-riddle-frame{max-width:92vw;}
   .tablet{border-width:7px;border-radius:24px;padding:18px;}
   .tablet-top{align-items:flex-start;flex-direction:column;}
   .tablet-bottom{flex-direction:column;}
@@ -826,7 +836,8 @@ body{
 
   <div class="menu-section">
     <div class="menu-section-title">ITEM</div>
-    <button class="menu-button secondary hidden" id="inventory-button" onclick="openInventory()">手に入れたもの一覧</button>
+    <button class="menu-button secondary hidden" id="item-ingot-button" onclick="openItem('ingot')">金のインゴット</button>
+    <button class="menu-button secondary hidden" id="item-diary-button" onclick="openItem('diary')">資産家の日記</button>
   </div>
 </nav>
 
@@ -840,12 +851,12 @@ body{
   <div class="image-frame" id="tablet-guide-image" onclick="event.stopPropagation()"></div>
 </div>
 
-<div class="inventory-overlay" id="inventory-overlay" onclick="closeInventoryByOutside(event)">
-  <button class="guide-close" onclick="closeInventory()">×</button>
-  <div class="inventory-panel" onclick="event.stopPropagation()">
-    <div class="inventory-title">手に入れたもの</div>
-    <div class="inventory-item">金インゴット</div>
-    <div class="inventory-item">資産家の日記</div>
+<div class="item-overlay" id="item-overlay" onclick="closeItemByOutside(event)">
+  <button class="guide-close" onclick="closeItem()">×</button>
+  <div class="item-panel" onclick="event.stopPropagation()">
+    <img id="item-image" src="" alt="">
+    <h2 id="item-title"></h2>
+    <p id="item-text"></p>
   </div>
 </div>
 
@@ -854,11 +865,9 @@ body{
   <div class="log-box" id="log-box" onclick="event.stopPropagation()"></div>
 </div>
 
-<!-- BEFORE -->
 <div class="page" id="before-page">
   <section class="before-box">
     <h2>「ELEVATOR HOUSE」を始める前に</h2>
-
     <p>
       以下の内容物（計５点）があるか<br>確認してください。<br><br>
       １:進め方が書かれた用紙<br>
@@ -884,12 +893,11 @@ body{
     </p>
 
     <div style="text-align:center;margin-top:44px;">
-      <button class="next-step-button" onclick="startNovel()">次へ</button>
+      <button class="next-step-button" onclick="startOpeningStory()">次へ</button>
     </div>
   </section>
 </div>
 
-<!-- NOVEL -->
 <div class="page hidden" id="novel-page">
   <div class="novel-stage">
     <div class="novel-window" onclick="nextNovelLine()">
@@ -903,18 +911,12 @@ body{
   </div>
 </div>
 
-<!-- STEP1 -->
 <div class="page hidden" id="step1-page">
   <div class="step-header"><img src="./image/title_step1.png" alt="1st STEP"></div>
 
-  <section class="story">
-    <h1>ELEVATOR</h1>
-    ここは、とある資産家が残した奇妙な建物。<br>
-    この建物には、3台のエレベーターが存在している。
-  </section>
-
-  <section class="section">
-    <div class="image-frame" id="image-step1-riddle"></div>
+  <section class="section step1-riddle-section">
+    <h1 class="step1-riddle-title">資産家の残した暗号</h1>
+    <div class="image-frame step1-riddle-frame" id="image-step1-riddle"></div>
   </section>
 
   <div class="panel">
@@ -922,13 +924,29 @@ body{
   </div>
 </div>
 
-<!-- STEP2 -->
 <div class="page hidden" id="step2-page">
   <div class="step-header"><img src="./image/title_step2.png" alt="2nd STEP"></div>
 
   <section class="story">
-    色々な階に行けるようになった。<br>
-    ＜２つ折り①＞を開き、各階層を調査しよう。
+    右上のメニューボタンから「透明カードの使い方」を見て、<br>
+    謎を解き進めよう！
+  </section>
+
+  <section class="before-box">
+    <p>
+      2nd.STEPと書かれた紙は開いて、2nd.STEPと書かれた紙の入った袋から中身を取り出してください。<br><br>
+      以下の内容物（計５点）があるか<br>確認してください。<br><br>
+      １：２つ折りの紙<br>
+      ２：オレンジで８と書かれた台紙<br>
+      ３：透明カード１（半透明の赤い四角とその右に三角が描かれているもの）<br>
+      ４：透明カード２（黒の四角が描かれているもの）<br>
+      ５：透明カード３（逆さまの人が描かれているもの）<br><br>
+      どれか一つでも不足している場合は<br>
+      お手数ですが、下記窓口まで<br>
+      ご連絡をお願いいたします。<br><br>
+      株式会社エフェックス<br>
+      hanbai_nazo@efex.co.jp
+    </p>
   </section>
 
   <div class="panel">
@@ -952,13 +970,22 @@ body{
   </div>
 </div>
 
-<!-- STEP3 -->
 <div class="page hidden" id="step3-page">
   <div class="step-header"><img src="./image/title_step3.png" alt="3rd STEP"></div>
 
-  <section class="story">
-    残りの階層のロックが解除された。<br>
-    ＜２つ折り②＞を開き、さらに調査を進めよう。
+  <section class="before-box">
+    <p>
+      3rd.STEPと書かれた紙は開いて、3rd.STEPと書かれた紙の入った袋から中身を取り出してください。<br><br>
+      以下の内容物（計３点）があるか<br>確認してください。<br><br>
+      １：２つ折りの紙<br>
+      ２：透明カード４（Pと書かれているもの）<br>
+      ３：透明カード５（ヒと書かれているもの）<br><br>
+      どれか一つでも不足している場合は<br>
+      お手数ですが、下記窓口まで<br>
+      ご連絡をお願いいたします。<br><br>
+      株式会社エフェックス<br>
+      hanbai_nazo@efex.co.jp
+    </p>
   </section>
 
   <div class="panel">
@@ -982,16 +1009,8 @@ body{
   </div>
 </div>
 
-<!-- STEP4 -->
 <div class="page hidden" id="step4-page">
   <div class="step-header"><img src="./image/title_step4.png" alt="4th STEP"></div>
-
-  <section class="story">
-    １階、A階から２号エレベーターへ移動した。<br>
-    エレベーターの中には階数ボタンがなく、代わりにタブレットがはまっている。<br><br>
-    階の様子に映る謎から次の行き先を導き、<br>
-    タブレットに入力して移動用の問題を表示しよう。
-  </section>
 
   <section class="section">
     <div class="floor-title" id="floor-title-step4"></div>
@@ -1013,18 +1032,9 @@ body{
         <button class="tablet-send" onclick="submitTablet4()">送信</button>
       </div>
     </div>
-
-    <div class="fourth-story-box hidden" id="fourth-story-box">
-      <p>E階につくと、目の前に３号エレベーターがあった。</p>
-      <p>「資産がある階にいくには、こちらのタブレットが必要となります」</p>
-      <p>その表示を見たあなたは、タブレットを持って３号エレベーターに乗り込んだ。</p>
-      <p>「こちらは資産があるフロア直通のエレベーターとなります」</p>
-      <button class="next-step-button" onclick="goStep5FromFourth()">5th STEPへ</button>
-    </div>
   </section>
 </div>
 
-<!-- STEP5 -->
 <div class="page hidden" id="step5-page">
   <div class="step-header"><img src="./image/title_step5.png" alt="5th STEP"></div>
 
@@ -1051,48 +1061,8 @@ body{
   </section>
 </div>
 
-<!-- STEP5 STORY -->
-<div class="page hidden" id="step5-story-page">
-  <div class="step-header"><img src="./image/title_step5.png" alt="5th STEP"></div>
-
-  <section class="story">
-    エレベーターは目的の階につき、<br>
-    無事に目的の＜金インゴット＞を入手した。
-  </section>
-
-  <section class="section">
-    <div class="diary">
-      <div class="diary-title">資産家の日記</div>
-      <div class="diary-body">
-        屋上(11F)から見る光景が好きだ。<br><br>
-        屋上へつながるトビラは、私しか開けられないようになっている。<br><br>
-        開ける前に身だしなみをチェックするのが習慣になっている。
-      </div>
-    </div>
-  </section>
-
-  <section class="story">
-    １号エレベーターへ戻り、＜金インゴット＞を監視カメラへ見せると、<br>
-    エレベーターマンから電話がかかってきた。<br><br>
-    「脱出させるというのはウソだ。<br>
-    お前をエレベーターの中から出すつもりはない」<br><br>
-    通話は切れた。<br><br>
-    あなたは、金インゴットで監視カメラを叩き割った。
-  </section>
-
-  <section class="section" style="text-align:center;">
-    <button class="next-step-button" onclick="goLastStep()">LAST STEPへ</button>
-  </section>
-</div>
-
-<!-- LAST STEP -->
 <div class="page hidden" id="last-step-page">
   <div class="step-header"><img src="./image/title_last.png" alt="LAST STEP"></div>
-
-  <section class="story">
-    エレベーターマンの監視から逃れた。<br>
-    資産家の日記に残された情報をもとに、向かうべき階を探そう。
-  </section>
 
   <section class="section">
     <div class="tablet">
@@ -1112,40 +1082,37 @@ body{
   </section>
 </div>
 
-<!-- LAST ACTION -->
 <div class="page hidden" id="last-action-page">
   <div class="step-header"><img src="./image/title_last.png" alt="LAST STEP"></div>
 
-  <section class="story">
-    １１階につき、エレベーターのトビラが開いた。<br>
-    しかし、そこにあるのは壁のみだった。<br><br>
-    今まで手に入れた情報を整理し、とるべき行動を入力せよ。
-  </section>
-
   <section class="section">
+    <div class="floor-title">11階の様子</div>
     <div class="image-frame" id="image-last-wall"></div>
 
-    <div class="answer-area">
+    <div class="answer-area" id="last-object-area">
+      <div class="input-label">気になるものを入力しよう</div>
+      <input id="last-object-answer" placeholder="気になるものを入力">
+      <button onclick="submitLastObject()">送信</button>
+    </div>
+
+    <div class="answer-area hidden" id="last-break-area">
+      <div class="input-label">とるべき行動を入力せよ</div>
       <input id="last-action-answer" placeholder="とるべき行動を入力">
       <button onclick="submitLastAction()">送信</button>
     </div>
   </section>
 </div>
 
-<!-- CLEAR -->
 <div class="page hidden" id="clear-page">
   <div class="step-header"><img src="./image/title_clear.png" alt="CLEAR"></div>
 
-  <section class="story">
-    <div class="clear-title">GAME CLEAR</div>
-    主人公がミラーをノックすると、奥に空間があることがわかった。<br>
-    金インゴットで鏡を割ると、屋外へとつながる道が現れた。<br><br>
-    スマホの電波がつながり、救助を呼ぶことができた。<br>
-    あなたは資産を手に入れ、この奇妙な建物から脱出した。
-  </section>
-
   <section class="section">
     <div class="image-frame" id="image-clear"></div>
+
+    <div class="clear-actions">
+      <a href="#" target="_blank" rel="noopener">アンケートに答える</a>
+      <button onclick="shareResult()">SNSで共有する</button>
+    </div>
   </section>
 </div>
 
@@ -1165,7 +1132,7 @@ body{
 </div>
 
 <script>
-const SAVE_KEY = "elevator_escape_state";
+const SAVE_KEY = "elevator_house_state";
 
 const gameState = {
   currentPage:"before-page",
@@ -1175,65 +1142,117 @@ const gameState = {
   currentStep4Floor:"A",
   currentStep4Mode:"waiting",
   currentStep4Target:null,
-  fourthStoryVisible:false,
-  inventoryUnlocked:false,
   guideUnlocked:false,
   tabletGuideUnlocked:false,
-  novelFinished:false
+  ingotUnlocked:false,
+  diaryUnlocked:false,
+  lastMirrorChecked:false
 };
 
 let audioContext = null;
 let novelIndex = 0;
+let activeStory = [];
+let activeStoryComplete = null;
 
-const novelLines = [
-  {role:"sound", speaker:"効果音", text:"Prrrr...."},
-  {role:"sound", speaker:"効果音", text:"カチャ"},
-  {role:"elevatorman", speaker:"？？？", text:"hello～\n気分はどうだい？"},
-  {role:"elevatorman", speaker:"？？？", text:"レストランで眠ってしまい、起きたらエレベーターの中にいて驚いたろう。"},
-  {role:"elevatorman", speaker:"？？？", text:"キミは謎を解き明かすのが「大好き」だというウワサを耳にしてね。\nなに、少しキミに手伝って欲しいことがあって、勝手にこのエレベーターへ「招待」させてもらったのさ。"},
-  {role:"elevatorman", speaker:"？？？", text:"今、キミが閉じ込められている場所は「エレベーターハウス」と呼ばれる、とある資産家が趣味で建てた奇妙な建物だ。生活スペースはほとんどなく、各フロアには「謎めいた絵」が飾ってある。そして、入れない場所もたくさんあるんだ。"},
-  {role:"elevatorman", speaker:"？？？", text:"さらにこの建物には「資産家の遺産」が隠されていて、\n遺言によると「建物にある３台のエレベーターの謎を全て解き明かせば、遺産の隠し場所へ辿り着くことができる」らしい。"},
-  {role:"elevatorman", speaker:"？？？", text:"「財宝探し」だぜ？ワクワクするだろ？"},
-  {role:"elevatorman", speaker:"？？？", text:"現在、エレベーターは１台も動いていない上に、そこにある謎もオレにはさっぱりわからん。だからキミにオレの代わりをしてもらおうかと思ってね。"},
-  {role:"elevatorman", speaker:"？？？", text:"今オレは、エレベーターの専用コントロールルームにいる。そして、キミがいる１号エレベーターは、オレの手によって出口があるフロアには停まらないようになっている。"},
-  {role:"elevatorman", speaker:"？？？", text:"自力でこの建物から脱出することは不可能ってワケ！\nでも、もしキミが「財宝」を見つけることができれば、解放してやるよ！"},
-  {role:"elevatorman", speaker:"？？？", text:"そう、キミのことはその１号エレベーター内の監視カメラでずっと見ているから、妙なマネをしたらすぐにわかるぞ。"},
-  {role:"elevatorman", speaker:"？？？", text:"オレのことはそうだな・・・"},
-  {role:"elevatorman", speaker:"エレベーターマン", text:"「エレベーターマン」とでも呼んでくれ。"},
-  {role:"elevatorman", speaker:"エレベーターマン", text:"まずは、エレベーターを動かして謎のあるフロアに移動できるようにしよう。遺言と一緒に残されていた暗号を、エレベーターの中に置いておいた。探して、解き明かしてくれ。"},
-  {role:"elevatorman", speaker:"エレベーターマン", text:"遺言と一緒にあった謎を、キミの居るエレベーターに置いておいた。\nその謎を解けば、エレベータを動かして謎のあるフロアに移動できるようになるはずだ。"},
-  {role:"elevatorman", speaker:"エレベーターマン", text:"「財宝」を見つけるまでの間、よろしくな？\nあ・い・ぼ・う！"},
-  {role:"elevatorman", speaker:"エレベーターマン", text:"じゃあ、さっそく「財宝探し」に取りかかってくれ。"},
-  {role:"protagonist", speaker:"主人公", text:"妙なことに巻き込まれてしまった。墓泥棒の片棒を担がないと、脱出させてくれないだって！？\n\nスマートフォンも圏外だ。"},
-  {role:"protagonist", speaker:"主人公", text:"ここはひとまず「エレベーターマン」に逆らわず、さっさと「財宝」を見つけるのが、最善だろうな。"},
-  {role:"narration", speaker:"地の文", text:"１度深呼吸をしてから、キミはエレベーターの中をくまなく探し、ドアの隙間に挟まっていた１枚の暗号を見つけた。"}
-];
+const stories = {
+  opening:[
+    {role:"sound", speaker:"効果音", text:"Prrrr...."},
+    {role:"sound", speaker:"効果音", text:"カチャ"},
+    {role:"elevatorman", speaker:"？？？", text:"HELLO～\n気分はどうだい？"},
+    {role:"elevatorman", speaker:"？？？", text:"レストランで眠ってしまい、起きたらエレベーターの中にいて驚いたろう。"},
+    {role:"elevatorman", speaker:"？？？", text:"キミは謎を解き明かすのが「大好き」だというウワサを耳にしてね。\nなに、少しキミに手伝って欲しいことがあって、勝手にこのエレベーターへ「招待」させてもらったのさ。"},
+    {role:"elevatorman", speaker:"？？？", text:"今、キミが閉じ込められている場所は「エレベーターハウス」と呼ばれる、とある資産家が趣味で建てた奇妙な建物だ。生活スペースはほとんどなく、各フロアには「謎めいた絵」が飾ってある。そして、入れない場所もたくさんあるんだ。"},
+    {role:"elevatorman", speaker:"？？？", text:"さらにこの建物には「資産家の遺産」が隠されていて、\n遺言によると「建物にある３台のエレベーターの謎を全て解き明かせば、遺産の隠し場所へ辿り着くことができる」らしい。"},
+    {role:"elevatorman", speaker:"？？？", text:"「財宝探し」だぜ？ワクワクするだろ？"},
+    {role:"elevatorman", speaker:"？？？", text:"現在、エレベーターは１台も動いていない上に、そこにある謎もオレにはさっぱりわからん。だからキミにオレの代わりをしてもらおうかと思ってね。"},
+    {role:"elevatorman", speaker:"？？？", text:"今オレは、エレベーターの専用コントロールルームにいる。そして、キミがいる１号エレベーターは、オレの手によって出口があるフロアには停まらないようになっている。"},
+    {role:"elevatorman", speaker:"？？？", text:"自力でこの建物から脱出することは不可能ってワケ！\nでも、もしキミが「財宝」を見つけることができれば、解放してやるよ！"},
+    {role:"elevatorman", speaker:"？？？", text:"そう、キミのことはその１号エレベーター内の監視カメラでずっと見ているから、妙なマネをしたらすぐにわかるぞ。"},
+    {role:"elevatorman", speaker:"？？？", text:"オレのことはそうだな・・・"},
+    {role:"elevatorman", speaker:"エレベーターマン", text:"「エレベーターマン」とでも呼んでくれ。"},
+    {role:"elevatorman", speaker:"エレベーターマン", text:"まずは、エレベーターを動かして謎のあるフロアに移動できるようにしよう。遺言と一緒に残されていた暗号を、エレベーターの中に置いておいた。探して、解き明かしてくれ。"},
+    {role:"elevatorman", speaker:"エレベーターマン", text:"遺言と一緒にあった謎を、キミの居るエレベーターに置いておいた。\nその謎を解けば、エレベータを動かして謎のあるフロアに移動できるようになるはずだ。"},
+    {role:"elevatorman", speaker:"エレベーターマン", text:"「財宝」を見つけるまでの間、よろしくな？\nあ・い・ぼ・う！"},
+    {role:"elevatorman", speaker:"エレベーターマン", text:"じゃあ、さっそく「財宝探し」に取りかかってくれ。"},
+    {role:"protagonist", speaker:"キミ", text:"妙なことに巻き込まれてしまった。墓泥棒の片棒を担がないと、脱出させてくれないだって！？\n\nスマートフォンも圏外だ。"},
+    {role:"protagonist", speaker:"キミ", text:"ここはひとまず「エレベーターマン」に逆らわず、さっさと「財宝」を見つけるのが、最善だろうな。"},
+    {role:"narration", speaker:"", text:"１度深呼吸をしてから、キミはエレベーターの中をくまなく探し、ドアの隙間に挟まっていた１枚の暗号を見つけた。"}
+  ],
 
-function playElevatorButtonSound(){
-  try{
-    if(!audioContext){
-      audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    }
+  afterStep1:[
+    {role:"elevatorman", speaker:"エレベーターマン", text:"お！どうやら、一部のフロアへ行けるようになったみたいだな。\nここから先は、各フロアにある謎を解いていく・・・という流れらしい。"},
+    {role:"elevatorman", speaker:"エレベーターマン", text:"今いるフロアの謎を全て解けば、残りのフロアに行くための解除コードがわかるんだ。\n\n解除コードがわかったら、オレがシステムに入力するから呼んでくれ。"},
+    {role:"elevatorman", speaker:"エレベーターマン", text:"フロアの謎を解くには、そのフロアについた時にエレベーターのディスプレイに表示される手がかりが必要らしい。"},
+    {role:"elevatorman", speaker:"エレベーターマン", text:"あと、このエレベーターは「開く」「閉じる」ボタンがないのだけど特に謎とは関係ないらしい。ゆっくり謎が見られるように特注した、という話だ。"},
+    {role:"elevatorman", speaker:"エレベーターマン", text:"オレが知っていることはこれで全て話したぞ。あとは、キミ自身で情報を集めてくれ。\nボタンを押して各フロアへ向かい、謎を解き明かすんだ。"},
+    {role:"narration", speaker:"", text:"そう言ったきり、エレベーターマンからの返事がなくなった。\n・・・・・・ひとまず、今行けるフロアの謎を解くとしよう。"}
+  ],
 
-    const now = audioContext.currentTime;
-    const oscillator = audioContext.createOscillator();
-    const gain = audioContext.createGain();
+  afterStep2:[
+    {role:"narration", speaker:"", text:"キミはエレベーターマンに連絡をして\n解除コードを伝えた。"},
+    {role:"elevatorman", speaker:"エレベーターマン", text:"「テクノロジー」っと・・・\nお！正解みたいだ。\n\n残りのフロアに行けるようになったんじゃないか？\n\n１号エレベーターの謎を解くと、２号エレベーターを動かせるようになるらしい。\n起動パスワードがどこかで見つかったら、こちらに教えてくれ。"},
+    {role:"narration", speaker:"", text:"残りのボタンが反応するようになったみたいだ。\nこの調子で、残りのフロアも調査していこう・・・"}
+  ],
 
-    oscillator.type = "triangle";
-    oscillator.frequency.setValueAtTime(95, now);
-    oscillator.frequency.exponentialRampToValueAtTime(55, now + .08);
+  afterStep3:[
+    {role:"narration", speaker:"", text:"エレベーターマンに２号エレベーターの起動パスワードを伝えるとすぐ、エレベーターのドアが自動で閉まり下降し始めた。"},
+    {role:"elevatorman", speaker:"エレベーターマン", text:"おお、さっきのパスワード正解だったみたいだぞ。\n２号エレベーターが起動した。\n\n今エレベーターが動いると思うが、着いたフロアに２号エレベーターの入り口が隠されているのだろう。"},
+    {role:"elevatorman", speaker:"エレベーターマン", text:"オレはこの１号エレベーターからのみ連絡ができる。\n\nだから、この先は完全にキミ１人で挑戦するってワケだな。"},
+    {role:"elevatorman", speaker:"エレベーターマン", text:"２号エレベーター、３号エレベーターと謎を解き進めていき、資産家が残した「財産」を見つけたら、１号エレベーターに戻ってきてオレに報告してくれ。"},
+    {role:"narration", speaker:"", text:"エレベーターは１階に着くとドアが開いた。\nフロアを見回ってみると、今まで壁だと思っていたところにエレベーターが出現した。\n\n・・・・・・どうやらこれが、２号エレベーターらしい。"},
+    {role:"narration", speaker:"", text:"早速エレベーターに入ってみると、今いるフロアが「A」階と表示されている。"},
+    {role:"narration", speaker:"", text:"そして、奇妙なことにエレベーター内部に行き先ボタンがない。\n代わりに、その場所にはタブレットが嵌め込まれている。"},
+    {role:"narration", speaker:"", text:"タブレットの中にあった説明を読んでみた。\n・・・・・・今回はどうやら指定のキーワードを送信することで、対応するフロアに移動できるらしい。"},
+    {role:"narration", speaker:"", text:"２号エレベーターで移動できるフロアのうち、３号エレベーターにつながっているのは１つのみ。そのフロアに辿りつくことができれば、次に進めるってワケか。"},
+    {role:"narration", speaker:"", text:"２号エレベーターの状況を把握したあなたは、まずは現在の階にある謎を解くことにした。"}
+  ],
 
-    gain.gain.setValueAtTime(.0001, now);
-    gain.gain.exponentialRampToValueAtTime(.28, now + .01);
-    gain.gain.exponentialRampToValueAtTime(.0001, now + .11);
+  afterStep4:[
+    {role:"narration", speaker:"", text:"E階に着き、エレベーターの扉が開くと目の前には別のエレベーターがあった。\n\n無事、３号エレベーターを見つけられたようだ。"},
+    {role:"narration", speaker:"", text:"タブレットに「資産があるフロアに行くには、こちらのタブレットが必要となります」という表示が出たため、タブレットを持って３号エレベーターに乗り込んだ。"},
+    {role:"narration", speaker:"", html:"３号エレベーターに乗り込むと、<br><span class='big-line'>「こちらは資産があるフロア直通のエレベーターとなります」</span><br>というアナウンスが流れた。"},
+    {role:"narration", speaker:"", text:"財宝を見つけ、この奇妙な「エレベーターハウス」から解放されるまであと少し。"}
+  ],
 
-    oscillator.connect(gain);
-    gain.connect(audioContext.destination);
+  afterStep5:[
+    {role:"narration", speaker:"", text:"「コ」の階に着き、エレベーターが開くとそこは\n明らかに今までとは様子が違うフロアだった。"},
+    {role:"narration", speaker:"", text:"ダイニング、書斎、キッチン・・・\nどうやら、資産家はここで生活をしていたみたいだな"},
+    {role:"narration", speaker:"", text:"書斎には資産家が残した日記と金色のインゴットが置かれていた。\nどうやら、「資産」とはこの「金のインゴット」のことだろう。"},
+    {role:"narration", speaker:"", text:"それにしてもこんな妙な謎を残す、資産家ってどんな人物だろう。\n書斎にあった日記も読んでみよう。"},
+    {role:"diary", speaker:"資産家の日記", html:"屋上(11F)から見る光景が好きだ。<br><br>屋上へつながるトビラは、私しか開けられないようになっている。<br><br>開ける前に身だしなみをチェックするのが習慣になっている。"},
+    {role:"narration", speaker:"", text:"金のインゴットと一緒に日記を持って１号エレベーターに戻ると、エレベーターマンから連絡がかかってきた。"},
+    {role:"elevatorman", speaker:"エレベーターマン", text:"何か見つけたのか！\n\nどれどれ・・・おお！それは金じゃないか？\n結構大きいな！結構な金額になりそうだ。"},
+    {role:"elevatorman", speaker:"エレベーターマン", text:"・・・・・・"},
+    {role:"elevatorman", speaker:"エレベーターマン", text:"無事に「財宝」を見つけられた、ということでキミの出番はここまでだ。"},
+    {role:"elevatorman", speaker:"エレベーターマン", text:"前に「財宝」を見つけたら、この「エレベーターハウス」から出してやる、と言ったが、あれは嘘だ。"},
+    {role:"elevatorman", speaker:"エレベーターマン", text:"金のインゴットのことを知っているやつを生かしておくことはできない。\nしばらくすると、エレベーター内に催眠ガスが充満するボタンを押した。"},
+    {role:"elevatorman", speaker:"エレベーターマン", text:"キミが「おねんね」した後に金のインゴットだけ頂戴して、キミは永遠にエレベーターの中、ってことさ。"},
+    {role:"elevatorman", speaker:"エレベーターマン", text:"相棒、ここまで協力してくれてありがとう。\nバイバイ！"},
+    {role:"sound", speaker:"効果音", text:"がちゃん！　ツー、ツー、ツー"},
+    {role:"protagonist", speaker:"キミ", text:"・・・・ちくしょう！「解放してやる」なんで信じるんじゃなかった！"},
+    {role:"protagonist", speaker:"キミ", text:"落ち着け、まだエレベーター内に催眠ガスは充満していないようだ。"},
+    {role:"protagonist", speaker:"キミ", text:"状況を整理して、活路を見出すんだ！"},
+    {role:"protagonist", speaker:"キミ", text:"まずは、監視カメラをどうにかしよう・・・"}
+  ],
 
-    oscillator.start(now);
-    oscillator.stop(now + .12);
-  }catch(e){}
-}
+  mirrorCheck:[
+    {role:"protagonist", speaker:"キミ", text:"鏡をノックしてみよう・・・"},
+    {role:"sound", speaker:"効果音", text:"コン、コン、、、"},
+    {role:"narration", speaker:"", text:"音が響く・・・どうやら、鏡の裏は空洞になっているようだ。"}
+  ],
+
+  ending:[
+    {role:"narration", speaker:"", text:"金のインゴットを振りかぶって、思いっきり鏡に叩きつけた！"},
+    {role:"sound", speaker:"効果音", text:"ガッシャーン！！"},
+    {role:"narration", speaker:"", text:"鏡は粉々に砕け、その後ろにある扉があらわになった。"},
+    {role:"narration", speaker:"", text:"恐る恐るドアノブに手をかけたが、鍵はかかっていないようだ。\n\n思い切ってそのまま扉を開くと、そこは屋上だった。"},
+    {role:"narration", speaker:"", text:"エレベーターから外に出た。\n・・・・・・ずっと閉鎖的は空間にいたので、新鮮か空気が美味しい。"},
+    {role:"narration", speaker:"", text:"ふとスマートフォンを見てみると、電波がつながっているのに気がついた。"},
+    {role:"narration", speaker:"", text:"慌てて警察に電話をかけ、しどろもどろに状況を説明した。"},
+    {role:"narration", speaker:"", text:"電話を切り、しばらくするとヘリコプターが近づいてくる音がした。\nどうやら、助かったみたいだ。"},
+    {role:"narration", speaker:"", text:"・・・・とんでもない「財宝探し」に巻き込まれたものだ。\n金のインゴットを回収して、救助に来たヘリコプターに乗り込んだ。\nこれでエレベーターマンに「財宝」が渡ることはないだろう。"}
+  ]
+};
 
 function saveState(){
   sessionStorage.setItem(SAVE_KEY, JSON.stringify(gameState));
@@ -1245,9 +1264,7 @@ function loadState(){
 
   try{
     Object.assign(gameState, JSON.parse(saved));
-  }catch(e){
-    console.warn("保存データの読み込みに失敗しました", e);
-  }
+  }catch(e){}
 }
 
 function normalize(str){
@@ -1256,6 +1273,18 @@ function normalize(str){
     .replace(/[Ａ-Ｚａ-ｚ０-９]/g, s => String.fromCharCode(s.charCodeAt(0)-65248))
     .replace(/[ぁ-ん]/g, s => String.fromCharCode(s.charCodeAt(0)+0x60))
     .replace(/\s/g,"");
+}
+
+function forceScrollTop(){
+  window.scrollTo(0,0);
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+
+  requestAnimationFrame(() => {
+    window.scrollTo(0,0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  });
 }
 
 function setImage(id,path,label=""){
@@ -1311,18 +1340,6 @@ function showTemporaryMessage(id,text){
   },1400);
 }
 
-function forceScrollTop(){
-  window.scrollTo(0,0);
-  document.documentElement.scrollTop = 0;
-  document.body.scrollTop = 0;
-
-  requestAnimationFrame(() => {
-    window.scrollTo(0,0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  });
-}
-
 function toggleMenu(){
   document.getElementById("menu-panel").classList.toggle("show");
   document.getElementById("menu-overlay").classList.toggle("show");
@@ -1346,8 +1363,10 @@ function showPage(id, shouldSave = true){
   page.classList.remove("hidden");
   closeMenu();
 
-  if(id === "step4-page"){
-    renderStep4();
+  if(id === "step4-page") renderStep4();
+
+  if(id === "last-action-page"){
+    document.getElementById("last-break-area").classList.toggle("hidden", !gameState.lastMirrorChecked);
   }
 
   if(shouldSave){
@@ -1383,9 +1402,7 @@ function closeGuide(){
 }
 
 function closeGuideByOutside(event){
-  if(event.target.id === "guide-overlay"){
-    closeGuide();
-  }
+  if(event.target.id === "guide-overlay") closeGuide();
 }
 
 function openTabletGuide(){
@@ -1398,66 +1415,49 @@ function closeTabletGuide(){
 }
 
 function closeTabletGuideByOutside(event){
-  if(event.target.id === "tablet-guide-overlay"){
-    closeTabletGuide();
-  }
+  if(event.target.id === "tablet-guide-overlay") closeTabletGuide();
 }
 
-function openInventory(){
+function openItem(type){
   closeMenu();
-  document.getElementById("inventory-overlay").classList.add("show");
+
+  const data = {
+    ingot:{
+      title:"金のインゴット",
+      image:imagePaths.itemIngot,
+      text:"資産家が残した財産と思われる、ずっしりと重い金色のインゴット。かなり頑丈そうだ。"
+    },
+    diary:{
+      title:"資産家の日記",
+      image:imagePaths.itemDiary,
+      text:"資産家が書き残した日記。屋上と鏡について、気になる記述がある。"
+    }
+  }[type];
+
+  if(!data) return;
+
+  document.getElementById("item-title").innerText = data.title;
+  document.getElementById("item-text").innerText = data.text;
+  document.getElementById("item-image").src = data.image;
+  document.getElementById("item-overlay").classList.add("show");
 }
 
-function closeInventory(){
-  document.getElementById("inventory-overlay").classList.remove("show");
+function closeItem(){
+  document.getElementById("item-overlay").classList.remove("show");
 }
 
-function closeInventoryByOutside(event){
-  if(event.target.id === "inventory-overlay"){
-    closeInventory();
-  }
-}
-
-function startNovel(){
-  novelIndex = 0;
-  unlockNav("nav-step1");
-  showPage("novel-page");
-  renderNovelLine();
-}
-
-function renderNovelLine(){
-  const line = novelLines[novelIndex];
-
-  if(!line){
-    gameState.novelFinished = true;
-    saveState();
-    showPage("step1-page");
-    return;
-  }
-
-  const speaker = document.getElementById("novel-speaker");
-  const text = document.getElementById("novel-text");
-
-  speaker.className = "novel-speaker";
-  speaker.classList.add(`role-${line.role || "narration"}`);
-
-  speaker.innerText = line.speaker;
-  text.innerText = line.text;
-}
-
-function nextNovelLine(){
-  novelIndex += 1;
-  renderNovelLine();
+function closeItemByOutside(event){
+  if(event.target.id === "item-overlay") closeItem();
 }
 
 function openLog(){
   const logBox = document.getElementById("log-box");
-  const lines = novelLines.slice(0, Math.min(novelIndex + 1, novelLines.length));
+  const lines = activeStory.slice(0, Math.min(novelIndex + 1, activeStory.length));
 
   logBox.innerHTML = lines.map(line => `
     <div class="log-entry">
-      <div class="log-speaker">${line.speaker}</div>
-      <div>${line.text.replace(/\n/g,"<br>")}</div>
+      <div class="log-speaker">${line.speaker || ""}</div>
+      <div>${(line.html || line.text || "").replace(/\n/g,"<br>")}</div>
     </div>
   `).join("");
 
@@ -1469,9 +1469,49 @@ function closeLog(){
 }
 
 function closeLogByOutside(event){
-  if(event.target.id === "log-overlay"){
-    closeLog();
+  if(event.target.id === "log-overlay") closeLog();
+}
+
+function runStory(lines,onComplete){
+  activeStory = lines;
+  activeStoryComplete = onComplete || null;
+  novelIndex = 0;
+  showPage("novel-page", false);
+  renderNovelLine();
+}
+
+function renderNovelLine(){
+  const line = activeStory[novelIndex];
+
+  if(!line){
+    const callback = activeStoryComplete;
+    activeStoryComplete = null;
+    if(callback) callback();
+    return;
   }
+
+  const speaker = document.getElementById("novel-speaker");
+  const text = document.getElementById("novel-text");
+
+  speaker.className = "novel-speaker";
+  speaker.classList.add(`role-${line.role || "narration"}`);
+  speaker.innerText = line.speaker || "";
+
+  if(line.html){
+    text.innerHTML = line.html;
+  }else{
+    text.innerText = line.text || "";
+  }
+}
+
+function nextNovelLine(){
+  novelIndex += 1;
+  renderNovelLine();
+}
+
+function startOpeningStory(){
+  unlockNav("nav-step1");
+  runStory(stories.opening, () => showPage("step1-page"));
 }
 
 function openMessageModal(text, callback){
@@ -1492,6 +1532,32 @@ function closeMessageModal(){
 
   if(callback === "showStep2") showPage("step2-page");
   if(callback === "showStep4") showPage("step4-page");
+}
+
+function playElevatorButtonSound(){
+  try{
+    if(!audioContext){
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    const now = audioContext.currentTime;
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    oscillator.type = "triangle";
+    oscillator.frequency.setValueAtTime(95, now);
+    oscillator.frequency.exponentialRampToValueAtTime(55, now + .08);
+
+    gain.gain.setValueAtTime(.0001, now);
+    gain.gain.exponentialRampToValueAtTime(.28, now + .01);
+    gain.gain.exponentialRampToValueAtTime(.0001, now + .11);
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+
+    oscillator.start(now);
+    oscillator.stop(now + .12);
+  }catch(e){}
 }
 
 const elevatorOrder = [8,9,6,7,4,5,2,3,0,1];
@@ -1523,7 +1589,10 @@ const imagePaths = {
   step5RiddleKo:"./image/step5_riddle_ko.png",
   lastRiddle11:"./image/last_riddle_11.png",
   lastWall:"./image/last_wall.png",
-  clear:"./image/clear.png"
+  clear:"./image/clear.png",
+
+  itemIngot:"./image/item_ingot.png",
+  itemDiary:"./image/item_diary.png"
 };
 
 function createButtons(targetId,enabledFloors,callback){
@@ -1582,11 +1651,11 @@ function checkStep1(){
 
   if(JSON.stringify(activeNumbers) === JSON.stringify([2,4,6,9])){
     unlockNav("nav-step2");
-    openUnlockModal([4,5,6,8,9],"step2-page");
+    openUnlockModal([4,5,6,8,9],"afterStep1");
   }
 }
 
-function openUnlockModal(floors,nextPage){
+function openUnlockModal(floors,nextAction){
   const modal = document.getElementById("unlock-modal");
   const floorsWrap = document.getElementById("modal-floors");
 
@@ -1604,20 +1673,21 @@ function openUnlockModal(floors,nextPage){
   document.getElementById("modal-next").onclick = () => {
     modal.classList.remove("show");
 
-    if(nextPage === "step2-page"){
+    if(nextAction === "afterStep1"){
       document.getElementById("guide-button").classList.remove("hidden");
       gameState.guideUnlocked = true;
       saveState();
 
-      openMessageModal(
-        "「透明カードの使い方」がメニューに追加されました。",
-        "showStep2"
-      );
-
+      runStory(stories.afterStep1, () => {
+        openMessageModal("「透明カードの使い方」がメニューに追加されました。","showStep2");
+      });
       return;
     }
 
-    showPage(nextPage);
+    if(nextAction === "afterStep2"){
+      runStory(stories.afterStep2, () => showPage("step3-page"));
+      return;
+    }
   };
 }
 
@@ -1655,15 +1725,9 @@ function submitStep2FloorAnswer(){
 function submitStep2Password(){
   const value = normalize(document.getElementById("step2-password").value);
 
-  const technologyAnswers = [
-    "テクノロジー",
-    "てくのろじー",
-    "technology"
-  ];
-
-  if(technologyAnswers.map(normalize).includes(value)){
+  if(["テクノロジー","てくのろじー","technology"].map(normalize).includes(value)){
     unlockNav("nav-step3");
-    openUnlockModal([0,1,2,3,7],"step3-page");
+    openUnlockModal([0,1,2,3,7],"afterStep2");
   }
 }
 
@@ -1708,10 +1772,9 @@ function submitStep3Password(){
     gameState.tabletGuideUnlocked = true;
     saveState();
 
-    openMessageModal(
-      "「タブレット端末の使い方」がメニューに追加されました。",
-      "showStep4"
-    );
+    runStory(stories.afterStep3, () => {
+      openMessageModal("メニュー内に「タブレット端末の使い方」ボタンが追加されました。","showStep4");
+    });
   }
 }
 
@@ -1742,11 +1805,6 @@ function syncStep4State(){
 
 function renderStep4(){
   syncStep4State();
-
-  const storyBox = document.getElementById("fourth-story-box");
-  if(storyBox){
-    storyBox.classList.toggle("hidden", !gameState.fourthStoryVisible);
-  }
 
   setFloorTitle("floor-title-step4",`${currentStep4Floor}階の様子`);
 
@@ -1800,21 +1858,17 @@ function moveStep4ToFloor(floor){
   setImage("floor-image-step4",getStep4FloorImage(floor),`${floor}階の様子`);
   setPlaceholder("tablet-image-4","行きたい階を入力せよ。");
 
-  clearTablet4();
+  document.getElementById("floor-input-4").value = "";
+  document.getElementById("answer-input-4").value = "";
 }
 
 function finishFourthStep(){
   moveStep4ToFloor("E");
-
-  gameState.fourthStoryVisible = true;
-  saveState();
-
-  const storyBox = document.getElementById("fourth-story-box");
-  if(storyBox){
-    storyBox.classList.remove("hidden");
-  }
-
   unlockNav("nav-step5");
+
+  runStory(stories.afterStep4, () => {
+    showPage("step5-page");
+  });
 }
 
 function handleStep4InvalidFloor(floorInput){
@@ -1888,16 +1942,6 @@ function submitTablet4(){
   }
 }
 
-function clearTablet4(){
-  document.getElementById("floor-input-4").value = "";
-  document.getElementById("answer-input-4").value = "";
-}
-
-function goStep5FromFourth(){
-  unlockNav("nav-step5");
-  showPage("step5-page");
-}
-
 function handleStep5InvalidFloor(floorInput){
   const inaccessibleFloors = ["ア","イ","ウ","エ","オ","カ","キ","ク","ケ"];
 
@@ -1923,22 +1967,24 @@ function submitStep5(){
     setImage("tablet-image-5",imagePaths.step5RiddleKo,"「こ」の階");
 
     if(["かくめい","カクメイ","革命"].map(normalize).includes(answer)){
-      gameState.inventoryUnlocked = true;
+      unlockNav("nav-last");
+
+      gameState.ingotUnlocked = true;
+      gameState.diaryUnlocked = true;
       saveState();
 
-      showPage("step5-story-page");
-      document.getElementById("inventory-button").classList.remove("hidden");
+      document.getElementById("item-ingot-button").classList.remove("hidden");
+      document.getElementById("item-diary-button").classList.remove("hidden");
+
+      runStory(stories.afterStep5, () => {
+        showPage("last-step-page");
+      });
     }
 
     return;
   }
 
   handleStep5InvalidFloor(floor);
-}
-
-function goLastStep(){
-  unlockNav("nav-last");
-  showPage("last-step-page");
 }
 
 function submitLastRiddle(){
@@ -1960,6 +2006,19 @@ function submitLastRiddle(){
   }
 }
 
+function submitLastObject(){
+  const value = normalize(document.getElementById("last-object-answer").value);
+
+  if(["かがみ","カガミ","鏡","ミラー","みらー"].map(normalize).includes(value)){
+    gameState.lastMirrorChecked = true;
+    saveState();
+
+    runStory(stories.mirrorCheck, () => {
+      showPage("last-action-page");
+    });
+  }
+}
+
 function submitLastAction(){
   const value = normalize(document.getElementById("last-action-answer").value);
 
@@ -1969,11 +2028,27 @@ function submitLastAction(){
     "かがみインゴットわる",
     "鏡インゴット割る",
     "インゴットでかがみをわる",
-    "インゴットで鏡を割る"
+    "インゴットで鏡を割る",
+    "ミラーをインゴットでわる",
+    "ミラーをインゴットで割る"
   ].map(normalize);
 
   if(correctAnswers.includes(value)){
-    showPage("clear-page");
+    runStory(stories.ending, () => {
+      showPage("clear-page");
+    });
+  }
+}
+
+function shareResult(){
+  const text = "ELEVATOR HOUSEをクリアしました！";
+  const url = location.href;
+
+  if(navigator.share){
+    navigator.share({text,url}).catch(()=>{});
+  }else{
+    const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+    window.open(shareUrl,"_blank");
   }
 }
 
@@ -1993,7 +2068,7 @@ function initializeImages(){
   setPlaceholder("tablet-image-5","行き先を入力してください");
   setPlaceholder("tablet-image-last","行き先を入力してください");
 
-  setImage("image-last-wall",imagePaths.lastWall,"11階");
+  setImage("image-last-wall",imagePaths.lastWall,"11階の様子");
   setImage("image-clear",imagePaths.clear,"GAME CLEAR");
 }
 
@@ -2013,8 +2088,12 @@ function restoreGame(){
     document.getElementById("tablet-guide-button").classList.remove("hidden");
   }
 
-  if(gameState.inventoryUnlocked){
-    document.getElementById("inventory-button").classList.remove("hidden");
+  if(gameState.ingotUnlocked){
+    document.getElementById("item-ingot-button").classList.remove("hidden");
+  }
+
+  if(gameState.diaryUnlocked){
+    document.getElementById("item-diary-button").classList.remove("hidden");
   }
 
   if(gameState.selectedStep2Floor !== null){
@@ -2054,6 +2133,7 @@ function bindEnterKeys(){
     "floor-input-5",
     "answer-input-last",
     "floor-input-last",
+    "last-object-answer",
     "last-action-answer"
   ].forEach(id => {
     const el = document.getElementById(id);
@@ -2076,6 +2156,10 @@ function bindEnterKeys(){
 
         if(id === "answer-input-last" || id === "floor-input-last"){
           submitLastRiddle();
+        }
+
+        if(id === "last-object-answer"){
+          submitLastObject();
         }
 
         if(id === "last-action-answer"){
