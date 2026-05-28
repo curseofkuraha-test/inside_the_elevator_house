@@ -366,7 +366,8 @@ body{
 }
 
 .tablet-top{
-  display:flex;
+  display:grid;
+  grid-template-columns:100px 1fr auto;
   align-items:center;
   gap:16px;
   padding:20px 10px 16px;
@@ -380,6 +381,67 @@ body{
   background:#070808;
   color:white;
   text-align:center;
+  font-size:28px;
+}
+
+.tablet-label{
+  text-align:center;
+  font-weight:700;
+}
+
+.tablet-floor-badge{
+  width:50px;
+  height:50px;
+  border-radius:6px;
+  background:#111;
+  border:1px solid rgba(255,255,255,.24);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.tablet-floor-badge img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
+
+.tablet-floor-badge.empty{
+  opacity:.28;
+}
+
+.tablet-screen{
+  width:100%;
+  aspect-ratio:16 / 9;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.12);
+  background:#090b0d;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.tablet-screen .image-frame{
+  width:100%;
+  height:100%;
+  max-width:none;
+  border:none;
+  border-radius:0;
+  margin:0;
+}
+
+.tablet-screen .image-frame img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.tablet-screen .image-placeholder{
+  min-height:0;
+  height:100%;
   font-size:28px;
 }
 
@@ -410,12 +472,6 @@ body{
   font-size:18px;
   font-weight:700;
   cursor:pointer;
-}
-
-.tablet .image-frame{
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,.12);
-  background:#090b0d;
 }
 
 .clear-actions{
@@ -831,10 +887,33 @@ body{
   .step1-riddle-title,.step-title-large{font-size:34px;letter-spacing:3px;}
   .step1-riddle-frame{max-width:92vw;}
   .tablet{border-width:7px;border-radius:24px;padding:18px;}
-  .tablet-top{align-items:flex-start;flex-direction:column;}
+  .tablet-top{
+    grid-template-columns:74px 1fr 44px;
+    gap:10px;
+    padding:20px 6px 16px;
+  }
+  .tablet-floor-input{
+    width:74px;
+    height:52px;
+    font-size:25px;
+  }
+  .tablet-floor-badge{
+    width:44px;
+    height:44px;
+  }
+  .tablet-label{
+    font-size:15px;
+  }
+  .tablet-screen{
+    aspect-ratio:4 / 5;
+  }
   .tablet-bottom{flex-direction:column;}
   .tablet-send{width:100%;height:56px;}
-  .tablet-answer-input{width:100%;}
+  .tablet-answer-input{
+    width:100%;
+    height:72px;
+    font-size:21px;
+  }
   .modal-title{font-size:22px;}
   .guide-close{top:14px;right:14px;width:50px;height:50px;}
   .novel-stage{min-height:calc(100vh - 72px);}
@@ -1072,10 +1151,14 @@ body{
     <div class="tablet">
       <div class="tablet-top">
         <input id="floor-input-4" class="tablet-floor-input" maxlength="2">
-        <span>階へ行くための手がかり</span>
+        <div class="tablet-label">階へ行くための手がかり</div>
+        <div class="tablet-floor-badge empty" id="tablet-floor-badge-4"></div>
       </div>
 
-      <div class="image-frame" id="tablet-image-4"></div>
+      <div class="tablet-screen">
+        <div class="image-frame" id="tablet-image-4"></div>
+      </div>
+
       <div class="tablet-message" id="tablet-message-4"></div>
 
       <div class="tablet-bottom">
@@ -1102,10 +1185,14 @@ body{
     <div class="tablet">
       <div class="tablet-top">
         <input id="floor-input-5" class="tablet-floor-input" maxlength="2">
-        <span>階へ行くための手がかり</span>
+        <div class="tablet-label">階へ行くための手がかり</div>
+        <div class="tablet-floor-badge empty" id="tablet-floor-badge-5"></div>
       </div>
 
-      <div class="image-frame" id="tablet-image-5"></div>
+      <div class="tablet-screen">
+        <div class="image-frame" id="tablet-image-5"></div>
+      </div>
+
       <div class="tablet-message" id="tablet-message-5"></div>
 
       <div class="tablet-bottom">
@@ -1120,7 +1207,7 @@ body{
   <div class="step-header"><img src="./image/title_last.png" alt="LAST STEP"></div>
 
   <section class="section">
-    <h1 class="step-title-large">キミは１号エレベーターの中にいる。</h1>
+    <h1 class="step-title-large">あなたは１号エレベーターの中にいる。</h1>
     <div class="story">どうにかして、生き延びる方法を考えよ！</div>
   </section>
 
@@ -1128,10 +1215,14 @@ body{
     <div class="tablet">
       <div class="tablet-top">
         <input id="floor-input-last" class="tablet-floor-input" maxlength="2">
-        <span>階へ行くための手がかり</span>
+        <div class="tablet-label">階へ行くための手がかり</div>
+        <div class="tablet-floor-badge empty" id="tablet-floor-badge-last"></div>
       </div>
 
-      <div class="image-frame" id="tablet-image-last"></div>
+      <div class="tablet-screen">
+        <div class="image-frame" id="tablet-image-last"></div>
+      </div>
+
       <div class="tablet-message" id="tablet-message-last"></div>
 
       <div class="tablet-bottom">
@@ -1191,6 +1282,13 @@ body{
   </div>
 </div>
 
+<div class="modal" id="move-modal">
+  <div class="modal-card">
+    <div class="modal-title" id="move-modal-text"></div>
+    <button class="modal-next" onclick="closeMoveModal()">次へ</button>
+  </div>
+</div>
+
 <div class="modal" id="camera-modal">
   <div class="modal-card">
     <div class="modal-title">監視カメラを壊しますか？</div>
@@ -1221,6 +1319,7 @@ let audioContext = null;
 let novelIndex = 0;
 let activeStory = [];
 let activeStoryComplete = null;
+let moveModalCallback = null;
 
 const stories = {
   opening:[
@@ -1266,14 +1365,13 @@ const stories = {
     {role:"protagonist", speaker:"キミ", text:"エレベーターマンに２号エレベーターの起動パスワードを伝えるとすぐ、エレベーターのドアが自動で閉まり下降し始めた。"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"おお、さっきのパスワード正解だったみたいだぞ。\n２号エレベーターが起動した。\n\n今エレベーターが動いていると思うが、着いたフロアに２号エレベーターの入り口が隠されているのだろう。"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"オレはこの１号エレベーターからのみ連絡ができる。\n\nだから、この先は完全にキミ１人で挑戦するってワケだな。"},
-    {role:"elevatorman", speaker:"エレベーターマン", text:"２号エレベーター、３号エレベーターと謎を解き進めていき、資産家が残した「財宝」を見つけたら、１号エレベーターに戻ってきてオレに報告してくれ。"},
+    {role:"elevatorman", speaker:"エレベーターマン", text:"２号エレベーター、３号エレベーターと謎を解き進めていき、資産家が残した「財産」を見つけたら、１号エレベーターに戻ってきてオレに報告してくれ。"},
     {role:"protagonist", speaker:"キミ", text:"エレベーターは１階に着くとドアが開いた。\nフロアを見回ってみると、今まで壁だと思っていたところにエレベーターが出現した。\n\n・・・・・・どうやらこれが、２号エレベーターらしい。"},
     {role:"protagonist", speaker:"キミ", text:"早速エレベーターに入ってみると、今いるフロアが「A」階と表示されている。"},
     {role:"protagonist", speaker:"キミ", text:"そして、奇妙なことにエレベーター内部に行き先ボタンがない。\n代わりに、その場所にはタブレットが嵌め込まれている。"},
-    {role:"protagonist", speaker:"キミ", html:"タブレットの中にあった説明を読んでみた。\n・・・・・・今回はどうやら<span class='big-line'>指定のキーワードを送信することで、対応するフロアに移動できる</span>らしい。"},
-    {role:"protagonist", speaker:"キミ", text:"２号エレベーターで移動できるフロアのうち、３号エレベーターにつながっているのは１つのみ。"},
-    {role:"protagonist", speaker:"キミ", text:"どのフロアに行けば良いかわからないが、この謎を解いていけば、いつか目的のフロアにたどりつくということか・・・"},
-    {role:"protagonist", speaker:"キミ", text:"２号エレベーターの状況を把握したキミは、まずは現在のフロアにある謎を解くことにした。"}
+    {role:"protagonist", speaker:"キミ", html:"タブレットの中にあった説明を読んでみた。<br>・・・・・・今回はどうやら<span class='big-line'>指定のキーワードを送信することで、対応するフロアに移動できる</span>らしい。"},
+    {role:"protagonist", speaker:"キミ", text:"２号エレベーターで移動できるフロアのうち、３号エレベーターにつながっているのは１つのみ。そのフロアに辿りつくことができれば、次に進めるってワケか。"},
+    {role:"protagonist", speaker:"キミ", text:"２号エレベーターの状況を把握したあなたは、まずは現在の階にある謎を解くことにした。"}
   ],
   afterStep4:[
     {role:"protagonist", speaker:"キミ", text:"E階に着き、エレベーターの扉が開くと目の前には別のエレベーターがあった。\n\n無事、３号エレベーターを見つけられたようだ。"},
@@ -1340,6 +1438,14 @@ function normalize(str){
     .replace(/\s/g,"");
 }
 
+function debounce(fn, delay = 300){
+  let timer = null;
+  return function(...args){
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
+
 function forceScrollTop(){
   window.scrollTo(0,0);
   document.documentElement.scrollTop = 0;
@@ -1401,6 +1507,20 @@ function setTabletMessage(id,text){
   el.innerText = text || "";
 }
 
+function setTabletFloorBadge(id,path,label=""){
+  const el = document.getElementById(id);
+  if(!el) return;
+
+  if(!path){
+    el.innerHTML = "";
+    el.classList.add("empty");
+    return;
+  }
+
+  el.classList.remove("empty");
+  el.innerHTML = `<img src="${path}" alt="${label}" onerror="this.style.display='none';">`;
+}
+
 function showTemporaryMessage(id,text){
   const el = document.getElementById(id);
   if(!el) return;
@@ -1415,7 +1535,6 @@ function showTemporaryMessage(id,text){
 function setGuideCardImage(){
   const img = document.getElementById("guide-card-image");
   if(!img) return;
-
   const isSp = window.matchMedia("(max-width:700px)").matches;
   img.src = isSp
     ? "./image/guide_transparent_card_sp.png"
@@ -1495,7 +1614,7 @@ function openItem(type){
     ingot:{
       title:"金のインゴット",
       image:imagePaths.itemIngot,
-      text:"資産家が残した財宝と思われる、ずっしりと重い金色のインゴット。かなり頑丈そうだ。"
+      text:"資産家が残した財産と思われる、ずっしりと重い金色のインゴット。かなり頑丈そうだ。"
     },
     diary:{
       title:"資産家の日記",
@@ -1607,6 +1726,22 @@ function closeMessageModal(){
   if(callback === "showStep4") showPage("step4-page");
 }
 
+function openMoveModal(floorLabel, callback){
+  const modal = document.getElementById("move-modal");
+  const text = document.getElementById("move-modal-text");
+  text.innerText = `「${floorLabel}」階に移動した。`;
+  moveModalCallback = callback || null;
+  modal.classList.add("show");
+}
+
+function closeMoveModal(){
+  const modal = document.getElementById("move-modal");
+  modal.classList.remove("show");
+  const callback = moveModalCallback;
+  moveModalCallback = null;
+  if(callback) callback();
+}
+
 function openCameraModal(){
   document.getElementById("camera-modal").classList.add("show");
 }
@@ -1670,7 +1805,13 @@ const imagePaths = {
   clear:"./image/clear.png",
 
   itemIngot:"./image/item_ingot.png",
-  itemDiary:"./image/item_diary.png"
+  itemDiary:"./image/item_diary.png",
+
+  tabletFloorJ:"./image/tablet_floor_j.png",
+  tabletFloorH:"./image/tablet_floor_h.png",
+  tabletFloorE:"./image/tablet_floor_e.png",
+  tabletFloorKo:"./image/tablet_floor_ko.png",
+  tabletFloor11:"./image/tablet_floor_11.png"
 };
 
 function createButtons(targetId,enabledFloors,callback){
@@ -1849,6 +1990,13 @@ function getStep4RiddleImage(target){
   return "";
 }
 
+function getStep4BadgeImage(target){
+  if(target === "J") return imagePaths.tabletFloorJ;
+  if(target === "H") return imagePaths.tabletFloorH;
+  if(target === "E") return imagePaths.tabletFloorE;
+  return "";
+}
+
 function syncStep4State(){
   currentStep4Floor = gameState.currentStep4Floor || "A";
   currentStep4Mode = gameState.currentStep4Mode || "waiting";
@@ -1859,21 +2007,29 @@ function renderStep4(){
   syncStep4State();
   setFloorTitle("floor-title-step4",`${currentStep4Floor}階の様子`);
   setImage("floor-image-step4",getStep4FloorImage(currentStep4Floor),`${currentStep4Floor}階の様子`);
+
   if(currentStep4Mode === "riddle" && currentStep4Target){
     setImage("tablet-image-4",getStep4RiddleImage(currentStep4Target),`${currentStep4Target}階へ行くための問題`);
+    setTabletFloorBadge("tablet-floor-badge-4",getStep4BadgeImage(currentStep4Target),`${currentStep4Target}階表示`);
   }else{
     setPlaceholder("tablet-image-4","行きたい階を入力せよ。");
+    setTabletFloorBadge("tablet-floor-badge-4","","");
   }
 }
 
 function setStep4Riddle(target){
+  if(currentStep4Mode === "riddle" && currentStep4Target === target) return;
+
   currentStep4Mode = "riddle";
   currentStep4Target = target;
   gameState.currentStep4Mode = "riddle";
   gameState.currentStep4Target = target;
+
   setTabletMessage("tablet-message-4","");
   saveState();
+
   setImage("tablet-image-4",getStep4RiddleImage(target),`${target}階へ行くための問題`);
+  setTabletFloorBadge("tablet-floor-badge-4",getStep4BadgeImage(target),`${target}階表示`);
 }
 
 function moveStep4ToFloor(floor){
@@ -1883,11 +2039,15 @@ function moveStep4ToFloor(floor){
   gameState.currentStep4Floor = floor;
   gameState.currentStep4Mode = "waiting";
   gameState.currentStep4Target = null;
+
   setTabletMessage("tablet-message-4","");
   saveState();
+
   setFloorTitle("floor-title-step4",`${floor}階の様子`);
   setImage("floor-image-step4",getStep4FloorImage(floor),`${floor}階の様子`);
   setPlaceholder("tablet-image-4","行きたい階を入力せよ。");
+  setTabletFloorBadge("tablet-floor-badge-4","","");
+
   document.getElementById("floor-input-4").value = "";
   document.getElementById("answer-input-4").value = "";
 }
@@ -1901,18 +2061,22 @@ function finishFourthStep(){
 function handleStep4InvalidFloor(floorInput){
   const inaccessibleFloors = ["b","c","d","f","g","i"];
   const progressionFloors = ["a","j","h","e"];
+
   if(inaccessibleFloors.includes(floorInput)){
     setTabletMessage("tablet-message-4","その階に移動することはできません。");
     return true;
   }
+
   if(progressionFloors.includes(floorInput)){
     setTabletMessage("tablet-message-4","その階にはまだ移動することはできません。");
     return true;
   }
+
   if(floorInput){
     setTabletMessage("tablet-message-4","その階は存在しません。");
     return true;
   }
+
   return false;
 }
 
@@ -1926,8 +2090,11 @@ function submitTablet4(){
       else handleStep4InvalidFloor(floorInput);
       return;
     }
+
     if(currentStep4Mode === "riddle" && currentStep4Target === "J"){
-      if(["よくばり","ヨクバリ","欲張り"].map(normalize).includes(answerInput)) moveStep4ToFloor("J");
+      if(["よくばり","ヨクバリ","欲張り"].map(normalize).includes(answerInput)){
+        openMoveModal("J", () => moveStep4ToFloor("J"));
+      }
     }
     return;
   }
@@ -1938,8 +2105,11 @@ function submitTablet4(){
       else handleStep4InvalidFloor(floorInput);
       return;
     }
+
     if(currentStep4Mode === "riddle" && currentStep4Target === "H"){
-      if(["よる","ヨル","夜"].map(normalize).includes(answerInput)) moveStep4ToFloor("H");
+      if(["よる","ヨル","夜"].map(normalize).includes(answerInput)){
+        openMoveModal("H", () => moveStep4ToFloor("H"));
+      }
     }
     return;
   }
@@ -1950,23 +2120,62 @@ function submitTablet4(){
       else handleStep4InvalidFloor(floorInput);
       return;
     }
+
     if(currentStep4Mode === "riddle" && currentStep4Target === "E"){
-      if(["めいはく","メイハク","明白"].map(normalize).includes(answerInput)) finishFourthStep();
+      if(["めいはく","メイハク","明白"].map(normalize).includes(answerInput)){
+        openMoveModal("E", () => finishFourthStep());
+      }
     }
   }
 }
 
+const handleTablet4FloorTyping = debounce(() => {
+  const input = document.getElementById("floor-input-4");
+  if(!input) return;
+
+  const value = normalize(input.value);
+  if(!value) return;
+
+  if(currentStep4Mode !== "waiting") return;
+
+  if(currentStep4Floor === "A"){
+    if(value === "j") setStep4Riddle("J");
+    else handleStep4InvalidFloor(value);
+    return;
+  }
+
+  if(currentStep4Floor === "J"){
+    if(value === "h") setStep4Riddle("H");
+    else handleStep4InvalidFloor(value);
+    return;
+  }
+
+  if(currentStep4Floor === "H"){
+    if(value === "e") setStep4Riddle("E");
+    else handleStep4InvalidFloor(value);
+  }
+},350);
+
 function handleStep5InvalidFloor(floorInput){
   const inaccessibleFloors = ["ア","イ","ウ","エ","オ","カ","キ","ク","ケ"];
+
   if(inaccessibleFloors.includes(floorInput)){
     setTabletMessage("tablet-message-5","その階に移動することはできません。");
     return true;
   }
+
   if(floorInput){
     setTabletMessage("tablet-message-5","その階は存在しません。");
     return true;
   }
+
   return false;
+}
+
+function showStep5KoRiddle(){
+  setTabletMessage("tablet-message-5","");
+  setImage("tablet-image-5",imagePaths.step5RiddleKo,"「こ」の階");
+  setTabletFloorBadge("tablet-floor-badge-5",imagePaths.tabletFloorKo,"こ階表示");
 }
 
 function submitStep5(){
@@ -1974,21 +2183,47 @@ function submitStep5(){
   const answer = normalize(document.getElementById("answer-input-5").value);
 
   if(floor === normalize("こ")){
-    setTabletMessage("tablet-message-5","");
-    setImage("tablet-image-5",imagePaths.step5RiddleKo,"「こ」の階");
+    showStep5KoRiddle();
 
     if(["かくめい","カクメイ","革命"].map(normalize).includes(answer)){
       unlockNav("nav-last");
       gameState.ingotUnlocked = true;
       gameState.diaryUnlocked = true;
       saveState();
+
       document.getElementById("item-ingot-button").classList.remove("hidden");
       document.getElementById("item-diary-button").classList.remove("hidden");
-      runStory(stories.afterStep5, () => openCameraModal());
+
+      openMoveModal("こ", () => {
+        runStory(stories.afterStep5, () => openCameraModal());
+      });
     }
+
     return;
   }
+
   handleStep5InvalidFloor(floor);
+}
+
+const handleTablet5FloorTyping = debounce(() => {
+  const input = document.getElementById("floor-input-5");
+  if(!input) return;
+
+  const value = normalize(input.value);
+  if(!value) return;
+
+  if(value === normalize("こ")){
+    showStep5KoRiddle();
+  }else{
+    setTabletFloorBadge("tablet-floor-badge-5","","");
+    handleStep5InvalidFloor(value);
+  }
+},350);
+
+function showLast11Riddle(){
+  setTabletMessage("tablet-message-last","");
+  setImage("tablet-image-last",imagePaths.lastRiddle11,"11階へ行く問題");
+  setTabletFloorBadge("tablet-floor-badge-last",imagePaths.tabletFloor11,"11階表示");
 }
 
 function submitLastRiddle(){
@@ -2001,20 +2236,39 @@ function submitLastRiddle(){
   }
 
   if(floor === "11"){
-    setTabletMessage("tablet-message-last","");
-    setImage("tablet-image-last",imagePaths.lastRiddle11,"11階へ行く問題");
+    showLast11Riddle();
 
     if(["ミラー","みらー"].map(normalize).includes(answer)){
-      showPage("last-action-page");
+      openMoveModal("11", () => showPage("last-action-page"));
     }
   }
 }
 
+const handleLastFloorTyping = debounce(() => {
+  const input = document.getElementById("floor-input-last");
+  if(!input) return;
+
+  const value = normalize(input.value);
+  if(!value) return;
+
+  if(["0","1","2","3","4","5","6","7","8","9"].includes(value)){
+    setTabletFloorBadge("tablet-floor-badge-last","","");
+    setTabletMessage("tablet-message-last","その階に行く必要がありません。");
+    return;
+  }
+
+  if(value === "11"){
+    showLast11Riddle();
+  }
+},350);
+
 function submitLastObject(){
   const value = normalize(document.getElementById("last-object-answer").value);
+
   if(["かがみ","カガミ","鏡","ミラー","みらー"].map(normalize).includes(value)){
     gameState.lastMirrorChecked = true;
     saveState();
+
     runStory(stories.mirrorCheck, () => showPage("last-action-page"));
   }
 }
@@ -2040,6 +2294,7 @@ function submitLastAction(){
 function shareResult(){
   const text = "ELEVATOR HOUSEをクリアしました！";
   const url = location.href;
+
   if(navigator.share){
     navigator.share({text,url}).catch(()=>{});
   }else{
@@ -2062,6 +2317,9 @@ function initializeImages(){
 
   setPlaceholder("tablet-image-5","行き先を入力してください");
   setPlaceholder("tablet-image-last","行き先を入力してください");
+
+  setTabletFloorBadge("tablet-floor-badge-5","","");
+  setTabletFloorBadge("tablet-floor-badge-last","","");
 
   setImage("image-last-wall",imagePaths.lastWall,"11階の様子");
   setImage("image-clear",imagePaths.clear,"GAME CLEAR");
@@ -2117,20 +2375,33 @@ function bindEnterKeys(){
   ].forEach(id => {
     const el = document.getElementById(id);
     if(!el) return;
+
     el.addEventListener("keydown", e => {
       if(e.key === "Enter"){
         if(id === "step2-answer") submitStep2FloorAnswer();
         if(id === "step2-password") submitStep2Password();
         if(id === "step3-answer") submitStep3FloorAnswer();
         if(id === "step3-password") submitStep3Password();
+
         if(id === "answer-input-4" || id === "floor-input-4") submitTablet4();
         if(id === "answer-input-5" || id === "floor-input-5") submitStep5();
         if(id === "answer-input-last" || id === "floor-input-last") submitLastRiddle();
+
         if(id === "last-object-answer") submitLastObject();
         if(id === "last-action-answer") submitLastAction();
       }
     });
   });
+}
+
+function bindTabletTyping(){
+  const floor4 = document.getElementById("floor-input-4");
+  const floor5 = document.getElementById("floor-input-5");
+  const floorLast = document.getElementById("floor-input-last");
+
+  if(floor4) floor4.addEventListener("input", handleTablet4FloorTyping);
+  if(floor5) floor5.addEventListener("input", handleTablet5FloorTyping);
+  if(floorLast) floorLast.addEventListener("input", handleLastFloorTyping);
 }
 
 function initGame(){
@@ -2139,6 +2410,7 @@ function initGame(){
   createButtons("buttons-step3",[0,1,2,3,4,5,6,7,8,9],selectStep3Floor);
   initializeImages();
   bindEnterKeys();
+  bindTabletTyping();
   restoreGame();
 }
 
