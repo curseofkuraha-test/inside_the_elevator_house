@@ -108,9 +108,7 @@ body{
   text-align:left;
 }
 
-.important-box strong{
-  color:#ffdf6e;
-}
+.important-box strong{color:#ffdf6e;}
 
 .section{
   width:100%;
@@ -231,9 +229,7 @@ body{
   color:#b7b7b7;
 }
 
-.compact-panel .elevator-button span{
-  font-size:46px;
-}
+.compact-panel .elevator-button span{font-size:46px;}
 
 .elevator-button.active{
   box-shadow:0 0 10px rgba(255,160,0,.45),0 0 24px rgba(255,160,0,.25);
@@ -607,13 +603,9 @@ body{
   box-shadow:-8px 0 24px rgba(0,0,0,.38);
 }
 
-.menu-panel.show{
-  transform:translateX(0);
-}
+.menu-panel.show{transform:translateX(0);}
 
-.menu-section{
-  margin-bottom:32px;
-}
+.menu-section{margin-bottom:32px;}
 
 .menu-section-title{
   font-size:15px;
@@ -743,8 +735,11 @@ body{
 .guide-scroll{
   width:min(94vw,1080px);
   max-height:86vh;
-  overflow:auto;
+  overflow-y:auto;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
   border-radius:8px;
+  background:#111;
 }
 
 .guide-scroll img{
@@ -752,9 +747,6 @@ body{
   width:100%;
   height:auto;
 }
-
-.guide-pc{display:block;}
-.guide-sp{display:none;}
 
 .tablet-guide-overlay .image-frame{
   width:min(92vw,1080px);
@@ -786,9 +778,7 @@ body{
   box-shadow:0 4px 16px rgba(0,0,0,.45);
 }
 
-.guide-close:hover{
-  background:#00a29a;
-}
+.guide-close:hover{background:#00a29a;}
 
 .item-panel{
   width:min(92vw,640px);
@@ -850,8 +840,6 @@ body{
   .novel-stage{min-height:calc(100vh - 72px);}
   .novel-window{padding:20px;}
   .novel-text{font-size:18px;min-height:220px;}
-  .guide-pc{display:none;}
-  .guide-sp{display:block;}
   .guide-scroll{
     width:min(94vw,520px);
     max-height:86vh;
@@ -899,8 +887,7 @@ body{
 <div class="guide-overlay" id="guide-overlay" onclick="closeGuideByOutside(event)">
   <button class="guide-close" onclick="closeGuide()">×</button>
   <div class="guide-scroll" onclick="event.stopPropagation()">
-    <img class="guide-pc" src="./image/guide_transparent_card_pc.png" alt="透明カードの使い方 PC">
-    <img class="guide-sp" src="./image/guide_transparent_card_sp.png" alt="透明カードの使い方 スマホ">
+    <img id="guide-card-image" src="" alt="透明カードの使い方">
   </div>
 </div>
 
@@ -1133,7 +1120,7 @@ body{
   <div class="step-header"><img src="./image/title_last.png" alt="LAST STEP"></div>
 
   <section class="section">
-    <h1 class="step-title-large">あなたは１号エレベーターの中にいる。</h1>
+    <h1 class="step-title-large">キミは１号エレベーターの中にいる。</h1>
     <div class="story">どうにかして、生き延びる方法を考えよ！</div>
   </section>
 
@@ -1261,7 +1248,6 @@ const stories = {
     {role:"protagonist", speaker:"キミ", text:"ここはひとまず「エレベーターマン」に逆らわず、さっさと「財宝」を見つけるのが、最善だろうな。"},
     {role:"protagonist", speaker:"キミ", text:"１度深呼吸をしてから、キミはエレベーターの中をくまなく探し、ドアの隙間に挟まっていた１枚の暗号を見つけた。"}
   ],
-
   afterStep1:[
     {role:"elevatorman", speaker:"エレベーターマン", text:"お！どうやら、一部のフロアへ行けるようになったみたいだな。\nここから先は、各フロアにある謎を解いていく・・・という流れらしい。"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"今いるフロアの謎を全て解けば、残りのフロアに行くための解除コードがわかるんだ。\n\n解除コードがわかったら、オレがシステムに入力するから呼んでくれ。"},
@@ -1270,34 +1256,30 @@ const stories = {
     {role:"elevatorman", speaker:"エレベーターマン", text:"オレが知っていることはこれで全て話したぞ。あとは、キミ自身で情報を集めてくれ。\nボタンを押して各フロアへ向かい、謎を解き明かすんだ。"},
     {role:"protagonist", speaker:"キミ", text:"そう言ったきり、エレベーターマンからの返事がなくなった。\n・・・・・・ひとまず、今行けるフロアの謎を解くとしよう。"}
   ],
-
   afterStep2:[
     {role:"protagonist", speaker:"キミ", text:"キミはエレベーターマンに連絡をして\n解除コードを伝えた。"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"「テクノロジー」っと・・・\nお！正解みたいだ。\n\n残りのフロアに行けるようになったんじゃないか？"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"１号エレベーターの謎を解くと、２号エレベーターを動かせるようになるらしい。\n起動パスワードがどこかで見つかったら、こちらに教えてくれ。"},
     {role:"protagonist", speaker:"キミ", text:"残りのボタンが反応するようになったみたいだ。\nこの調子で、残りのフロアも調査していこう・・・"}
   ],
-
   afterStep3:[
     {role:"protagonist", speaker:"キミ", text:"エレベーターマンに２号エレベーターの起動パスワードを伝えるとすぐ、エレベーターのドアが自動で閉まり下降し始めた。"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"おお、さっきのパスワード正解だったみたいだぞ。\n２号エレベーターが起動した。\n\n今エレベーターが動いていると思うが、着いたフロアに２号エレベーターの入り口が隠されているのだろう。"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"オレはこの１号エレベーターからのみ連絡ができる。\n\nだから、この先は完全にキミ１人で挑戦するってワケだな。"},
-    {role:"elevatorman", speaker:"エレベーターマン", text:"２号エレベーター、３号エレベーターと謎を解き進めていき、資産家が残した「財産」を見つけたら、１号エレベーターに戻ってきてオレに報告してくれ。"},
+    {role:"elevatorman", speaker:"エレベーターマン", text:"２号エレベーター、３号エレベーターと謎を解き進めていき、資産家が残した「財宝」を見つけたら、１号エレベーターに戻ってきてオレに報告してくれ。"},
     {role:"protagonist", speaker:"キミ", text:"エレベーターは１階に着くとドアが開いた。\nフロアを見回ってみると、今まで壁だと思っていたところにエレベーターが出現した。\n\n・・・・・・どうやらこれが、２号エレベーターらしい。"},
     {role:"protagonist", speaker:"キミ", text:"早速エレベーターに入ってみると、今いるフロアが「A」階と表示されている。"},
     {role:"protagonist", speaker:"キミ", text:"そして、奇妙なことにエレベーター内部に行き先ボタンがない。\n代わりに、その場所にはタブレットが嵌め込まれている。"},
-    {role:"protagonist", speaker:"キミ", text:"タブレットの中にあった説明を読んでみた。\n・・・・・・今回はどうやら指定のキーワードを送信することで、対応するフロアに移動できるらしい。"},
-    {role:"protagonist", speaker:"キミ", text:"２号エレベーターで移動できるフロアのうち、３号エレベーターにつながっているのは１つのみ。そのフロアに辿りつくことができれば、次に進めるってワケか。"},
-    {role:"protagonist", speaker:"キミ", text:"２号エレベーターの状況を把握したあなたは、まずは現在の階にある謎を解くことにした。"}
+    {role:"protagonist", speaker:"キミ", text:"タブレットの中にあった説明を読んでみた。\n・・・・・・今回はどうやら<span class='big-line'>指定のキーワードを送信することで、対応するフロアに移動できる</span>らしい。"},
+    {role:"protagonist", speaker:"キミ", text:"２号エレベーターで移動できるフロアのうち、３号エレベーターにつながっているのは１つのみ。\nそのフロアに辿りつくことができれば、次に進めるってワケか。"},
+    {role:"protagonist", speaker:"キミ", text:"２号エレベーターの状況を把握したキミは、まずは現在のフロアにある謎を解くことにした。"}
   ],
-
   afterStep4:[
     {role:"protagonist", speaker:"キミ", text:"E階に着き、エレベーターの扉が開くと目の前には別のエレベーターがあった。\n\n無事、３号エレベーターを見つけられたようだ。"},
     {role:"protagonist", speaker:"キミ", text:"タブレットに「資産があるフロアに行くには、こちらのタブレットが必要となります」という表示が出たため、タブレットを持って３号エレベーターに乗り込んだ。"},
     {role:"protagonist", speaker:"キミ", html:"３号エレベーターに乗り込むと、<br><span class='big-line'>「こちらは資産があるフロア直通のエレベーターとなります」</span><br>というアナウンスが流れた。"},
     {role:"protagonist", speaker:"キミ", text:"財宝を見つけ、この奇妙な「エレベーターハウス」から解放されるまであと少し。"}
   ],
-
   afterStep5:[
     {role:"protagonist", speaker:"キミ", text:"「コ」の階に着き、エレベーターが開くとそこは\n明らかに今までとは様子が違うフロアだった。"},
     {role:"protagonist", speaker:"キミ", text:"ダイニング、書斎、キッチン・・・\nどうやら、資産家はここで生活をしていたみたいだな"},
@@ -1318,17 +1300,14 @@ const stories = {
     {role:"protagonist", speaker:"キミ", text:"状況を整理して、活路を見出すんだ！"},
     {role:"protagonist", speaker:"キミ", text:"まずは、監視カメラをどうにかしよう・・・"}
   ],
-
   cameraBreak:[
     {role:"protagonist", speaker:"キミ", text:"キミは手元のインゴットを使い、監視カメラを壊した。"}
   ],
-
   mirrorCheck:[
     {role:"protagonist", speaker:"キミ", text:"鏡をノックしてみよう・・・"},
     {role:"sound", speaker:"", text:"コン、コン、、、"},
     {role:"protagonist", speaker:"キミ", text:"音が響く・・・どうやら、鏡の裏は空洞になっているようだ。"}
   ],
-
   ending:[
     {role:"protagonist", speaker:"キミ", text:"金のインゴットを振りかぶって、思いっきり鏡に叩きつけた！"},
     {role:"sound", speaker:"", text:"ガッシャーン！！"},
@@ -1432,6 +1411,16 @@ function showTemporaryMessage(id,text){
   },1400);
 }
 
+function setGuideCardImage(){
+  const img = document.getElementById("guide-card-image");
+  if(!img) return;
+
+  const isSp = window.matchMedia("(max-width:700px)").matches;
+  img.src = isSp
+    ? "./image/guide_transparent_card_sp.png"
+    : "./image/guide_transparent_card_pc.png";
+}
+
 function toggleMenu(){
   document.getElementById("menu-panel").classList.toggle("show");
   document.getElementById("menu-overlay").classList.toggle("show");
@@ -1474,6 +1463,7 @@ function unlockNav(id){
 
 function openGuide(){
   closeMenu();
+  setGuideCardImage();
   document.getElementById("guide-overlay").classList.add("show");
 }
 
@@ -1504,7 +1494,7 @@ function openItem(type){
     ingot:{
       title:"金のインゴット",
       image:imagePaths.itemIngot,
-      text:"資産家が残した財産と思われる、ずっしりと重い金色のインゴット。かなり頑丈そうだ。"
+      text:"資産家が残した財宝と思われる、ずっしりと重い金色のインゴット。かなり頑丈そうだ。"
     },
     diary:{
       title:"資産家の日記",
