@@ -7,8 +7,20 @@
 <meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
 <title>ELEVATOR HOUSE</title>
 
+<script>
+ (function(d) {
+    var config = {
+      kitId: 'qfx1iuu',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+</script>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
 
 html{scroll-behavior:smooth;}
 
@@ -224,9 +236,12 @@ body{
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
+
   font-size:78px;
-  font-weight:700;
   color:#b7b7b7;
+  font-weight:700;
+
+  font-family:'LINE Seed JP',sans-serif;
 }
 
 .compact-panel .elevator-button span{font-size:46px;}
@@ -302,6 +317,64 @@ body{
   font-size:22px;
   font-weight:700;
   letter-spacing:1px;
+}
+
+.last-action-builder{
+  width:min(94vw,900px);
+  margin:44px auto 0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:22px;
+}
+.last-action-label,
+.last-action-builder .input-label{
+  width:100%;
+  text-align:center;
+}
+
+.last-action-heading{
+  width:100%;
+  text-align:center;
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:.06em;
+  margin-bottom:14px;
+  color:#ffffff;
+}
+
+.action-row{
+  width:100%;
+  display:grid;
+  grid-template-columns:1fr auto 1fr auto 1fr;
+  align-items:center;
+  gap:12px;
+  font-size:22px;
+  font-weight:700;
+}
+
+.action-row input,
+.action-row select{
+  height:56px;
+  border:none;
+  border-radius:5px;
+  background:#252525;
+  color:white;
+  padding:0 16px;
+  box-sizing:border-box;
+  font-size:18px;
+}
+
+.action-decision-button{
+  width:180px;
+  height:56px;
+  border:none;
+  border-radius:5px;
+  background:white;
+  color:#111;
+  font-size:18px;
+  font-weight:700;
+  cursor:pointer;
 }
 
 .answer-message,
@@ -605,8 +678,35 @@ body{
 }
 
 .log-speaker{
+  display:inline-block;
   font-weight:700;
-  color:#007f79;
+  margin-bottom:6px;
+}
+
+/* キミ */
+.log-speaker.role-protagonist{
+  color:#5c6bc0;
+}
+
+/* エレベーターマン */
+.log-speaker.role-elevatorman{
+  color:#00a29a;
+}
+
+/* 地の文 */
+.log-speaker.role-narration,
+.log-speaker.role-storyline{
+  color:#bdbdbd;
+}
+
+/* 日記 */
+.log-speaker.role-diary{
+  color:#8a6d3b;
+}
+
+/* 効果音 */
+.log-speaker.role-sound{
+  display:none;
 }
 
 .log-divider{
@@ -883,6 +983,62 @@ body{
   margin:0;
 }
 
+/* =========================
+   Font Settings
+========================= */
+
+/* ゲーム内テキスト：Adobe Fonts */
+.story,
+.novel-text,
+.novel-speaker,
+.log-entry,
+.log-speaker,
+.log-text,
+.diary-text{
+  font-family: mochiy-pop-p, sans-serif;
+}
+
+/* ゲーム外UI・説明文：M PLUS 2P */
+.before-box,
+.before-box *,
+.important-box,
+.important-box *,
+.menu-panel,
+.menu-panel *,
+.modal-card,
+.modal-card *,
+.input-label,
+.password-title,
+.answer-message,
+.tablet-message,
+.last-action-heading,
+.last-action-builder,
+.last-action-builder *,
+.clear-actions,
+.clear-actions *,
+.guide-overlay,
+.guide-overlay *,
+.tablet-guide-overlay,
+.tablet-guide-overlay *,
+.item-overlay,
+.item-overlay *{
+  font-family:"M PLUS 2p",sans-serif;
+}
+
+/* 入力欄・ボタン類もゲーム外UIとしてM PLUS 2P */
+button,
+input,
+select,
+textarea{
+  font-family:"M PLUS 2p",sans-serif;
+}
+
+/* エレベーター階数ボタンだけLINE Seed固定 */
+.elevator-button,
+.elevator-button span{
+  font-family:"LINE Seed JP",sans-serif !important;
+}
+
 @media(max-width:700px){
   .page{padding:36px 14px 90px;}
   .step-header img{width:min(82vw,320px);}
@@ -939,7 +1095,24 @@ body{
     width:min(94vw,520px);
     max-height:86vh;
   }
+  .action-row{
+    grid-template-columns:1fr;
+    gap:10px;
+    text-align:center;
+  }
+
+  .action-row span{
+    font-size:18px;
+  }
+
+  .action-row input,
+  .action-row select{
+    width:100%;
+    height:60px;
+  }
 }
+
+
 </style>
 </head>
 
@@ -1103,11 +1276,11 @@ body{
 
   <div class="answer-area">
     <div class="input-label">正誤判定</div>
-    <input id="step2-answer" placeholder="この階の解答を入力">
+    <input id="step2-answer" placeholder="このフロアの解答を入力">
     <button onclick="submitStep2FloorAnswer()">送信</button>
     <div class="answer-message" id="step2-message"></div>
 
-    <div class="password-title">５つの階の謎の答えから導いたキーワード</div>
+    <div class="password-title">５つのフロアの謎の答えから導いたキーワード</div>
     <input id="step2-password" placeholder="答えを入力">
     <button onclick="submitStep2Password()">送信</button>
   </div>
@@ -1145,7 +1318,7 @@ body{
 
   <div class="answer-area">
     <div class="input-label">正誤判定</div>
-    <input id="step3-answer" placeholder="この階の解答を入力">
+    <input id="step3-answer" placeholder="このフロアの解答を入力">
     <button onclick="submitStep3FloorAnswer()">送信</button>
     <div class="answer-message" id="step3-message"></div>
 
@@ -1259,7 +1432,9 @@ body{
 </div>
 
 <div class="page hidden" id="last-action-page">
-  <div class="step-header"><img src="./image/title_last.png" alt="LAST STEP"></div>
+  <div class="step-header">
+    <img src="./image/title_last.png" alt="LAST STEP">
+  </div>
 
   <section class="section">
     <div class="floor-title">11階の様子</div>
@@ -1267,15 +1442,35 @@ body{
 
     <div class="answer-area" id="last-object-area">
       <div class="input-label">調べたい物を入力しよう</div>
-      <input id="last-object-answer" placeholder="調べたい物">
+      <input id="last-object-answer" placeholder="調べたいもの">
       <button onclick="submitLastObject()">送信</button>
-      <div class="answer-message show" id="last-object-message"></div>
     </div>
 
-    <div class="answer-area hidden" id="last-break-area">
-      <div class="input-label">とるべき行動を入力せよ</div>
-      <input id="last-action-answer" placeholder="とるべき行動を入力">
-      <button onclick="submitLastAction()">送信</button>
+    <div class="last-action-builder hidden" id="last-break-area">
+
+      <div class="input-label">
+        行動を入力せよ
+      </div>
+    
+      <div class="action-row">
+        <input id="last-tool-answer" placeholder="使用するもの">
+        <span>で</span>
+        <input id="last-target-answer" placeholder="対象物">
+        <span>を</span>
+        <select id="last-action-select">
+          <option value="">行動</option>
+          <option value="かける">かける</option>
+          <option value="押す">押す</option>
+          <option value="照らす">照らす</option>
+          <option value="割る">割る</option>
+          <option value="こする">こする</option>
+          <option value="引く">引く</option>
+          <option value="うつす">うつす</option>
+          <option value="ひく">ひく</option>
+        </select>
+      </div>
+
+      <button class="action-decision-button" onclick="submitLastAction()">決定</button>
     </div>
   </section>
 </div>
@@ -1356,7 +1551,7 @@ const stories = {
     {role:"elevatorman", speaker:"？？？", text:"今、キミが閉じ込められている場所は「エレベーターハウス」と呼ばれる、とある資産家が趣味で建てた奇妙な建物だ。"},
     {role:"elevatorman", speaker:"？？？", text:"生活スペースはほとんどなく、各フロアには「謎めいた絵」が飾ってある。そして、入れない場所もたくさんあるんだ。"},
     {role:"elevatorman", speaker:"？？？", text:"さらにこの建物には「資産家の遺産」が隠されていて、"},
-    {role:"elevatorman", speaker:"？？？", html:"遺言によると「建物にある<span class='big-line'>３台のエレベーターの謎</span>を全て解き明かせば、遺産の隠し場所へ辿り着くことができる」<br>らしい。"},
+    {role:"elevatorman", speaker:"？？？", html:"遺言によると「建物にある<span class='big-line'>３台のエレベーターの謎</span>を全て解き明かせば、遺産の隠し場所へ辿り着くことができる」らしい。"},
     {role:"elevatorman", speaker:"？？？", text:"「財宝探し」だぜ？ワクワクするだろ？"},
     {role:"elevatorman", speaker:"？？？", text:"現在、エレベーターは１台も動いていない上に、そこにある謎もオレにはさっぱりわからん。\nだからキミにオレの代わりをしてもらおうかと思ってね。"},
     {role:"elevatorman", speaker:"？？？", text:"今オレは、エレベーターの専用コントロールルームにいる。\nそして、キミがいる１号エレベーターは、オレの手によって出口があるフロアには停まらないようになっている。"},
@@ -1370,7 +1565,7 @@ const stories = {
     {role:"elevatorman", speaker:"エレベーターマン", text:"じゃあ、さっそく「財宝探し」に取りかかってくれ。"},
     {role:"protagonist", speaker:"キミ", text:"妙なことに巻き込まれてしまった。墓泥棒の片棒を担がないと、脱出させてくれないだって！？\n\nスマートフォンも圏外だ。"},
     {role:"protagonist", speaker:"キミ", text:"ここはひとまず「エレベーターマン」に逆らわず、さっさと「財宝」を見つけるのが、最善だろうな。"},
-    {role:"protagonist", speaker:"キミ", text:"１度深呼吸をしてから、キミはエレベーターの中をくまなく探し、ドアの隙間に挟まっていた１枚の暗号を見つけた。"}
+    {role:"narration", speaker:"", text:"１度深呼吸をしてから、キミはエレベーターの中をくまなく探し、ドアの隙間に挟まっていた１枚の暗号を見つけた。"}
   ],
   afterStep1:[
     {role:"elevatorman", speaker:"エレベーターマン", text:"お！どうやら、一部のフロアへ行けるようになったみたいだな。\nここから先は、各フロアにある謎を解いていく・・・という流れらしい。"},
@@ -1378,31 +1573,31 @@ const stories = {
     {role:"elevatorman", speaker:"エレベーターマン", text:"フロアの謎を解くには、そのフロアについた時にエレベーターのディスプレイに表示される手がかりが必要だと聞いた。"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"あと、このエレベーターは「開く」「閉じる」ボタンがないが、特に謎とは関係ないらしい。\nゆっくり謎が見られるように特注した、という話だ。"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"オレが知っていることはこれで全て話したぞ。あとは、キミ自身で情報を集めてくれ。\nボタンを押して各フロアへ向かい、謎を解き明かすんだ。"},
-    {role:"protagonist", speaker:"キミ", text:"そう言ったきり、エレベーターマンからの返事がなくなった。\n・・・・・・ひとまず、今行けるフロアの謎を解くとしよう。"}
+    {role:"narration", speaker:"", text:"そう言ったきり、エレベーターマンからの返事がなくなった。\n・・・・・・ひとまず、今行けるフロアの謎を解くとしよう。"}
   ],
   afterStep2:[
-    {role:"protagonist", speaker:"キミ", text:"キミはエレベーターマンに連絡をして\n解除コードを伝えた。"},
+    {role:"narration", speaker:"", text:"キミはエレベーターマンに連絡をして\n解除コードを伝えた。"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"「テクノロジー」っと・・・\nお！正解みたいだ。\n\n残りのフロアに行けるようになったんじゃないか？"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"１号エレベーターの謎を解くと、２号エレベーターを動かせるようになるらしい。\n起動パスワードがどこかで見つかったら、こちらに教えてくれ。"},
     {role:"protagonist", speaker:"キミ", text:"残りのボタンが反応するようになったみたいだ。\nこの調子で、残りのフロアも調査していこう・・・"}
   ],
   afterStep3:[
-    {role:"protagonist", speaker:"キミ", text:"エレベーターマンに２号エレベーターの起動パスワードを伝えるとすぐ、エレベーターのドアが自動で閉まり下降し始めた。",sound:"./sound/elevator_down.mp3"},
+    {role:"narration", speaker:"", text:"エレベーターマンに２号エレベーターの起動パスワードを伝えるとすぐ、エレベーターのドアが自動で閉まり下降し始めた。",sound:"./sound/elevator_down.mp3"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"おお、さっきのパスワード正解だったみたいだぞ。\n２号エレベーターが起動した。\n\n今エレベーターが動いていると思うが、着いたフロアに２号エレベーターの入り口が隠されているのだろう。"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"オレはこの１号エレベーターからのみ連絡ができる。\n\nだから、この先は完全にキミ１人で挑戦するってワケだな。"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"２号エレベーター、３号エレベーターと謎を解き進めていき、資産家が残した「財産」を見つけたら、１号エレベーターに戻ってきてオレに報告してくれ。"},
     {role:"protagonist", speaker:"キミ", text:"エレベーターは１階に着くとドアが開いた。\nフロアを見回ってみると、今まで壁だと思っていたところにエレベーターが出現した。\n\n・・・・・・どうやらこれが、２号エレベーターらしい。",sound:"./sound/elevator_touchaku.mp3"},
-    {role:"protagonist", speaker:"キミ", text:"早速エレベーターに入ってみると、今いるフロアが「A」階と表示されている。"},
-    {role:"protagonist", speaker:"キミ", text:"そして、奇妙なことにエレベーター内部に行き先ボタンがない。\n代わりに、その場所にはタブレットが嵌め込まれている。"},
-    {role:"protagonist", speaker:"キミ", html:"タブレットの中にあった説明を読んでみた。<br>・・・・・・今回はどうやら<span class='big-line'>指定のキーワードを送信することで、対応するフロアに移動できる</span>らしい。"},
+    {role:"narration", speaker:"", text:"早速エレベーターに入ってみると、今いるフロアが「A」階と表示されている。"},
+    {role:"narration", speaker:"", text:"そして、奇妙なことにエレベーター内部に行き先ボタンがない。\n代わりに、その場所にはタブレットが嵌め込まれている。"},
+    {role:"narration", speaker:"", html:"タブレットの中にあった説明を読んでみた。<br>・・・・・・今回はどうやら<span class='big-line'>指定のキーワードを送信することで、対応するフロアに移動できる</span>らしい。"},
     {role:"protagonist", speaker:"キミ", text:"２号エレベーターで移動できるフロアのうち、３号エレベーターにつながっているのは１つのみ。そのフロアに辿りつくことができれば、次に進めるってワケか。"},
-    {role:"protagonist", speaker:"キミ", text:"２号エレベーターの状況を把握したあなたは、まずは現在の階にある謎を解くことにした。"}
+    {role:"narration", speaker:"", text:"２号エレベーターの状況を把握したキミは、まずは現在の階にある謎を解くことにした。"}
   ],
   afterStep4:[
     {role:"protagonist", speaker:"キミ", text:"E階に着き、エレベーターの扉が開くと目の前には別のエレベーターがあった。\n\n無事、３号エレベーターを見つけられたようだ。"},
-    {role:"protagonist", speaker:"キミ", text:"タブレットに「資産があるフロアに行くには、こちらのタブレットが必要となります」という表示が出たため、タブレットを持って３号エレベーターに乗り込んだ。"},
-    {role:"protagonist", speaker:"キミ", html:"３号エレベーターに乗り込むと、<br><span class='big-line'>「こちらは資産があるフロア直通のエレベーターとなります」</span><br>というアナウンスが流れた。"},
-    {role:"protagonist", speaker:"キミ", text:"財宝を見つけ、この奇妙な「エレベーターハウス」から解放されるまであと少し。"}
+    {role:"narration", speaker:"", text:"タブレットに「資産があるフロアに行くには、こちらのタブレットが必要となります」という表示が出たため、タブレットを持って３号エレベーターに乗り込んだ。"},
+    {role:"narration", speaker:"", html:"３号エレベーターに乗り込むと、<br><span class='big-line'>「こちらは資産があるフロア直通のエレベーターとなります」</span><br>というアナウンスが流れた。"},
+    {role:"narration", speaker:"", text:"財宝を見つけ、この奇妙な「エレベーターハウス」から解放されるまであと少し。"}
   ],
   afterStep5:[
     {role:"protagonist", speaker:"キミ", text:"「コ」の階に着き、エレベーターが開くとそこは\n明らかに今までとは様子が違うフロアだった。"},
@@ -1410,7 +1605,7 @@ const stories = {
     {role:"protagonist", speaker:"キミ", text:"書斎には資産家が残した日記と金色のインゴットが置かれていた。\nどうやら、「資産」とはこの「金のインゴット」のことだろう。"},
     {role:"protagonist", speaker:"キミ", text:"それにしてもこんな妙な謎を残す、資産家ってどんな人物だろう。\n書斎にあった日記も読んでみよう。"},
     {role:"diary", speaker:"資産家の日記", html:"<img src='./image/item_diary.png' alt='資産家の日記' style='display:block;width:min(80vw,520px);margin:0 auto;border-radius:6px;'>"},
-    {role:"elevatorman", speaker:"キミ", text:"金のインゴットと一緒に日記を持って１号エレベーターに戻ると、エレベーターマンから連絡がかかってきた。"},
+    {role:"narration", speaker:"", text:"金のインゴットと一緒に日記を持って１号エレベーターに戻ると、エレベーターマンから連絡がかかってきた。"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"何か見つけたのか！\n\nどれどれ・・・おお！それは金じゃないか？\n結構大きいな！いい金額になりそうだ。"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"・・・・・・・・・"},
     {role:"elevatorman", speaker:"エレベーターマン", text:"・・・・・・"},
@@ -1423,7 +1618,7 @@ const stories = {
     {role:"protagonist", speaker:"キミ", text:"・・・・ちくしょう！「解放してやる」なんで信じるんじゃなかった！"},
     {role:"protagonist", speaker:"キミ", text:"落ち着け、まだエレベーター内に催眠ガスは充満していないようだ。"},
     {role:"protagonist", speaker:"キミ", text:"状況を整理して、活路を見出すんだ！"},
-    {role:"protagonist", speaker:"キミ", text:"まずは、監視カメラをどうにかしよう・・・"}
+    {role:"protagonist", speaker:"キミ", text:"（まずは、監視カメラをどうにかしよう・・・）"}
   ],
   cameraBreak:[
     {role:"sound", speaker:"", text:"キミは手元のインゴットを使い、監視カメラを壊した。", sound:"./sound/break_kanshi.mp3"},
@@ -1434,15 +1629,15 @@ const stories = {
     {role:"protagonist", speaker:"キミ", text:"音が響く・・・どうやら、鏡の裏は空洞になっているようだ。"}
   ],
   ending:[
-    {role:"protagonist", speaker:"キミ", text:"金のインゴットを振りかぶって、思いっきり鏡に叩きつけた！"},
+    {role:"narration", speaker:"", text:"金のインゴットを振りかぶって、思いっきり鏡に叩きつけた！"},
     {role:"sound", speaker:"", text:"ガッシャーン！！", sound:"./sound/break.mp3"},
-    {role:"protagonist", speaker:"キミ", text:"鏡は粉々に砕け、その後ろにある扉があらわになった。"},
-    {role:"protagonist", speaker:"キミ", text:"恐る恐るドアノブに手をかけたが、鍵はかかっていないようだ。\n\n思い切ってそのまま扉を開くと、そこは屋上だった。"},
-    {role:"protagonist", speaker:"キミ", text:"エレベーターから外に出た。\n・・・・・・ずっと閉鎖的は空間にいたので、新鮮か空気が美味しい。"},
-    {role:"protagonist", speaker:"キミ", text:"ふとスマートフォンを見てみると、電波がつながっているのに気がついた。"},
-    {role:"protagonist", speaker:"キミ", text:"慌てて警察に電話をかけ、しどろもどろに状況を説明した。"},
-    {role:"protagonist", speaker:"キミ", text:"電話を切り、しばらくするとヘリコプターが近づいてくる音がした。\nどうやら、助かったみたいだ。"},
-    {role:"protagonist", speaker:"キミ", text:"・・・・とんでもない「財宝探し」に巻き込まれたものだ。\n金のインゴットを回収して、救助に来たヘリコプターに乗り込んだ。\nこれでエレベーターマンに「財宝」が渡ることはないだろう。"}
+    {role:"narration", speaker:"", text:"鏡は粉々に砕け、その後ろにある扉があらわになった。"},
+    {role:"narration", speaker:"", text:"恐る恐るドアノブに手をかけたが、鍵はかかっていないようだ。\n\n思い切ってそのまま扉を開くと、そこは屋上だった。"},
+    {role:"narration", speaker:"", text:"エレベーターから外に出た。\n・・・・・・ずっと閉鎖的は空間にいたので、新鮮か空気が美味しい。"},
+    {role:"narration", speaker:"", text:"ふとスマートフォンを見てみると、電波がつながっているのに気がついた。"},
+    {role:"narration", speaker:"", text:"慌てて警察に電話をかけ、しどろもどろに状況を説明した。"},
+    {role:"narration", speaker:"", text:"電話を切り、しばらくするとヘリコプターが近づいてくる音がした。\nどうやら、助かったみたいだ。",sound:"./sound/helicopter_scale.mp3"},
+    {role:"narration", speaker:"", text:"・・・・とんでもない「財宝探し」に巻き込まれたものだ。\n金のインゴットを回収して、救助に来たヘリコプターに乗り込んだ。\nこれでエレベーターマンに「財宝」が渡ることはないだろう。"}
   ]
 };
 
@@ -1604,8 +1799,17 @@ function showPage(id, shouldSave = true){
   closeMenu();
   if(id === "step4-page") renderStep4();
   if(id === "last-action-page"){
-    document.getElementById("last-break-area").classList.toggle("hidden", !gameState.lastMirrorChecked);
+  const objectArea = document.getElementById("last-object-area");
+  const breakArea = document.getElementById("last-break-area");
+
+  if(gameState.lastMirrorChecked){
+    objectArea.classList.add("hidden");
+    breakArea.classList.remove("hidden");
+  }else{
+    objectArea.classList.remove("hidden");
+    breakArea.classList.add("hidden");
   }
+}
   if(shouldSave){
     gameState.currentPage = id;
     saveState();
@@ -1690,11 +1894,16 @@ function openLog(){
   }
 
   return `
-    <div class="log-entry">
-      <div class="log-speaker">${line.speaker || ""}</div>
-      <div>${String(line.content || "").replace(/\n/g,"<br>")}</div>
+  <div class="log-entry">
+    <div class="log-speaker role-${line.role || "narration"}">
+      ${line.speaker || ""}
     </div>
-  `;
+
+    <div class="log-text">
+      ${String(line.content || "").replace(/\n/g,"<br>")}
+    </div>
+  </div>
+`;
 }).join("");
   }
   document.getElementById("log-overlay").classList.add("show");
@@ -2348,20 +2557,19 @@ function submitLastObject(){
   ].map(normalize);
 
   if(mirrorWords.includes(value)){
-    gameState.lastMirrorChecked = true;
-    saveState();
-
-    runStory(stories.mirrorCheck, () => showPage("last-action-page"));
+    runStory(stories.mirrorCheck, () => {
+      gameState.lastMirrorChecked = true;
+      saveState();
+      showPage("last-action-page");
+    });
     return;
   }
 
   const result = getLastObjectMessage(value);
 
-  if(result){
-    setTabletMessage("last-object-message", result);
-  }else{
-    showTemporaryTabletMessage("last-object-message", "調べられないようだ。", 2000);
-  }
+  runStory([
+    {role:"narration", speaker:"", text: result || "調べられないようだ。"}
+  ], () => showPage("last-action-page"));
 }
 
 function getLastObjectMessage(value){
@@ -2418,19 +2626,31 @@ function getLastObjectMessage(value){
 }
 
 function submitLastAction(){
-  const value = normalize(document.getElementById("last-action-answer").value);
-  const correctAnswers = [
-    "かがみをインゴットでわる",
-    "鏡をインゴットで割る",
-    "かがみインゴットわる",
-    "鏡インゴット割る",
-    "インゴットでかがみをわる",
-    "インゴットで鏡を割る",
-    "ミラーをインゴットでわる",
-    "ミラーをインゴットで割る"
+  const tool = normalize(document.getElementById("last-tool-answer").value);
+  const target = normalize(document.getElementById("last-target-answer").value);
+  const action = document.getElementById("last-action-select").value;
+
+  const toolWords = [
+    "金のインゴット",
+    "きんのいんごっと",
+    "キンノインゴット",
+    "インゴット",
+    "いんごっと"
   ].map(normalize);
 
-  if(correctAnswers.includes(value)){
+  const targetWords = [
+    "かがみ",
+    "カガミ",
+    "鏡",
+    "ミラー",
+    "みらー"
+  ].map(normalize);
+
+  if(
+    toolWords.includes(tool) &&
+    targetWords.includes(target) &&
+    action === "割る"
+  ){
     runStory(stories.ending, () => showPage("clear-page"));
   }
 }
