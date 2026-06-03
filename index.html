@@ -82,6 +82,33 @@ body{
   color:#e8e8e8;
 }
 
+.mission-title{
+  font-family:"M PLUS 2p",sans-serif;
+  font-weight:700;
+  text-align:center;
+  letter-spacing:.04em;
+
+  font-size:clamp(24px,4vw,34px);
+
+  margin-bottom:18px;
+}
+
+.sub-story-box{
+  width:min(90vw,760px);
+  margin:18px auto 0;
+  padding:18px 22px;
+
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:6px;
+
+  font-family:"M PLUS 2p",sans-serif;
+  font-size:16px;
+  line-height:1.9;
+
+  text-align:left;
+}
+
 .before-box{
   background:rgba(0,0,0,.48);
   border:1px solid rgba(255,255,255,.14);
@@ -1363,8 +1390,17 @@ textarea{
 <div class="page hidden" id="step5-page">
   <div class="step-header"><img src="./image/title_step5.png" alt="5th STEP"></div>
 
-  <section class="section">
-    <h1 class="step-title-large">資産がある階を突き止めろ！</h1>
+  <section class="story">
+    <h2 class="mission-title">
+      資産がある階を突き止めろ！
+    </h2>
+  
+    <div class="sub-story-box">
+      ・キミは今、３号エレベーターにいる。<br>
+      ・この３号エレベーターは資産があるフロアへ向かうためのエレベーターだ。<br>
+      ・今いる階以外に、このエレベーターが停まることのできるフロアは１つだけらしい。<br>
+      ・手がかりをもとに、そのフロアを探し出そう。
+    </div>
   </section>
 
   <section class="story hidden" id="step5-story-text"></section>
@@ -1396,8 +1432,11 @@ textarea{
   <div class="step-header"><img src="./image/title_last.png" alt="LAST STEP"></div>
 
   <section class="section">
-    <h1 class="step-title-large">あなたは１号エレベーターの中にいる。</h1>
-    <div class="story">どうにかして、生き延びる方法を考えよ！</div>
+    <div class="story"> <h2 class="mission-title">どうにかして、生き延びる方法を考えよ！</h2></div>
+    <div class="sub-story-box">
+      ・キミは１号エレベーターに戻ってきたが、騙されて閉じ込められてしまった。<br>
+      ・エレベーターでの階移動は可能だが、他のエレベーターへ移動することはできない。
+    </div>
   </section>
 
   <div class="panel compact-panel">
@@ -2517,17 +2556,30 @@ function submitLastRiddle(){
   const floor = normalize(document.getElementById("floor-input-last").value);
   const answer = normalize(document.getElementById("answer-input-last").value);
 
-  if(["0","1","2","3","4","5","6","7","8","9"].includes(floor)){
-    showTemporaryTabletMessage("tablet-message-last","その階に行く必要がありません。");
-    return;
-  }
-
+  if(floor === "10"){
+  showTemporaryTabletMessage(
+    "tablet-message-last",
+    "その階に移動することはできません。"
+  );
+  return;
+}
+  
   if(floor === "11"){
     showLast11Riddle();
 
     if(["ミラー","みらー"].map(normalize).includes(answer)){
       openMoveModal("11", () => showPage("last-action-page"));
     }
+    return;
+  }
+
+  if(["0","1","2","3","4","5","6","7","8","9"].includes(floor)){
+    showTemporaryTabletMessage("tablet-message-last","ここに入力する必要はありません。");
+    return;
+  }
+
+  if(floor){
+    showTemporaryTabletMessage("tablet-message-last","その階は存在しません。");
   }
 }
 
@@ -2538,15 +2590,27 @@ const handleLastFloorTyping = debounce(() => {
   const value = normalize(input.value);
   if(!value) return;
 
-  if(["0","1","2","3","4","5","6","7","8","9"].includes(value)){
-    setTabletFloorBadge("tablet-floor-badge-last","","");
-    setTabletMessage("tablet-message-last","その階に行く必要がありません。");
+  if(value === "11"){
+    showLast11Riddle();
     return;
   }
 
-  if(value === "11"){
-    showLast11Riddle();
+  if(value === "10"){
+  setTabletFloorBadge("tablet-floor-badge-last","","");
+  showTemporaryTabletMessage(
+    "tablet-message-last",
+    "その階に移動することはできません。"
+  );
+  return;
+}
+
+  if(["0","1","2","3","4","5","6","7","8","9"].includes(value)){
+    setTabletFloorBadge("tablet-floor-badge-last","","");
+    showTemporaryTabletMessage("tablet-message-last","ここに入力する必要はありません。");
+    return;
   }
+
+  showTemporaryTabletMessage("tablet-message-last","その階は存在しません。");
 },350);
 
 function submitLastObject(){
