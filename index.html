@@ -583,7 +583,12 @@ body{
 .tablet-label{
   text-align:left;
   font-weight:700;
-  white-space:nowrap;
+  white-space:normal;
+  line-height:1.35;
+}
+
+.tablet-label span{
+  display:inline;
 }
 
 .tablet-floor-badge{
@@ -1218,6 +1223,60 @@ textarea{
     height:72px;
     font-size:21px;
   }
+  .tablet-top{
+    grid-template-columns:70px 1fr 40px;
+    grid-template-areas:
+      "input label badge";
+    gap:8px;
+    align-items:center;
+    padding:18px 4px 12px;
+  }
+
+  .tablet-floor-input{
+    grid-area:input;
+    width:70px;
+    height:48px;
+    font-size:24px;
+  }
+
+  .tablet-label{
+    grid-area:label;
+    font-size:14px;
+    line-height:1.35;
+    text-align:left;
+    white-space:normal;
+  }
+
+  .tablet-label-line1,
+  .tablet-label-line2{
+    display:block;
+  }
+
+  .tablet-label-line2{
+    padding-left:1.5em;
+  }
+
+  .tablet-floor-badge{
+    grid-area:badge;
+    width:40px;
+    height:40px;
+  }
+
+  .tablet-top > div:nth-child(3){
+    display:none;
+  }
+
+  .tablet-screen{
+    aspect-ratio:16 / 9;
+    min-height:auto;
+  }
+
+  .tablet-screen .image-placeholder{
+    font-size:20px;
+    padding:16px;
+  }
+
+  
   .modal-title{font-size:22px;}
   .guide-close{top:14px;right:14px;width:50px;height:50px;}
   .novel-stage{min-height:calc(100vh - 72px);}
@@ -1337,6 +1396,7 @@ textarea{
 }
 
 @media(max-width:700px){
+  
   #clear-page .clear-actions{
     flex-direction:column !important;
   }
@@ -1345,6 +1405,40 @@ textarea{
   #clear-page .clear-actions button{
     width:min(82vw,260px) !important;
   }
+}
+
+.item-panel img{
+  cursor:pointer;
+}
+
+.item-image-zoom-overlay{
+  position:fixed;
+  inset:0;
+  z-index:14000;
+  background:rgba(0,0,0,.88);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  padding:24px;
+  box-sizing:border-box;
+}
+
+.item-image-zoom-overlay.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.item-image-zoom-overlay img{
+  display:block;
+  max-width:94vw;
+  max-height:88vh;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  border-radius:6px;
 }
 
 </style>
@@ -1404,10 +1498,15 @@ textarea{
 <div class="item-overlay" id="item-overlay" onclick="closeItemByOutside(event)">
   <button class="guide-close" onclick="closeItem()">×</button>
   <div class="item-panel" onclick="event.stopPropagation()">
-    <img id="item-image" src="" alt="">
+    <img id="item-image" src="" alt="" onclick="openItemImageZoom()">
     <h2 id="item-title"></h2>
     <p id="item-text"></p>
   </div>
+</div>
+
+<div class="item-image-zoom-overlay" id="item-image-zoom-overlay" onclick="closeItemImageZoomByOutside(event)">
+  <button class="guide-close" onclick="closeItemImageZoom()">×</button>
+  <img id="item-image-zoom" src="" alt="">
 </div>
 
 <div class="log-overlay" id="log-overlay" onclick="closeLogByOutside(event)">
@@ -1611,7 +1710,10 @@ textarea{
     <div class="tablet">
       <div class="tablet-top">
         <input id="floor-input-4" class="tablet-floor-input" maxlength="2">
-        <div class="tablet-label">階へ行くための手がかり</div>
+        <div class="tablet-label">
+          <span class="tablet-label-line1">階へ行くための</span>
+          <span class="tablet-label-line2">手がかり</span>
+        </div>
         <div></div>
         <div class="tablet-floor-badge empty" id="tablet-floor-badge-4"></div>
       </div>
@@ -1763,8 +1865,8 @@ textarea{
     <div class="clear-image-frame" id="image-clear"></div>
 
     <div class="clear-actions">
-      <a href="#" target="_blank" rel="noopener">アンケート</a>
-      <button onclick="shareResult()">SNS共有</button>
+      <a href="https://forms.gle/gpnERzvb61zMosNE9" target="_blank" rel="noopener">アンケート</a>
+      <button onclick="shareResult()">Xに感想を共有</button>
       <a href="./behind_the_scenes.html" target="_blank" rel="noopener">裏話を読む</a>
     </div>
   </section>
@@ -2193,7 +2295,7 @@ function openItem(type){
     diary:{
       title:"資産家の日記",
       image:imagePaths.itemDiary,
-      text:"資産家が書き残した日記。"
+      text:"※タップまたはクリックで拡大可能。"
     }
   }[type];
   if(!data) return;
@@ -2987,6 +3089,28 @@ function getLastObjectMessage(value){
   return "";
 }
 
+function openItemImageZoom(){
+  const itemImage = document.getElementById("item-image");
+  const zoomImage = document.getElementById("item-image-zoom");
+  const overlay = document.getElementById("item-image-zoom-overlay");
+
+  if(!itemImage || !zoomImage || !overlay) return;
+
+  zoomImage.src = itemImage.src;
+  zoomImage.alt = itemImage.alt || "";
+  overlay.classList.add("show");
+}
+
+function closeItemImageZoom(){
+  document.getElementById("item-image-zoom-overlay").classList.remove("show");
+}
+
+function closeItemImageZoomByOutside(event){
+  if(event.target.id === "item-image-zoom-overlay"){
+    closeItemImageZoom();
+  }
+}
+
 function submitLastAction(){
   const tool = normalize(document.getElementById("last-tool-answer").value);
   const target = normalize(document.getElementById("last-target-answer").value);
@@ -3021,19 +3145,23 @@ function submitLastAction(){
 }
 
 function shareResult(){
-  const text = "ELEVATOR HOUSEをクリアしました！";
-  const url = location.href;
+  const text =
+`持ち帰り謎「ELEVATOR HOUSE」の全ての謎を解き明かした！
 
-  if(navigator.share){
-    navigator.share({text,url}).catch(()=>{});
-  }else{
-    const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
-    window.open(shareUrl,"_blank");
-  }
+#エフェックス謎解き
+#EVハウス謎
+
+pic.twitter.com/NCOZ7q85so`;
+
+  const shareUrl =
+    "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text);
+
+  window.open(shareUrl, "_blank", "noopener");
 }
 
 function setClearImage(){
   const isSp = window.matchMedia("(max-width:700px)").matches;
+
   setImage(
     "image-clear",
     isSp ? imagePaths.clearSp : imagePaths.clearPc,
