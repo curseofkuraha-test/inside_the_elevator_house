@@ -561,60 +561,6 @@ body{
   background:rgba(255,255,255,.16);
 }
 
-.tablet-top{
-  display:grid;
-  grid-template-columns:100px auto 1fr 50px;
-  align-items:center;
-  gap:12px;
-  padding:20px 10px 16px;
-}
-
-.tablet-floor-input{
-  width:100px;
-  height:50px;
-  border:1px solid rgba(255,255,255,.24);
-  border-radius:6px;
-  background:#070808;
-  color:white;
-  text-align:center;
-  font-size:28px;
-}
-
-.tablet-label{
-  font-size:13px;
-  text-align:left;
-  font-weight:700;
-  white-space:normal;
-  line-height:1.25;
-}
-
-.tablet-label span{
-  display:inline;
-}
-
-.tablet-floor-badge{
-  width:50px;
-  height:50px;
-  border-radius:6px;
-  background:#111;
-  border:1px solid rgba(255,255,255,.24);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-}
-
-.tablet-floor-badge img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  display:block;
-}
-
-.tablet-floor-badge.empty{
-  opacity:.28;
-}
-
 .tablet-screen{
   width:100%;
   aspect-ratio:16 / 9;
@@ -1177,133 +1123,6 @@ textarea{
   font-family:"LINE Seed JP",sans-serif !important;
 }
 
-@media(max-width:700px){
-  .page{padding:36px 14px 90px;}
-  .step-header img{width:min(82vw,320px);}
-  .story,.before-box{font-size:17px;line-height:2;}
-  .before-box{padding:32px 20px;}
-  .before-box h2{font-size:25px;}
-  .before-box h3{font-size:22px;}
-  .important-box{font-size:16px;padding:20px;}
-  .panel{width:300px;padding:22px;}
-  .panel.compact-panel{width:200px;padding:15px;}
-  .buttons{grid-template-columns:repeat(2,100px);gap:18px;}
-  .compact-panel .buttons{grid-template-columns:repeat(2,60px);gap:11px;}
-  .elevator-button{width:100px;height:100px;}
-  .compact-panel .elevator-button{width:60px;height:60px;}
-  .elevator-button span{font-size:64px;}
-  .compact-panel .elevator-button span{font-size:38px;}
-  .floor-title{font-size:22px;}
-  .step1-riddle-title,.step-title-large{font-size:34px;letter-spacing:3px;}
-  .step1-riddle-frame{max-width:92vw;}
-  .tablet{border-width:7px;border-radius:24px;padding:18px;}
-  .tablet-top{
-    grid-template-columns:74px auto 1fr 44px;
-    gap:8px;
-    padding:20px 6px 16px;
-  }
-  .tablet-floor-input{
-    width:74px;
-    height:52px;
-    font-size:25px;
-  }
-  .tablet-floor-badge{
-    width:44px;
-    height:44px;
-  }
-  .tablet-label{
-    font-size:15px;
-  }
-  .tablet-screen{
-    aspect-ratio:4 / 5;
-  }
-  .tablet-bottom{flex-direction:column;}
-  .tablet-send{width:100%;height:56px;}
-  .tablet-answer-input{
-    width:100%;
-    height:72px;
-    font-size:21px;
-  }
-  .tablet-top{
-    grid-template-columns:70px 1fr 40px;
-    grid-template-areas:
-      "input label badge";
-    gap:8px;
-    align-items:center;
-    padding:18px 4px 12px;
-  }
-
-  .tablet-floor-input{
-    grid-area:input;
-    width:70px;
-    height:48px;
-    font-size:24px;
-  }
-
-  .tablet-label{
-    grid-area:label;
-    font-size:14px;
-    line-height:1.35;
-    text-align:left;
-    white-space:normal;
-  }
-
-  .tablet-label-line1,
-  .tablet-label-line2{
-    display:block;
-  }
-
-  .tablet-label-line2{
-    padding-left:1.5em;
-  }
-
-  .tablet-floor-badge{
-    grid-area:badge;
-    width:40px;
-    height:40px;
-  }
-
-  .tablet-top > div:nth-child(3){
-    display:none;
-  }
-
-  .tablet-screen{
-    aspect-ratio:16 / 9;
-    min-height:auto;
-  }
-
-  .tablet-screen .image-placeholder{
-    font-size:20px;
-    padding:16px;
-  }
-
-  
-  .modal-title{font-size:22px;}
-  .guide-close{top:14px;right:14px;width:50px;height:50px;}
-  .novel-stage{min-height:calc(100vh - 72px);}
-  .novel-window{padding:20px;}
-  .novel-text{font-size:18px;min-height:220px;}
-  .guide-scroll{
-    width:min(94vw,520px);
-    max-height:86vh;
-  }
-  .action-row{
-    grid-template-columns:1fr;
-    gap:10px;
-    text-align:center;
-  }
-
-  .action-row span{
-    font-size:18px;
-  }
-
-  .action-row input,
-  .action-row select{
-    width:100%;
-    height:60px;
-  }
-}
-
 .sound-check-box{
   max-width:720px;
   text-align:center;
@@ -1396,67 +1215,6 @@ textarea{
   cursor:pointer;
 }
 
-@media(max-width:700px){
-  
-  #clear-page .clear-actions{
-    flex-direction:column !important;
-  }
-
-  #clear-page .clear-actions a,
-  #clear-page .clear-actions button{
-    width:min(82vw,260px) !important;
-  }
-
-  .tablet .tablet-top{
-    display:grid !important;
-    grid-template-columns:58px minmax(110px, 1fr) 34px !important;
-    grid-template-areas:"input label badge" !important;
-    column-gap:12px !important;
-    align-items:center !important;
-    box-sizing:border-box !important;
-    overflow:visible !important;
-  }
-
-  .tablet .tablet-floor-input{
-    grid-area:input !important;
-    width:58px !important;
-    min-width:58px !important;
-    height:46px !important;
-    font-size:22px !important;
-  }
-
-  .tablet .tablet-label{
-    grid-area:label !important;
-    min-width:0 !important;
-    width:auto !important;
-    padding-left:2px !important;
-    font-size:12px !important;
-    line-height:1.25 !important;
-    white-space:normal !important;
-    overflow-wrap:normal !important;
-    word-break:keep-all !important;
-  }
-
-  .tablet .tablet-label-line1,
-  .tablet .tablet-label-line2{
-    display:block !important;
-    width:auto !important;
-  }
-
-  .tablet .tablet-label-line2{
-    padding-left:1.2em !important;
-  }
-
-  .tablet .tablet-floor-badge{
-    grid-area:badge !important;
-    width:34px !important;
-    height:34px !important;
-  }
-
-  .tablet .tablet-top > div:nth-child(3){
-    display:none !important;
-  }}
-
 .item-panel img{
   cursor:pointer;
 }
@@ -1491,75 +1249,262 @@ textarea{
   border-radius:6px;
 }
 
-/* スマホ時の右ズレ対策 */
 @media(max-width:700px){
 
-.page,
+.page{
+  padding:36px 14px 90px;
+  box-sizing:border-box;
+  max-width:100%;
+}
+
 .section,
 .story,
 .before-box,
 .important-box,
 .floor-view,
-.tablet,
-.tablet-top,
-.tablet-screen,
 .answer-area,
 .clear-section{
-  box-sizing:border-box !important;
-  max-width:100% !important;
+  box-sizing:border-box;
+  max-width:100%;
 }
 
-.tablet{
-  width:100% !important;
-  margin-left:auto !important;
-  margin-right:auto !important;
+.step-header img{
+  width:min(82vw,320px);
 }
 
-.tablet-top{
-  width:100% !important;
-  margin-left:0 !important;
-  margin-right:0 !important;
-  overflow:hidden !important;
+.story,
+.before-box{
+  font-size:17px;
+  line-height:2;
 }
 
-.tablet-label{
-  width:auto !important;
-  min-width:0 !important;
+.before-box{
+  padding:32px 20px;
 }
 
-.tablet-screen{
-  width:100% !important;
+.before-box h2{
+  font-size:25px;
 }
 
-.image-frame{
-  max-width:100% !important;
+.before-box h3{
+  font-size:22px;
+}
+
+.important-box{
+  width:100%;
+  font-size:16px;
+  padding:20px;
 }
 
 .sub-story-box{
-    width:100% !important;
-    max-width:100% !important;
-    margin-left:auto !important;
-    margin-right:auto !important;
-    padding:16px 18px !important;
-    box-sizing:border-box !important;
-  }
+  width:100%;
+  max-width:100%;
+  margin-left:auto;
+  margin-right:auto;
+  padding:16px 18px;
+  box-sizing:border-box;
+}
 
-  .story .sub-story-box{
-    width:100% !important;
-  }
+.panel{
+  width:300px;
+  padding:22px;
+}
 
-  .important-box,
-  .before-box,
-  .novel-container,
-  .tablet,
-  .tablet-top,
-  .tablet-screen,
-  .clear-section,
-  .section{
+.panel.compact-panel{
+  width:200px;
+  padding:15px;
+}
 
-    box-sizing:border-box !important;
-    max-width:100% !important;
-  }
+.buttons{
+  grid-template-columns:repeat(2,100px);
+  gap:18px;
+}
+
+.compact-panel .buttons{
+  grid-template-columns:repeat(2,60px);
+  gap:11px;
+}
+
+.elevator-button{
+  width:100px;
+  height:100px;
+}
+
+.compact-panel .elevator-button{
+  width:60px;
+  height:60px;
+}
+
+.elevator-button span{
+  font-size:64px;
+}
+
+.compact-panel .elevator-button span{
+  font-size:38px;
+}
+
+.floor-title{
+  font-size:22px;
+}
+
+.step1-riddle-title,
+.step-title-large{
+  font-size:34px;
+  letter-spacing:3px;
+}
+
+.step1-riddle-frame{
+  max-width:92vw;
+}
+
+.tablet{
+  width:100%;
+  max-width:100%;
+  margin-left:auto;
+  margin-right:auto;
+  padding:18px;
+  border-width:7px;
+  border-radius:24px;
+  box-sizing:border-box;
+}
+
+.tablet-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:16px 4px 12px;
+  width:100%;
+  max-width:100%;
+  box-sizing:border-box;
+  overflow:visible;
+}
+
+.tablet-destination{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-width:0;
+}
+
+.tablet-floor-input{
+  width:56px;
+  min-width:56px;
+  height:46px;
+  font-size:22px;
+}
+
+.tablet-label{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  font-size:12px;
+  line-height:1.25;
+  white-space:normal;
+  min-width:0;
+  width:auto;
+}
+
+.tablet-label span{
+  display:block;
+}
+
+.tablet-label span:nth-child(2){
+  padding-left:1.2em;
+}
+
+.tablet-floor-badge{
+  width:34px;
+  min-width:34px;
+  height:34px;
+}
+
+.tablet-screen{
+  width:100%;
+  max-width:100%;
+  aspect-ratio:16 / 9;
+  min-height:auto;
+  box-sizing:border-box;
+}
+
+.tablet-screen .image-placeholder{
+  font-size:20px;
+  padding:16px;
+}
+
+.tablet-bottom{
+  flex-direction:column;
+}
+
+.tablet-send{
+  width:100%;
+  height:56px;
+}
+
+.tablet-answer-input{
+  width:100%;
+  height:72px;
+  font-size:21px;
+}
+
+.image-frame{
+  max-width:100%;
+}
+
+.modal-title{
+  font-size:22px;
+}
+
+.guide-close{
+  top:14px;
+  right:14px;
+  width:50px;
+  height:50px;
+}
+
+.novel-stage{
+  min-height:calc(100vh - 72px);
+}
+
+.novel-window{
+  padding:20px;
+}
+
+.novel-text{
+  font-size:18px;
+  min-height:220px;
+}
+
+.guide-scroll{
+  width:min(94vw,520px);
+  max-height:86vh;
+}
+
+.action-row{
+  grid-template-columns:1fr;
+  gap:10px;
+  text-align:center;
+}
+
+.action-row span{
+  font-size:18px;
+}
+
+.action-row input,
+.action-row select{
+  width:100%;
+  height:60px;
+}
+
+#clear-page .clear-actions{
+  flex-direction:column;
+}
+
+#clear-page .clear-actions a,
+#clear-page .clear-actions button{
+  width:min(82vw,260px);
+}
 }
 
 
@@ -1835,12 +1780,14 @@ textarea{
   <section class="section">
     <div class="tablet">
       <div class="tablet-top">
-        <input id="floor-input-4" class="tablet-floor-input" maxlength="2">
-        <div class="tablet-label">
-          <span class="tablet-label-line1">階へ行くための</span>
-          <span class="tablet-label-line2">手がかり</span>
+        <div class="tablet-destination">
+          <input id="floor-input-4" class="tablet-floor-input" maxlength="2">
+          <div class="tablet-label">
+            <span>階へ行くための</span>
+            <span>手がかり</span>
+          </div>
         </div>
-        <div></div>
+      
         <div class="tablet-floor-badge empty" id="tablet-floor-badge-4"></div>
       </div>
 
@@ -1879,12 +1826,14 @@ textarea{
   <section class="section">
     <div class="tablet">
       <div class="tablet-top">
-        <input id="floor-input-5" class="tablet-floor-input" maxlength="2">
-        <div class="tablet-label">
-          <span class="tablet-label-line1">階へ行くための</span>
-          <span class="tablet-label-line2">手がかり</span>
+        <div class="tablet-destination">
+          <input id="floor-input-5" class="tablet-floor-input" maxlength="2">
+          <div class="tablet-label">
+            <span>階へ行くための</span>
+            <span>手がかり</span>
+          </div>
         </div>
-        <div></div>
+      
         <div class="tablet-floor-badge empty" id="tablet-floor-badge-5"></div>
       </div>
 
@@ -1925,12 +1874,14 @@ textarea{
   <section class="section">
     <div class="tablet">
       <div class="tablet-top">
-        <input id="floor-input-last" class="tablet-floor-input" maxlength="2">
-        <div class="tablet-label">
-          <span class="tablet-label-line1">階へ行くための</span>
-          <span class="tablet-label-line2">手がかり</span>
+        <div class="tablet-destination">
+          <input id="floor-input-last" class="tablet-floor-input" maxlength="2">
+          <div class="tablet-label">
+            <span>階へ行くための</span>
+            <span>手がかり</span>
+          </div>
         </div>
-        <div></div>
+      
         <div class="tablet-floor-badge empty" id="tablet-floor-badge-last"></div>
       </div>
 
@@ -3422,6 +3373,38 @@ function initGame(){
   bindEnterKeys();
   bindTabletTyping();
   restoreGame();
+
+  const params = new URLSearchParams(window.location.search);
+
+  if(params.get("return") === "clear"){
+    forceClearReturnState();
+  }
+}
+
+function forceClearReturnState(){
+  unlockNav("nav-step1");
+  unlockNav("nav-step2");
+  unlockNav("nav-step3");
+  unlockNav("nav-step4");
+  unlockNav("nav-step5");
+  unlockNav("nav-last");
+
+  gameState.guideUnlocked = true;
+  gameState.tabletGuideUnlocked = true;
+  gameState.ingotUnlocked = true;
+  gameState.diaryUnlocked = true;
+  gameState.lastMirrorChecked = true;
+  gameState.currentPage = "clear-page";
+
+  document.getElementById("guide-button").classList.remove("hidden");
+  document.getElementById("tablet-guide-button").classList.remove("hidden");
+  document.getElementById("item-ingot-button").classList.remove("hidden");
+  document.getElementById("item-diary-button").classList.remove("hidden");
+
+  saveState();
+  showPage("clear-page");
+
+  history.replaceState(null, "", "./index.html");
 }
 
 initGame();
