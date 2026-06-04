@@ -1428,7 +1428,7 @@ textarea{
   .tablet .tablet-label-line2{
     padding-left:1.4em !important;
   }
-  
+
   .tablet .tablet-top{
     grid-template-columns:64px minmax(0, 1fr) 36px !important;
     column-gap:14px !important;
@@ -1486,6 +1486,52 @@ textarea{
   object-fit:contain;
   border-radius:6px;
 }
+
+/* スマホ時の右ズレ対策 */
+@media(max-width:700px){
+
+.page,
+.section,
+.story,
+.before-box,
+.important-box,
+.floor-view,
+.tablet,
+.tablet-top,
+.tablet-screen,
+.answer-area,
+.clear-section{
+  box-sizing:border-box !important;
+  max-width:100% !important;
+}
+
+.tablet{
+  width:100% !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+.tablet-top{
+  width:100% !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+  overflow:hidden !important;
+}
+
+.tablet-label{
+  width:auto !important;
+  min-width:0 !important;
+}
+
+.tablet-screen{
+  width:100% !important;
+}
+
+.image-frame{
+  max-width:100% !important;
+}
+}
+
 
 
 
