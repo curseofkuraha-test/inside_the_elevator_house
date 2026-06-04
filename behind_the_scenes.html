@@ -150,7 +150,125 @@ p{
   font-weight:700;
 }
 
+.bonus-answer-area{
+  width:min(100%,620px);
+  margin:40px auto;
+  text-align:center;
+}
+
+.bonus-answer-area h3{
+  margin:0 0 18px;
+  font-size:24px;
+  font-family:"M PLUS 2p",sans-serif;
+}
+
+.bonus-answer-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+}
+
+.bonus-answer-row input{
+  flex:1;
+  height:54px;
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:6px;
+  background:#111;
+  color:#fff;
+  padding:0 16px;
+  box-sizing:border-box;
+  font-family:"M PLUS 2p",sans-serif;
+  font-size:17px;
+}
+
+.bonus-answer-row button{
+  width:120px;
+  height:54px;
+  border:none;
+  border-radius:6px;
+  background:#00a29a;
+  color:#fff;
+  font-family:"M PLUS 2p",sans-serif;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.bonus-answer-message{
+  min-height:80px;
+  margin-top:18px;
+
+  text-align:center;
+
+  font-weight:700;
+  font-size:36px;
+
+  color:#ffdf6e;
+
+  line-height:1.2;
+}
+
+.bonus-riddle-image{
+  width:100%;
+  margin:24px 0;
+  text-align:center;
+}
+
+.bonus-riddle-image img{
+  display:block;
+  width:min(100%,900px);
+  height:auto;
+  margin:0 auto;
+}
+
+.return-button{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  width:min(320px,90%);
+  height:58px;
+
+  margin:36px auto 0;
+
+  border:none;
+  border-radius:8px;
+
+  background:#00a29a;
+  color:#fff;
+
+  text-decoration:none;
+
+  font-family:"M PLUS 2p",sans-serif;
+  font-size:17px;
+  font-weight:700;
+
+  transition:.2s;
+  cursor:pointer;
+}
+
+.return-button:hover{
+  transform:translateY(-1px);
+  opacity:.92;
+}
+
+.return-button:active{
+  transform:translateY(1px);
+}
+
+
+
 @media(max-width:700px){
+  .bonus-answer-row{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .bonus-answer-row button{
+    width:100%;
+  }
+
   .page{
     padding:34px 12px 70px;
   }
@@ -401,11 +519,76 @@ p{
   <img src="./image/bonus_riddle.png" alt="おまけの謎">
 </div>
 
-    <div class="back-link">
-      <a href="./index.html">ゲームに戻る</a>
-    </div>
+<div class="bonus-answer-area">
+  <h3>おまけの答えを入力</h3>
+
+  <div class="bonus-answer-row">
+    <input id="bonus-answer-input"
+           type="text"
+           placeholder="答えを入力">
+
+    <button onclick="checkBonusAnswer()">
+      送信
+    </button>
+  </div>
+
+  <div id="bonus-answer-message"
+       class="bonus-answer-message">
+  </div>
+</div>
+
+<a class="return-button" href="./index.html">
+  ゲームに戻る
+</a>
 
   </article>
 </main>
+
+<script>
+  function normalizeBonusAnswer(value){
+    return String(value)
+      .toLowerCase()
+      .replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s){
+        return String.fromCharCode(s.charCodeAt(0) - 65248);
+      })
+      .replace(/[ぁ-ん]/g, function(s){
+        return String.fromCharCode(s.charCodeAt(0) + 0x60);
+      })
+      .replace(/\s/g,"");
+  }
+  
+  function checkBonusAnswer(){
+    const input = document.getElementById("bonus-answer-input");
+    const message = document.getElementById("bonus-answer-message");
+    if(!input || !message) return;
+  
+    const value = normalizeBonusAnswer(input.value);
+  
+    const answers = [
+      "おーぷん",
+      "オープン",
+      "open",
+      "OPEN"
+    ].map(normalizeBonusAnswer);
+  
+    if(answers.includes(value)){
+      message.textContent = "正解です！";
+    }else{
+      message.textContent = "";
+    }
+  }
+  
+  document.addEventListener("DOMContentLoaded", function(){
+    const input = document.getElementById("bonus-answer-input");
+    if(!input) return;
+  
+    input.addEventListener("keydown", function(e){
+      if(e.key === "Enter"){
+        checkBonusAnswer();
+      }
+    });
+  });
+  </script>
+
 </body>
 </html>
