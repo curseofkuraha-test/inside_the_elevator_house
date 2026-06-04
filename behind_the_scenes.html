@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+<meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+<title>ELEVATOR HOUSE 裏話</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+2p:wght@400;500;700;800&display=swap');
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:#111;
+  color:#f4f4f4;
+  font-family:"M PLUS 2p",sans-serif;
+  line-height:2;
+  overflow-x:hidden;
+}
+
+.background-layer{
+  position:fixed;
+  inset:0;
+  background:url("./image/background.png") center/cover no-repeat;
+  z-index:-20;
+}
+
+.background-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.72);
+  z-index:-19;
+}
+
+.page{
+  width:100%;
+  min-height:100vh;
+  padding:48px 18px 90px;
+  box-sizing:border-box;
+}
+
+.article{
+  width:min(92vw,860px);
+  margin:0 auto;
+  padding:46px 34px;
+  box-sizing:border-box;
+
+  background:rgba(0,0,0,.58);
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:10px;
+  box-shadow:0 18px 42px rgba(0,0,0,.42);
+}
+
+.main-title{
+  text-align:center;
+  font-size:clamp(30px,6vw,48px);
+  line-height:1.45;
+  letter-spacing:.08em;
+  margin:0 0 36px;
+  color:#fff;
+}
+
+.lead{
+  font-size:18px;
+  margin-bottom:42px;
+}
+
+.section-title{
+  margin:58px 0 22px;
+  padding:10px 16px;
+  border-left:6px solid #00a29a;
+  background:rgba(0,162,154,.12);
+  font-size:clamp(23px,4.5vw,32px);
+  line-height:1.5;
+  letter-spacing:.06em;
+  color:#ffffff;
+}
+
+p{
+  margin:0 0 24px;
+  font-size:17px;
+}
+
+.divider{
+  width:100%;
+  height:1px;
+  margin:48px 0;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.35),
+    transparent
+  );
+}
+
+.note{
+  color:#ddd;
+  font-size:16px;
+}
+
+.emphasis{
+  display:inline;
+  color:#ffdf6e;
+  font-weight:700;
+}
+
+.list{
+  margin:0 0 26px 1.2em;
+  padding:0;
+}
+
+.list li{
+  margin-bottom:8px;
+}
+
+.final-message{
+  margin-top:54px;
+  padding:28px 22px;
+  border:1px solid rgba(0,162,154,.45);
+  background:rgba(0,162,154,.1);
+  border-radius:8px;
+  text-align:center;
+  font-weight:700;
+  font-size:18px;
+}
+
+.back-link{
+  display:flex;
+  justify-content:center;
+  margin-top:38px;
+}
+
+.back-link a{
+  min-width:220px;
+  min-height:54px;
+  padding:0 22px;
+  border-radius:6px;
+  background:#00a29a;
+  color:#fff;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+}
+
+@media(max-width:700px){
+  .page{
+    padding:34px 12px 70px;
+  }
+
+  .article{
+    padding:34px 20px;
+  }
+
+  p{
+    font-size:16px;
+  }
+
+  .lead{
+    font-size:16px;
+  }
+
+  .section-title{
+    margin-top:48px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="background-layer"></div>
+<div class="background-overlay"></div>
+
+<main class="page">
+  <article class="article">
+
+    <h1 class="main-title">ELEVATOR HOUSE<br>裏話</h1>
+
+    <section class="lead">
+      <p>ELEVATOR HOUSEのクリアおめでとうございます！<br>
+      制作者のKURAHAと申します。</p>
+
+      <p>知ってくださっている方も、初めての方も、今後覚えていただけると嬉しいです！</p>
+
+      <p>今回は、エレベーターをテーマにした謎解きでした。</p>
+
+      <p>タイトルからは想像できなかったかもしれませんが、透明カードを使用した謎解きに挑戦してみました。</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <h2 class="section-title">タイトルについて</h2>
+
+    <p>元々この作品のタイトルは、ELEVATOR HOUSEではなく「DISPLAYERS」でした。</p>
+
+    <p>透明カードを何枚も重ねて組み合わせることから「LAYERS」。</p>
+
+    <p>そして、その行動によってディスプレイに手がかりが現れる構造だったため、「DISPLAYERS」というタイトルを考えていました。</p>
+
+    <p>ただ、DISPLAYERSは既存の単語として存在しており、造語としての独自性が弱いことや、作品内容を十分に表現できていないことから、最終的には採用を見送りました。</p>
+
+    <p class="note">個人的には結構気に入っていたんですけどね……。</p>
+
+    <div class="divider"></div>
+
+    <h2 class="section-title">透明カードのギミックについて</h2>
+
+    <p>透明カードを重ねて使用する場合、できる限りカード枚数を少なくすることを前提に設計しました。</p>
+
+    <p>エレベーターの数字表示を深掘りして考えると、デジタル数字は「セグメント」を点灯させることで表現されています。</p>
+
+    <p class="note">デジタル数字を構成する部分を、本作では以後「セグメント」と呼びます。</p>
+
+    <p>この仕組みを透明カードで再現しようとすると、数字を作るために必要なセグメントは7つ。</p>
+
+    <p>つまり、各セグメント用のカード7枚と台紙1枚の、合計8枚が必要になります。</p>
+
+    <p>しかし、この方式だと「8」を作る際にすべてのカードを使用する必要があり、実際に遊ぶうえではかなり大変です。</p>
+
+    <p>そこで発想を転換し、<span class="emphasis">「付け足す」のではなく「消す」方式</span>に変更しました。</p>
+
+    <div class="divider"></div>
+
+    <p>それでも一見すると7枚必要そうに見えますが、考えるべきなのは「最大でいくつ消す必要があるか」です。</p>
+
+    <p>最も多くセグメントを消す数字は「1」で、この場合必要になるのは5か所。</p>
+
+    <p>つまり、透明カードは5枚あれば足ります。</p>
+
+    <p>とはいえ、普通は1枚のカードに複数のセグメントを入れてしまうと成立しません。</p>
+
+    <p>ですが、</p>
+
+    <ul class="list">
+      <li>カードの回転</li>
+      <li>各セグメントの使用頻度</li>
+    </ul>
+
+    <p>などを考慮していくと、同じカード上に複数のセグメントが存在していても、0〜9のすべてを成立させられる組み合わせが存在しました。</p>
+
+    <p>その結果、透明カードは7枚ではなく5枚で実現できた、というわけです。</p>
+
+    <div class="divider"></div>
+
+    <h2 class="section-title">14通りの使用パターン</h2>
+
+    <p>そして、この5枚のカードを本当にたくさんのパターンで組み合わせていただきました。</p>
+
+    <p>最終的な使用パターンは合計14通りです。</p>
+
+    <p>しかも、その14パターンすべてにおいて、</p>
+
+    <p><span class="emphasis">「緑枠は必ず1つしか成立してはいけない」</span></p>
+
+    <p>という、なかなか無茶な制約がありました。</p>
+
+    <p>カードに描かれていたバツ印、緑枠、手がかりの内容は、重複して使われているものこそありますが、すべて意味があります。</p>
+
+    <p>実は、使われていないダミー要素は1つもありません。</p>
+
+    <p class="note">どれか1つ欠けるだけで成立しなくなります。</p>
+
+    <p>さらに、制作途中でカード構成を変更すると、ほぼ全部作り直しになります。</p>
+
+    <p>謎制作はパズル制作だと言われますが、この作品に関しては本当にその通りだなと思いました。</p>
+
+    <div class="divider"></div>
+
+    <h2 class="section-title">問題構成について</h2>
+
+    <p>一部の問題は言葉遊びを多めにしつつ、小謎ラッシュ寄りの構成になっています。</p>
+
+    <p>その中でも、透明カードの仕組みから生まれた部分を少し紹介します。</p>
+
+    <p>実は、セグメントを使えばアルファベットもある程度表現できます。</p>
+
+    <p>しかし、透明カードを5枚に削減した影響で、本来なら作れるアルファベットでも、このカード構成では作れないものが存在します。</p>
+
+    <p>そして、その「作れない文字の階」は、ゲーム中でも行けない階になっています。</p>
+
+    <div class="divider"></div>
+
+    <h2 class="section-title">「このかいにしさんあり」について</h2>
+
+    <p>3号エレベーターで行き詰まり、3rd STEPの赤枠に書かれていた</p>
+
+    <p><span class="emphasis">「このかいにしさんあり」</span></p>
+
+    <p>という文章が、実は資産家からのメッセージだった。</p>
+
+    <p>そして、「この階」という曖昧な指示ではなく、きちんと階名を示していた。</p>
+
+    <p>……という流れも、</p>
+
+    <p><span class="emphasis">「その文字をカードで実際に作れる」</span></p>
+
+    <p>という裏付けがあったからこそ実装できたギミックでした。</p>
+
+    <p>もしカード側の都合で成立しなければ、最終問題はまったく別の形になっていたと思います。</p>
+
+    <div class="divider"></div>
+
+    <h2 class="section-title">採用されなかった階</h2>
+
+    <p>ちなみに、セグメントで表現できるカタカナには「ヒ」「ヨ」「コ」などもあります。</p>
+
+    <p>最終問題を決める前は、</p>
+
+    <ul class="list">
+      <li>ヒ階</li>
+      <li>ヨ階</li>
+      <li>コ階</li>
+    </ul>
+
+    <p>へ進む構成も考えていました。</p>
+
+    <p>ただ、</p>
+
+    <p>「ヒ階（27階）！？」<br>
+    「ヨ階（38階）！？」<br>
+    「そもそもこの家に存在しないのでは……？」</p>
+
+    <p>となり、泣く泣く採用を見送りました。</p>
+
+    <p>悲しいね🐥</p>
+
+    <div class="divider"></div>
+
+    <h2 class="section-title">最後に登場する11階</h2>
+
+    <p>そして最後に登場する11階。</p>
+
+    <p>実はこれも、カードギミックを考え始めた段階から想定していました。</p>
+
+    <p><span class="emphasis">「11階って、7セグメント1つで作れるんじゃない？」</span></p>
+
+    <p>という発想です。</p>
+
+    <p>そんなわけで、皆さんには7セグメントで11を作っていただきました。</p>
+
+    <p>本来1つの数字しか作れない仕組みなので、かなり特殊な使い方です。</p>
+
+    <p>ちなみに10階はどうやっても作れません。</p>
+
+    <p>作れないものは作れません。</p>
+
+    <div class="divider"></div>
+
+    <h2 class="section-title">全体設計について</h2>
+
+    <p>こうして、</p>
+
+    <p><span class="emphasis">「カードで実現可能か」</span></p>
+
+    <p>を先に検証してから、全体の骨組みを作っていきました。</p>
+
+    <p>あとは、そのレギュレーションに合わせて各問題へ手がかりを配置していくだけです。</p>
+
+    <p>問題制作に関する話は、だいたいこんなところでしょうか。</p>
+
+    <div class="divider"></div>
+
+    <h2 class="section-title">音について</h2>
+
+    <p>最後に、ちょっとした小話です。</p>
+
+    <p>実は、このWebサイトで使用している効果音は、一部編集しています。</p>
+
+    <p>例えば、ヘリコプターが近づいてくるシーンでは、音量が徐々に大きくなるよう調整しています。</p>
+
+    <p>また、鏡をノックするシーンでは、鏡の向こうに空間があることが伝わるよう、音源を加工して強めのリバーブを加えています。</p>
+
+    <p>細かな部分までこだわって制作しました。</p>
+
+    <p>少しでも楽しんでいただけていたら嬉しいです。</p>
+
+    <div class="divider"></div>
+
+    <div class="final-message">
+      改めまして、<br><br>
+      プレイしていただき、本当にありがとうございました！<br>
+      他の作品や次回作も、楽しみにしていただけると嬉しいです。
+    </div>
+
+    <div class="divider"></div>
+
+    <h2 class="section-title">おまけの謎</h2>
+
+    <p>せっかくここまで読んでくださったので……</p>
+
+<p><span class="emphasis">おまけの謎です！</span></p>
+
+<div class="bonus-riddle-image">
+  <img src="./image/bonus_riddle.png" alt="おまけの謎">
+</div>
+
+    <div class="back-link">
+      <a href="./index.html">ゲームに戻る</a>
+    </div>
+
+  </article>
+</main>
+</body>
+</html>
