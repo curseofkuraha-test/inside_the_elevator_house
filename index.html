@@ -672,28 +672,36 @@ body{
 }
 
 .clear-actions{
+  margin-top:34px;
   display:flex;
   justify-content:center;
-  gap:16px;
+  align-items:center;
   flex-wrap:wrap;
-  margin-top:34px;
+  gap:16px;
 }
 
 .clear-actions a,
 .clear-actions button{
-  width:min(82vw,260px);
-  min-height:54px;
+
+  width:200px;
+  height:56px;
+
   border:none;
   border-radius:6px;
+
   background:#00a29a;
-  color:white;
-  font-size:17px;
+  color:#fff;
+
+  font-family:"M PLUS 2p",sans-serif;
+  font-size:16px;
   font-weight:700;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+
   text-decoration:none;
+  cursor:pointer;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
 /* novel */
@@ -1934,15 +1942,17 @@ function updateAudioToggleButton(){
 }
 
 function playStorySound(src){
-  if(!src) return;
 
-  stopStorySound();
+if(!src) return;
 
-  if(!gameState.audioEnabled) return;
+stopStorySound();
 
-  currentStoryAudio = new Audio(src);
-  currentStoryAudio.volume = 1;
-  currentStoryAudio.play().catch(()=>{});
+if(!gameState.audioEnabled){
+  return;
+}
+
+currentStoryAudio = new Audio(src);
+currentStoryAudio.play().catch(()=>{});
 }
 
 function pressEmergencyCall(){
@@ -2269,13 +2279,17 @@ function stopStorySound(){
 }
 
 function playStorySound(src){
-  if(!src) return;
 
-  stopStorySound();
+if(!src) return;
 
-  currentStoryAudio = new Audio(src);
-  currentStoryAudio.volume = 0.85;
-  currentStoryAudio.play().catch(()=>{});
+stopStorySound();
+
+if(!gameState.audioEnabled){
+  return;
+}
+
+currentStoryAudio = new Audio(src);
+currentStoryAudio.play().catch(()=>{});
 }
 
 function renderNovelLine(){
