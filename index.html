@@ -1407,51 +1407,55 @@ textarea{
     width:min(82vw,260px) !important;
   }
 
-  .tablet .tablet-label{
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:flex-start !important;
-    justify-content:center !important;
-    gap:2px !important;
+  .tablet .tablet-top{
+    display:grid !important;
+    grid-template-columns:58px minmax(110px, 1fr) 34px !important;
+    grid-template-areas:"input label badge" !important;
+    column-gap:12px !important;
+    align-items:center !important;
+    box-sizing:border-box !important;
+    overflow:visible !important;
+  }
 
-    font-size:13px !important;
+  .tablet .tablet-floor-input{
+    grid-area:input !important;
+    width:58px !important;
+    min-width:58px !important;
+    height:46px !important;
+    font-size:22px !important;
+  }
+
+  .tablet .tablet-label{
+    grid-area:label !important;
+    min-width:0 !important;
+    width:auto !important;
+    padding-left:2px !important;
+    font-size:12px !important;
     line-height:1.25 !important;
     white-space:normal !important;
+    overflow-wrap:normal !important;
+    word-break:keep-all !important;
   }
 
   .tablet .tablet-label-line1,
   .tablet .tablet-label-line2{
     display:block !important;
-    width:100% !important;
+    width:auto !important;
   }
 
   .tablet .tablet-label-line2{
-    padding-left:1.4em !important;
-  }
-
-  .tablet .tablet-top{
-    grid-template-columns:64px minmax(0, 1fr) 36px !important;
-    column-gap:14px !important;
-    padding-left:8px !important;
-    padding-right:8px !important;
-  }
-
-  .tablet .tablet-floor-input{
-    width:64px !important;
-    min-width:64px !important;
-  }
-
-  .tablet .tablet-label{
-    padding-left:4px !important;
-    padding-right:4px !important;
-    box-sizing:border-box !important;
+    padding-left:1.2em !important;
   }
 
   .tablet .tablet-floor-badge{
-    width:36px !important;
-    height:36px !important;
+    grid-area:badge !important;
+    width:34px !important;
+    height:34px !important;
   }
-}
+
+  .tablet .tablet-top > div:nth-child(3){
+    display:none !important;
+  }}
 
 .item-panel img{
   cursor:pointer;
