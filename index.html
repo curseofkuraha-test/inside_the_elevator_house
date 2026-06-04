@@ -581,10 +581,11 @@ body{
 }
 
 .tablet-label{
+  font-size:13px;
   text-align:left;
   font-weight:700;
   white-space:normal;
-  line-height:1.35;
+  line-height:1.25;
 }
 
 .tablet-label span{
@@ -1405,6 +1406,28 @@ textarea{
   #clear-page .clear-actions button{
     width:min(82vw,260px) !important;
   }
+
+  .tablet .tablet-label{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:flex-start !important;
+    justify-content:center !important;
+    gap:2px !important;
+
+    font-size:13px !important;
+    line-height:1.25 !important;
+    white-space:normal !important;
+  }
+
+  .tablet .tablet-label-line1,
+  .tablet .tablet-label-line2{
+    display:block !important;
+    width:100% !important;
+  }
+
+  .tablet .tablet-label-line2{
+    padding-left:1.4em !important;
+  }
 }
 
 .item-panel img{
@@ -1440,6 +1463,10 @@ textarea{
   object-fit:contain;
   border-radius:6px;
 }
+
+
+
+
 
 </style>
 </head>
@@ -1754,7 +1781,10 @@ textarea{
     <div class="tablet">
       <div class="tablet-top">
         <input id="floor-input-5" class="tablet-floor-input" maxlength="2">
-        <div class="tablet-label">階へ行くための手がかり</div>
+        <div class="tablet-label">
+          <span class="tablet-label-line1">階へ行くための</span>
+          <span class="tablet-label-line2">手がかり</span>
+        </div>
         <div></div>
         <div class="tablet-floor-badge empty" id="tablet-floor-badge-5"></div>
       </div>
@@ -1797,7 +1827,10 @@ textarea{
     <div class="tablet">
       <div class="tablet-top">
         <input id="floor-input-last" class="tablet-floor-input" maxlength="2">
-        <div class="tablet-label">階へ行くための手がかり</div>
+        <div class="tablet-label">
+          <span class="tablet-label-line1">階へ行くための</span>
+          <span class="tablet-label-line2">手がかり</span>
+        </div>
         <div></div>
         <div class="tablet-floor-badge empty" id="tablet-floor-badge-last"></div>
       </div>
