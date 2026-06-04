@@ -961,6 +961,72 @@ body{
   width:min(82vw,260px);
 }
 
+.tablet-top{
+  position:relative;
+  padding:18px 12px 12px;
+  min-height:70px;
+}
+
+.tablet-destination{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  padding-right:60px;
+}
+
+.tablet-floor-input{
+  width:100px;
+  height:50px;
+  border:1px solid rgba(255,255,255,.24);
+  border-radius:6px;
+  background:#070808;
+  color:white;
+  text-align:center;
+  font-size:28px;
+  box-sizing:border-box;
+}
+
+.tablet-label{
+  font-weight:700;
+  line-height:1.35;
+  white-space:nowrap;
+  text-align:left;
+}
+
+.tablet-label span{
+  display:inline;
+}
+
+.tablet-floor-badge{
+  position:absolute;
+  top:0;
+  right:0;
+
+  width:48px;
+  height:48px;
+
+  border-radius:6px;
+  background:#111;
+  border:1px solid rgba(255,255,255,.24);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.tablet-floor-badge img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
+
+.tablet-floor-badge.empty{
+  opacity:.28;
+}
+
 /* OVERLAYS */
 
 .guide-overlay,
@@ -1381,11 +1447,9 @@ textarea{
 }
 
 .tablet-destination{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  min-width:0;
-}
+    padding-right:42px;
+    gap:8px;
+  }
 
 .tablet-floor-input{
   width:56px;
@@ -1395,30 +1459,24 @@ textarea{
 }
 
 .tablet-label{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  justify-content:center;
-  font-size:12px;
-  line-height:1.25;
-  white-space:normal;
-  min-width:0;
-  width:auto;
-}
+    display:flex;
+    flex-direction:column;
+    font-size:12px;
+    line-height:1.25;
+  }
 
-.tablet-label span{
-  display:block;
-}
+  .tablet-label span{
+    display:block;
+  }
 
-.tablet-label span:nth-child(2){
-  padding-left:1.2em;
-}
+  .tablet-label span:nth-child(2){
+    padding-left:1.2em;
+  }
 
 .tablet-floor-badge{
-  width:34px;
-  min-width:34px;
-  height:34px;
-}
+    width:34px;
+    height:34px;
+  }
 
 .tablet-screen{
   width:100%;
@@ -1780,15 +1838,22 @@ textarea{
   <section class="section">
     <div class="tablet">
       <div class="tablet-top">
+
+        <div class="tablet-floor-badge empty"
+             id="tablet-floor-badge-4">
+        </div>
+      
         <div class="tablet-destination">
-          <input id="floor-input-4" class="tablet-floor-input" maxlength="2">
+          <input id="floor-input-4"
+                 class="tablet-floor-input"
+                 maxlength="2">
+      
           <div class="tablet-label">
             <span>階へ行くための</span>
             <span>手がかり</span>
           </div>
         </div>
       
-        <div class="tablet-floor-badge empty" id="tablet-floor-badge-4"></div>
       </div>
 
       <div class="tablet-screen">
@@ -1826,15 +1891,22 @@ textarea{
   <section class="section">
     <div class="tablet">
       <div class="tablet-top">
+
+        <div class="tablet-floor-badge empty"
+             id="tablet-floor-badge-5">
+        </div>
+      
         <div class="tablet-destination">
-          <input id="floor-input-5" class="tablet-floor-input" maxlength="2">
+          <input id="floor-input-5"
+                 class="tablet-floor-input"
+                 maxlength="2">
+      
           <div class="tablet-label">
             <span>階へ行くための</span>
             <span>手がかり</span>
           </div>
         </div>
       
-        <div class="tablet-floor-badge empty" id="tablet-floor-badge-5"></div>
       </div>
 
       <div class="tablet-screen">
@@ -1874,15 +1946,22 @@ textarea{
   <section class="section">
     <div class="tablet">
       <div class="tablet-top">
+
+        <div class="tablet-floor-badge empty"
+             id="tablet-floor-badge-last">
+        </div>
+      
         <div class="tablet-destination">
-          <input id="floor-input-last" class="tablet-floor-input" maxlength="2">
+          <input id="floor-input-last"
+                 class="tablet-floor-input"
+                 maxlength="2">
+      
           <div class="tablet-label">
             <span>階へ行くための</span>
             <span>手がかり</span>
           </div>
         </div>
       
-        <div class="tablet-floor-badge empty" id="tablet-floor-badge-last"></div>
       </div>
 
       <div class="tablet-screen">
@@ -2356,6 +2435,13 @@ function closeGuideByOutside(event){
 
 function openTabletGuide(){
   closeMenu();
+
+  setImage(
+    "tablet-guide-image",
+    imagePaths.tabletGuide,
+    "タブレット端末の使い方"
+  );
+
   document.getElementById("tablet-guide-overlay").classList.add("show");
 }
 
