@@ -1300,46 +1300,50 @@ textarea{
   object-fit:contain;
 }
 
-.clear-actions{
-  margin-top:34px;
-  display:grid;
-  grid-template-columns:repeat(3, minmax(0, 1fr));
-  gap:14px;
+/* CLEAR画面：3ボタン中央横並び */
+#clear-page .clear-actions{
+  width:100%;
+  margin:34px auto 0;
+  display:flex !important;
+  flex-direction:row !important;
+  justify-content:center !important;
+  align-items:center !important;
+  flex-wrap:wrap;
+  gap:16px;
 }
 
-.clear-actions a,
-.clear-actions button{
-  min-height:56px;
+#clear-page .clear-actions a,
+#clear-page .clear-actions button{
+  width:200px !important;
+  height:56px !important;
+  min-height:56px !important;
+  margin:0 !important;
+  padding:0 16px !important;
+  box-sizing:border-box;
+
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
   border:none;
   border-radius:6px;
   background:#00a29a;
   color:#fff;
-  font-family:"M PLUS 2p",sans-serif;
-  font-size:17px;
-  font-weight:700;
   text-decoration:none;
+  font-family:"M PLUS 2p",sans-serif;
+  font-size:16px;
+  font-weight:700;
   cursor:pointer;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
 }
 
 @media(max-width:700px){
-  .clear-page{
-    padding-top:78px;
+  #clear-page .clear-actions{
+    flex-direction:column !important;
   }
 
-  .clear-actions{
-    grid-template-columns:1fr;
-    gap:12px;
-  }
-
-  .clear-actions a,
-  .clear-actions button{
-    width:100%;
-    min-height:54px;
+  #clear-page .clear-actions a,
+  #clear-page .clear-actions button{
+    width:min(82vw,260px) !important;
   }
 }
 
@@ -1455,7 +1459,6 @@ textarea{
     <h3>注意事項</h3>
     <p>
       ・十分にコンテンツを楽しんでいただくため、ソースコードの閲覧はお控えください。<br>
-      ・音声はONにしてお楽しみください。<br>
       ・答えがわかったら、解答欄に入力してください。<br>
       ・ゲーム進行中、メニュー画面に様々な機能が追加されます。随時確認しながら進めるようにしましょう。<br>
       ・ヒントは、右上のメニューより「ヒント」ボタンを選択することで、閲覧が可能です。
@@ -2311,6 +2314,9 @@ function renderNovelLine(){
 
   const speaker = document.getElementById("novel-speaker");
   const text = document.getElementById("novel-text");
+  speaker.innerText = "";
+  text.innerHTML = "";
+  text.innerText = "";  
 
   speaker.className = "novel-speaker";
 
@@ -2323,10 +2329,10 @@ function renderNovelLine(){
   speaker.innerText = line.speaker || "";
 
   if(line.html){
-    text.innerHTML = line.html;
+  text.innerHTML = line.html;
   }else{
-    text.innerText = line.text || "";
-  }
+  text.textContent = line.text || "";
+}
 }
 
 function nextNovelLine(){
@@ -2413,7 +2419,8 @@ const imagePaths = {
   step5RiddleKo:"./image/step5_riddle_ko.png",
   lastRiddle11:"./image/last_riddle_11.png",
   lastWall:"./image/floor_11.png",
-  clear:"./image/clear.png",
+  clearPc:"./image/clear_pc.png",
+  clearSp:"./image/clear_sp.png",
 
   itemIngot:"./image/item_ingot.png",
   itemDiary:"./image/item_diary.png",
@@ -2986,12 +2993,15 @@ function submitLastAction(){
   const action = document.getElementById("last-action-select").value;
 
   const toolWords = [
-    "金のインゴット",
-    "きんのいんごっと",
-    "キンノインゴット",
-    "インゴット",
-    "いんごっと"
-  ].map(normalize);
+  "金のインゴット",
+  "きんのいんごっと",
+  "キンノインゴット",
+  "金インゴット",
+  "きんいんごっと",
+  "キンインゴット",
+  "インゴット",
+  "いんごっと"
+].map(normalize);
 
   const targetWords = [
     "かがみ",
@@ -3022,6 +3032,17 @@ function shareResult(){
   }
 }
 
+function setClearImage(){
+  const isSp = window.matchMedia("(max-width:700px)").matches;
+  setImage(
+    "image-clear",
+    isSp ? imagePaths.clearSp : imagePaths.clearPc,
+    "GAME CLEAR"
+  );
+}
+
+
+
 function initializeImages(){
   setImage("tablet-guide-image",imagePaths.tabletGuide,"タブレット端末の使い方画像");
   setImage("image-step1-riddle",imagePaths.step1Riddle,"1st STEP 問題画像");
@@ -3043,7 +3064,7 @@ function initializeImages(){
   setTabletFloorBadge("tablet-floor-badge-last","","");
 
   setImage("image-last-wall",imagePaths.lastWall,"11階の様子");
-  setImage("image-clear",imagePaths.clear,"GAME CLEAR");
+  setClearImage();
 }
 
 function restoreGame(){
