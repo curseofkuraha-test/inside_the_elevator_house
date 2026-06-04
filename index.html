@@ -1267,6 +1267,74 @@ textarea{
   cursor:pointer;
 }
 
+.clear-page{
+  padding-top:90px;
+}
+
+.clear-section{
+  width:min(94vw,1100px);
+  margin:0 auto;
+}
+
+.clear-image-frame{
+  width:100%;
+  max-width:1100px;
+  margin:0 auto;
+  border-radius:8px;
+  overflow:hidden;
+  background:#111;
+}
+
+.clear-image-frame img{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:contain;
+}
+
+.clear-actions{
+  margin-top:34px;
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:14px;
+}
+
+.clear-actions a,
+.clear-actions button{
+  min-height:56px;
+  border:none;
+  border-radius:6px;
+  background:#00a29a;
+  color:#fff;
+  font-family:"M PLUS 2p",sans-serif;
+  font-size:17px;
+  font-weight:700;
+  text-decoration:none;
+  cursor:pointer;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+@media(max-width:700px){
+  .clear-page{
+    padding-top:78px;
+  }
+
+  .clear-actions{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .clear-actions a,
+  .clear-actions button{
+    width:100%;
+    min-height:54px;
+  }
+}
+
 </style>
 </head>
 
@@ -1679,15 +1747,13 @@ textarea{
   </section>
 </div>
 
-<div class="page hidden" id="clear-page">
-  <div class="step-header"><img src="./image/title_clear.png" alt="CLEAR"></div>
-
-  <section class="section">
-    <div class="image-frame" id="image-clear"></div>
+<div class="page hidden clear-page" id="clear-page">
+  <section class="clear-section">
+    <div class="clear-image-frame" id="image-clear"></div>
 
     <div class="clear-actions">
-      <a href="#" target="_blank" rel="noopener">アンケートに答える</a>
-      <button onclick="shareResult()">SNSで共有する</button>
+      <a href="#" target="_blank" rel="noopener">アンケート</a>
+      <button onclick="shareResult()">SNS共有</button>
       <a href="./behind_the_scenes.html" target="_blank" rel="noopener">裏話を読む</a>
     </div>
   </section>
